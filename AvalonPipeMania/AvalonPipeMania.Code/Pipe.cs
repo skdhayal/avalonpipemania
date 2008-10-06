@@ -95,6 +95,28 @@ namespace AvalonPipeMania.Code
 
 			}
 		}
+
+
+		public static Pipe[] KnownPipes
+		{
+			get
+			{
+				return new Pipe[]
+				{
+					new LeftToBottom(),
+					new LeftToDrain(),
+					new LeftToRight(),
+					new LeftToRightBent(),
+					new PumpToLeft(),
+					new PumpToRight(),
+					new RightToBottom(),
+					new RightToDrain(),
+					new TopToBottom(),
+					new TopToLeft(),
+					new TopToRight()
+				};
+			}
+		}
 	}
 
 

@@ -21,6 +21,7 @@ namespace AvalonPipeMania.Code
 
 		public const int ShadowBorder = 8;
 		public const int Size = 64;
+		public const int SurfaceHeight = 52;
 
 		public readonly Rectangle Overlay;
 
