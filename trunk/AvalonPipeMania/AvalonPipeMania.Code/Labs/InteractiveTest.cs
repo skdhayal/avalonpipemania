@@ -48,10 +48,47 @@ namespace AvalonPipeMania.Code.Labs
 
 			const int PipeSizeWithMargin = Pipe.Size + 8;
 
-			Pipe.KnownPipes.ForEach(
-				(pipe, i) =>
+			Action<int, Action<Pipe>> AddPipes =
+				(offset, handler) =>
 				{
-					pipe.Container.AttachTo(this).MoveTo(32 + (i % 2) * PipeSizeWithMargin, 32 + PipeSizeWithMargin * i / 2);
+					Pipe.KnownPipes.ForEach(
+						(pipe, i) =>
+						{
+							pipe.Container.AttachTo(this).MoveTo(16 + (i % 2) * PipeSizeWithMargin + offset, 32 + PipeSizeWithMargin * i / 2);
+
+							handler(pipe);
+						}
+					);
+				};
+
+
+			AddPipes(0,
+				pipe =>
+				{
+					pipe.Yellow.Visibility = System.Windows.Visibility.Hidden;
+				}
+			);
+
+			AddPipes(PipeSizeWithMargin * 2,
+				pipe =>
+				{
+					pipe.Yellow.Visibility = System.Windows.Visibility.Visible;
+				}
+			);
+
+			AddPipes(PipeSizeWithMargin * 4,
+				pipe =>
+				{
+					pipe.Yellow.Visibility = System.Windows.Visibility.Hidden;
+					pipe.Green.Visibility = System.Windows.Visibility.Visible;
+				}
+			);
+
+			AddPipes(PipeSizeWithMargin * 6,
+				pipe =>
+				{
+					pipe.Yellow.Visibility = System.Windows.Visibility.Hidden;
+					pipe.Brown.Visibility = System.Windows.Visibility.Visible;
 				}
 			);
 		}
