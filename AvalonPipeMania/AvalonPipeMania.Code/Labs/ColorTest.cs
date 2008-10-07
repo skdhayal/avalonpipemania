@@ -12,13 +12,13 @@ using System.Windows.Shapes;
 namespace AvalonPipeMania.Code.Labs
 {
 	[Script]
-	public class InteractiveTest : Canvas
+	public class ColorTest : Canvas
 	{
 		public const int DefaultWidth = 600;
 		public const int DefaultHeight = 600;
 
 
-		public InteractiveTest()
+		public ColorTest()
 		{
 			this.Width = DefaultWidth;
 			this.Height = DefaultHeight;

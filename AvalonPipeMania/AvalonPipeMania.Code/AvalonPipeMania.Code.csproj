@@ -50,6 +50,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\util\jsc\bin\ScriptCoreLib.Avalon.Cursors.dll</HintPath>
     </Reference>
+    <Reference Include="ScriptCoreLib.Avalon.TextButton, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\util\jsc\bin\ScriptCoreLib.Avalon.TextButton.dll</HintPath>
+    </Reference>
     <Reference Include="ScriptCoreLib.Avalon.TiledImageButton, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\util\jsc\bin\ScriptCoreLib.Avalon.TiledImageButton.dll</HintPath>
@@ -75,8 +79,7 @@
   <ItemGroup>
     <Compile Include="AvalonPipeManiaCanvas.cs" />
     <Compile Include="Labs\FieldTest.cs" />
-    <Compile Include="Labs\InteractiveTest.cs" />
-    <Compile Include="Labs\MenuWithNavigator.cs" />
+    <Compile Include="Labs\ColorTest.cs" />
     <Compile Include="Pipe.RightToDrain.cs" />
     <Compile Include="Pipe.TopToLeft.cs" />
     <Compile Include="Pipe.LeftToBottom.cs" />
