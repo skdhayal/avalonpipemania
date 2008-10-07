@@ -10,9 +10,14 @@ namespace AvalonPipeMania.Labs.JavaScript
 {
 	using TargetCanvas = global::AvalonPipeMania.Code.AvalonPipeManiaCanvas;
 
-	[Script, ScriptApplicationEntryPoint]
+	[Script, ScriptApplicationEntryPoint(IsClickOnce = true, ScriptedLoading = true)]
 	public class LabsDocument
 	{
+		public LabsDocument()
+			: this(null)
+		{
+		}
+
 		public LabsDocument(IHTMLElement e)
 		{
 			// wpf here
