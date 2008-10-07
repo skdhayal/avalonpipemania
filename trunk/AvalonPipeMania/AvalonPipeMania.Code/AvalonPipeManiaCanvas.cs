@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Input;
 using System.Windows;
 using AvalonPipeMania.Code.Labs;
+using ScriptCoreLib.Shared.Avalon.TextButton;
 
 namespace AvalonPipeMania.Code
 {
@@ -30,17 +31,104 @@ namespace AvalonPipeMania.Code
 			this.Width = DefaultWidth;
 			this.Height = DefaultHeight;
 
+			#region background
+			new[]
+			{
+				//Colors.White,
+				//Colors.Blue,
+				Colors.Black,
+				Colors.White,
+				Colors.Black
+			}.ToGradient(DefaultHeight / 4).ForEach(
+				(c, i) =>
+				new Rectangle
+				{
+					Fill = new SolidColorBrush(c),
+					Width = DefaultWidth,
+					Height = 5,
+				}.MoveTo(0, i * 4).AttachTo(this)
+			);
+			#endregion
+
+			var Buttons = new Canvas
+			{
+				Width = DefaultWidth,
+				Height = DefaultHeight
+			}.AttachTo(this);
+
 			// we selecting an implementation here:
 			// this should be dynamic in the UI for labs entrypoint
-
-			//new FieldTest
-			//{
-			//    PlaySound = e => PlaySound(e)
-			//}.AttachTo(this);
-
-			new InteractiveTest
+			var Options = new Canvas[]
 			{
-			}.AttachTo(this);
+				new FieldTest
+				{
+					PlaySound = e => PlaySound(e),
+					Visibility = Visibility.Hidden
+				}.AttachTo(this),
+
+				new ColorTest
+				{
+					Visibility = Visibility.Hidden
+				}.AttachTo(this)
+			};
+
+			var Navigationbar = new AeroNavigationBar();
+
+			Navigationbar.Container.MoveTo(4, 4).AttachTo(this);
+
+			const int ButtonHeight = 30;
+
+			Options.ForEach(
+				(Option, Index) =>
+				{
+					var Button = new TextButtonControl
+					{
+						Text = "Open " + Option.GetType().Name,
+						Width = 200,
+						Height = ButtonHeight
+					};
+
+					Button.Background.Fill = Brushes.Blue;
+					Button.Background.Opacity = 0;
+					Button.Foreground = Brushes.Blue;
+
+					Button.MouseEnter +=
+						delegate
+						{
+							Button.Background.Opacity = 0.5;
+							Button.Foreground = Brushes.White;
+						};
+
+					Button.MouseLeave +=
+						delegate
+						{
+							Button.Background.Opacity = 0;
+							Button.Foreground = Brushes.Blue;
+						};
+
+
+					Button.Click +=
+						delegate
+						{
+							Navigationbar.History.Add(
+								delegate
+								{
+									Option.Visibility = Visibility.Hidden;
+									Buttons.Visibility = Visibility.Visible;
+								},
+								delegate
+								{
+									Option.Visibility = Visibility.Visible;
+									Buttons.Visibility = Visibility.Hidden;
+								}
+							);
+						};
+
+					Button.Container.MoveTo(72, 16 + Index * ButtonHeight).AttachTo(Buttons);
+				}
+			);
+
+
 		}
 	}
 }
