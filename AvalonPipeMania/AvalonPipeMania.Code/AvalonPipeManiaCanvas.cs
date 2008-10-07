@@ -76,6 +76,7 @@ namespace AvalonPipeMania.Code
 
 			Navigationbar.Container.MoveTo(4, 4).AttachTo(this);
 
+			#region generate the menu
 			const int ButtonHeight = 30;
 
 			Options.ForEach(
@@ -127,6 +128,7 @@ namespace AvalonPipeMania.Code
 					Button.Container.MoveTo(72, 16 + Index * ButtonHeight).AttachTo(Buttons);
 				}
 			);
+			#endregion
 
 
 		}
