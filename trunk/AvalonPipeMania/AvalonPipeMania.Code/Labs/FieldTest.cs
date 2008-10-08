@@ -43,7 +43,9 @@ namespace AvalonPipeMania.Code.Labs
 			f[4, 1] = new SimplePipe.TopToLeft();
 			f[4, 0] = new SimplePipe.LeftToBottom();
 			f[3, 0] = new SimplePipe.RightToDrain();
-			f[2, 0] = new SimplePipe.PumpToRight();
+			f[1, 3] = new SimplePipe.PumpToRight();
+
+			f[4, 2].Output.Drain = f[1, 3].Input.Pump;
 
 			// show a hole in the floor
 			f.Tiles[3, 0].Drain.Visibility = System.Windows.Visibility.Visible;

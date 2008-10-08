@@ -80,6 +80,7 @@ namespace AvalonPipeMania.Code
 					Left =>
 					{
 						Left.Value.Output.Right = value.Input.Left;
+						value.Output.Left = Left.Value.Input.Right;
 					}
 				);
 
@@ -87,6 +88,7 @@ namespace AvalonPipeMania.Code
 					Right =>
 					{
 						Right.Value.Output.Left = value.Input.Right;
+						value.Output.Right = Right.Value.Input.Left;
 					}
 				);
 
@@ -94,6 +96,7 @@ namespace AvalonPipeMania.Code
 					Top =>
 					{
 						Top.Value.Output.Bottom = value.Input.Top;
+						value.Output.Top = Top.Value.Input.Bottom;
 					}
 				);
 
@@ -101,6 +104,7 @@ namespace AvalonPipeMania.Code
 					Bottom =>
 					{
 						Bottom.Value.Output.Top = value.Input.Bottom;
+						value.Output.Bottom = Bottom.Value.Input.Top;
 					}
 				);
 
