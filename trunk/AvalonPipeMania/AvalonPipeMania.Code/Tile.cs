@@ -86,5 +86,20 @@ namespace AvalonPipeMania.Code
 				Opacity = 0
 			}.MoveTo(ShadowBorder, ShadowBorder);
 		}
+
+		public void Show()
+		{
+			this.Shadow.Show();
+			this.Container.Show();
+			this.Overlay.Show();
+		}
+
+
+		public void Hide()
+		{
+			this.Shadow.Hide();
+			this.Container.Hide();
+			this.Overlay.Hide();
+		}
 	}
 }
