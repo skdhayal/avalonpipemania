@@ -38,6 +38,10 @@ namespace AvalonPipeMania.Code
 					{
 						Animate(this.PipeRightToBottom.Water.Reverse(), this.Output.Right);
 					};
+
+				this.OverlayBlackAnimationStartEvent += this.PipeRightToBottom.OverlayBlackAnimationStart;
+				this.OverlayBlackAnimationStopEvent += this.PipeRightToBottom.OverlayBlackAnimationStop;
+
 			}
 		}
 	}

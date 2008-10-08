@@ -23,6 +23,8 @@ namespace AvalonPipeMania.Code
 
 				this.PipeTopToBottom.Container.AttachTo(this.Container);
 
+		
+
 				// if the animation has already been started or even if its already
 				// complete this action should not be called again.
 
@@ -37,6 +39,10 @@ namespace AvalonPipeMania.Code
 					{
 						Animate(this.PipeTopToBottom.Water.Reverse(), this.Output.Top);
 					};
+
+				this.OverlayBlackAnimationStartEvent += this.PipeTopToBottom.OverlayBlackAnimationStart;
+				this.OverlayBlackAnimationStopEvent += this.PipeTopToBottom.OverlayBlackAnimationStop;
+
 			}
 		}
 	}

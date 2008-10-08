@@ -44,6 +44,8 @@ namespace AvalonPipeMania.Code
 					"56_64"
 				);
 
+				this.OverlayBlack = f.ToImage("black");
+				this.OverlayBlack.Visibility = Visibility.Hidden;
 
 				this.Glow = f.ToImage("glow");
 			}

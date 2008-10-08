@@ -22,6 +22,7 @@ namespace AvalonPipeMania.Code
 
 			public Cross()
 			{
+				
 				#region vertical
 				this.PipeTopToBottom = new Pipe.TopToBottom();
 
@@ -63,6 +64,13 @@ namespace AvalonPipeMania.Code
 						Animate(this.PipeLeftToRight.Water.Reverse(), this.Output.Left);
 					};
 				#endregion
+
+				this.OverlayBlackAnimationStartEvent += this.PipeTopToBottom.OverlayBlackAnimationStart;
+				this.OverlayBlackAnimationStopEvent += this.PipeTopToBottom.OverlayBlackAnimationStop;
+
+				this.OverlayBlackAnimationStartEvent += this.PipeLeftToRight.OverlayBlackAnimationStart;
+				this.OverlayBlackAnimationStopEvent += this.PipeLeftToRight.OverlayBlackAnimationStop;
+
 
 			}
 		}
