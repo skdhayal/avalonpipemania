@@ -21,10 +21,16 @@ namespace AvalonPipeMania.Code
 
 		public readonly List<Tile> Tiles = new List<Tile>();
 
-		public TileField(int width, int height)
+		public readonly int SizeX;
+		public readonly int SizeY;
+
+		public TileField(int SizeX, int SizeY)
 		{
-			this.Width = Tile.Size * width + Tile.ShadowBorder * 2;
-			this.Height = Tile.Size * height + Tile.ShadowBorder * 2;
+			this.SizeX = SizeX;
+			this.SizeY = SizeY;
+
+			this.Width = Tile.Size * SizeX + Tile.ShadowBorder * 2;
+			this.Height = Tile.SurfaceHeight * SizeY + Tile.ShadowBorder * 2;
 
 			this.Shadow = new Canvas
 			{
@@ -53,8 +59,8 @@ namespace AvalonPipeMania.Code
 			this.Shadow.AttachTo(this.Container);
 			this.Content.AttachTo(this.Container);
 
-			for (int ix = 0; ix < width; ix++)
-				for (int iy = 0; iy < height; iy++)
+			for (int ix = 0; ix < SizeX; ix++)
+				for (int iy = 0; iy < SizeY; iy++)
 				{
 					var tile = new Tile
 					{
@@ -67,6 +73,8 @@ namespace AvalonPipeMania.Code
 					tile.Shadow.MoveTo(64 * ix, 52 * iy).AttachTo(this.Shadow);
 					tile.Container.MoveTo(64 * ix + Tile.ShadowBorder, 52 * iy + Tile.ShadowBorder).AttachTo(this.Content);
 					tile.Overlay.MoveTo(64 * ix + Tile.ShadowBorder, 52 * iy + Tile.ShadowBorder).AttachTo(this.Overlay);
+
+		
 
 					tile.Overlay.MouseEnter +=
 						delegate

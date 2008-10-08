@@ -29,6 +29,10 @@ namespace AvalonPipeMania.Code
 		// See more:
 		// http://members.chello.at/theodor.lauppert/games/pipe.htm
 
+		// tile themes to add:
+		// moon lander/ space
+		// grass/farmer/trees
+
 		public AvalonPipeManiaCanvas()
 		{
 			this.Width = DefaultWidth;
@@ -76,6 +80,11 @@ namespace AvalonPipeMania.Code
 
 
 				new SimplePipeTest
+				{
+					Visibility = Visibility.Hidden
+				}.AttachTo(this),
+
+				new FieldTest
 				{
 					Visibility = Visibility.Hidden
 				}.AttachTo(this)

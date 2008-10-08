@@ -11,6 +11,15 @@ namespace AvalonPipeMania.Code
 	[Script]
 	static class MyExtensions
 	{
+		public static void DoIfAny<T>(this T e, Action<T> h)
+			where T : class
+		{
+			if (e == null)
+				return;
+
+			h(e);
+		}
+
 		public static IEnumerable<Color> ToGradient(this Color[] source, int count)
 		{
 			var value = new Color[0].AsEnumerable();
