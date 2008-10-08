@@ -26,6 +26,9 @@ namespace AvalonPipeMania.Code
 
 		public Action<string> PlaySound = delegate { };
 
+		// See more:
+		// http://members.chello.at/theodor.lauppert/games/pipe.htm
+
 		public AvalonPipeManiaCanvas()
 		{
 			this.Width = DefaultWidth;
@@ -67,6 +70,12 @@ namespace AvalonPipeMania.Code
 				}.AttachTo(this),
 
 				new ColorTest
+				{
+					Visibility = Visibility.Hidden
+				}.AttachTo(this),
+
+
+				new SimplePipeTest
 				{
 					Visibility = Visibility.Hidden
 				}.AttachTo(this)
@@ -114,13 +123,13 @@ namespace AvalonPipeMania.Code
 							Navigationbar.History.Add(
 								delegate
 								{
-									Option.Visibility = Visibility.Hidden;
-									Buttons.Visibility = Visibility.Visible;
+									Option.Hide();
+									Buttons.Show();
 								},
 								delegate
 								{
-									Option.Visibility = Visibility.Visible;
-									Buttons.Visibility = Visibility.Hidden;
+									Option.Show();
+									Buttons.Hide();
 								}
 							);
 						};
