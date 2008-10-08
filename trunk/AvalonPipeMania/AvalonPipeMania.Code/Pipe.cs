@@ -9,6 +9,7 @@ using AvalonPipeMania.Assets.Shared;
 using System.Windows;
 using ScriptCoreLib.Shared.Lambda;
 using System.Windows.Markup;
+using System.Windows.Threading;
 
 namespace AvalonPipeMania.Code
 {
@@ -54,6 +55,44 @@ namespace AvalonPipeMania.Code
 		public Image Yellow;
 
 		public Image Outline;
+
+		public Image OverlayBlack;
+
+		DispatcherTimer OverlayBlackTimer;
+
+
+		public void OverlayBlackAnimationStart()
+		{
+			if (OverlayBlack == null)
+				return;
+
+			OverlayBlackAnimationStop();
+
+
+			OverlayBlack.Opacity = 0.15;
+			OverlayBlack.Show();
+
+			OverlayBlackTimer = (1000 / 24).AtIntervalWithCounter(
+				Counter =>
+				{
+					OverlayBlack.Opacity = (Math.Cos(Counter * 0.5) + 1) * 0.20 + 0.15; 
+				}
+			);
+		}
+
+		public void OverlayBlackAnimationStop()
+		{
+			if (OverlayBlack == null)
+				return;
+
+			if (OverlayBlackTimer != null)
+			{
+				OverlayBlackTimer.Stop();
+				OverlayBlackTimer = null;
+			}
+
+			OverlayBlack.Hide();
+		}
 
 		[Script]
 		public class Factory

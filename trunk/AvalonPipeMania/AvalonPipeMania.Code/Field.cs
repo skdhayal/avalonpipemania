@@ -35,7 +35,27 @@ namespace AvalonPipeMania.Code
 				Height = Tiles.Height
 			}.AttachTo(this.Container);
 
+			this.Tiles.Focus +=
+				Selection =>
+				{
+					this[Selection.IndexX, Selection.IndexY].DoIfAny(
+						k =>
+						{
+							k.OverlayBlackAnimationStart();
+						}
+					);
+				};
 
+			this.Tiles.Unfocus +=
+				Selection =>
+				{
+					this[Selection.IndexX, Selection.IndexY].DoIfAny(
+						k =>
+						{
+							k.OverlayBlackAnimationStop();
+						}
+					);
+				};
 		}
 
 		[Script]
