@@ -5,6 +5,8 @@ using System.Text;
 using ScriptCoreLib;
 using ScriptCoreLib.Shared.Avalon.Extensions;
 using System.Windows.Controls;
+using System.Windows.Shapes;
+using System.Windows.Media;
 
 namespace AvalonPipeMania.Code.Labs
 {
@@ -58,6 +60,8 @@ namespace AvalonPipeMania.Code.Labs
 					f[2, 0].Input.Pump();
 				};
 
+
+
 			// when a user adds a pipe on top of another
 			// we need to call this to force a zorder sort
 			f.RefreshPipes();
@@ -66,7 +70,55 @@ namespace AvalonPipeMania.Code.Labs
 			var y = (DefaultHeight - f.Tiles.Height) / 2;
 
 			f.Container.MoveTo(x, y).AttachTo(this);
-			f.Tiles.Overlay.MoveTo(x, y).AttachTo(this);
+
+			var CurrentTile = new SimplePipe.Cross();
+
+			CurrentTile.Container.Opacity = 0.7;
+			CurrentTile.Container.AttachTo(this);
+			CurrentTile.OverlayBlackAnimationStart();
+
+			#region overlay
+			var Overlay = new Canvas
+			{
+				Width = DefaultWidth,
+				Height = DefaultHeight,
+			}.AttachTo(this);
+
+			new Rectangle
+			{
+				Fill = Brushes.White,
+				Width = DefaultWidth,
+				Height = DefaultHeight,
+				Opacity = 0
+			}.AttachTo(Overlay);
+
+			f.Tiles.Overlay.MoveTo(x, y).AttachTo(Overlay);
+			#endregion
+
+
+
+			this.MouseMove +=
+				(Sender, Arguments) =>
+				{
+					var p = Arguments.GetPosition(this);
+
+					if (f.Tiles.FocusTile != null)
+					{
+						p.X = x + f.Tiles.FocusTile.IndexX * Tile.Size + Tile.ShadowBorder;
+						p.Y = y + (f.Tiles.FocusTile.IndexY + 1) * Tile.SurfaceHeight + Tile.ShadowBorder - Tile.Size;
+						
+						CurrentTile.Container.Opacity = 1;
+					}
+					else
+					{
+						p.X -= Tile.Size / 2;
+						p.Y -= Tile.SurfaceHeight / 2;
+
+						CurrentTile.Container.Opacity = 0.7;
+					}
+
+					CurrentTile.Container.MoveTo(p.X , p.Y );
+				};
 		}
 	}
 }

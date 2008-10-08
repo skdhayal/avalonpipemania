@@ -79,6 +79,8 @@ namespace AvalonPipeMania.Code
 					tile.Overlay.MouseEnter +=
 						delegate
 						{
+							FocusTile = tile;
+
 							if (Focus != null)
 								Focus(tile);
 
@@ -89,6 +91,8 @@ namespace AvalonPipeMania.Code
 					tile.Overlay.MouseLeave +=
 						delegate
 						{
+							FocusTile = null;
+
 							if (Unfocus != null)
 								Unfocus(tile);
 
@@ -99,6 +103,8 @@ namespace AvalonPipeMania.Code
 				}
 
 		}
+
+		public Tile FocusTile;
 
 		public event Action<Tile> Focus;
 		public event Action<Tile> Unfocus;
