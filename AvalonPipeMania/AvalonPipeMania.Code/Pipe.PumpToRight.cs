@@ -8,6 +8,7 @@ using AvalonPipeMania.Assets.Shared;
 using ScriptCoreLib;
 using ScriptCoreLib.Shared.Avalon.Extensions;
 using ScriptCoreLib.Shared.Lambda;
+using System.Windows.Threading;
 
 namespace AvalonPipeMania.Code
 {
@@ -18,6 +19,8 @@ namespace AvalonPipeMania.Code
 		[Script]
 		public class PumpToRight : Pipe
 		{
+			public readonly DispatcherTimer PumpHandleAnimation;
+
 			public PumpToRight()
 			{
 				{
@@ -49,15 +52,15 @@ namespace AvalonPipeMania.Code
 						"1", "2", "3", "4", "5", "6"
 					);
 
-					Action Hide = delegate { };
+					Handles.AtModulus(0).Visibility = Visibility.Visible;
+					Action Hide = () => Handles.AtModulus(0).Visibility = Visibility.Hidden;
 
-					(1000 / 23).AtIntervalWithCounter(
+					this.PumpHandleAnimation = (1000 / 23).AtIntervalWithCounter(
 						Counter =>
 						{
 							Hide();
 
 							Handles.AtModulus(Counter).Visibility = Visibility.Visible;
-
 							Hide = () => Handles.AtModulus(Counter).Visibility = Visibility.Hidden;
 						}
 					);

@@ -8,6 +8,7 @@ using AvalonPipeMania.Assets.Shared;
 using ScriptCoreLib;
 using ScriptCoreLib.Shared.Avalon.Extensions;
 using ScriptCoreLib.Shared.Lambda;
+using System.Windows.Threading;
 
 namespace AvalonPipeMania.Code
 {
@@ -19,6 +20,8 @@ namespace AvalonPipeMania.Code
 		public class RightToDrain : Pipe
 		{
 
+
+			public readonly DispatcherTimer WaterDropAnimation;
 
 			public RightToDrain()
 			{
@@ -32,7 +35,7 @@ namespace AvalonPipeMania.Code
 
 				Action Hide = delegate { };
 
-				(1000 / 23).AtIntervalWithCounter(
+				this.WaterDropAnimation = (1000 / 23).AtIntervalWithCounter(
 					Counter =>
 					{
 						Hide();
