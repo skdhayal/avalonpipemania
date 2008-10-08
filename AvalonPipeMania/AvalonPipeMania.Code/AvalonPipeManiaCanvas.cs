@@ -63,7 +63,7 @@ namespace AvalonPipeMania.Code
 			// this should be dynamic in the UI for labs entrypoint
 			var Options = new Canvas[]
 			{
-				new FieldTest
+				new TileFieldTest
 				{
 					PlaySound = e => PlaySound(e),
 					Visibility = Visibility.Hidden

@@ -17,14 +17,14 @@ using System.Windows;
 namespace AvalonPipeMania.Code.Labs
 {
 	[Script]
-	public partial class FieldTest : Canvas
+	public partial class TileFieldTest : Canvas
 	{
 		public const int DefaultWidth = 600;
 		public const int DefaultHeight = 600;
 
 		public Action<string> PlaySound = delegate { };
 
-		public FieldTest()
+		public TileFieldTest()
 		{
 			this.Width = DefaultWidth;
 			this.Height = DefaultHeight;
@@ -73,7 +73,7 @@ namespace AvalonPipeMania.Code.Labs
 			}.AttachTo(OverlayCanvas);
 
 
-			var field = new Field(8, 6);
+			var field = new TileField(8, 6);
 			var field_x = 64;
 			var field_y = 200;
 
