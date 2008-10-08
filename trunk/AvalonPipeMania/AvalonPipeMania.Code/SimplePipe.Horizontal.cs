@@ -26,8 +26,8 @@ namespace AvalonPipeMania.Code
 				// if the animation has already been started or even if its already
 				// complete this action should not be called again.
 
-				this.OverlayBlackAnimationStart += this.PipeLeftToRight.OverlayBlackAnimationStart;
-				this.OverlayBlackAnimationStop += this.PipeLeftToRight.OverlayBlackAnimationStop;
+				this.OverlayBlackAnimationStartEvent += this.PipeLeftToRight.OverlayBlackAnimationStart;
+				this.OverlayBlackAnimationStopEvent += this.PipeLeftToRight.OverlayBlackAnimationStop;
 
 				this.Input.Left =
 					delegate
