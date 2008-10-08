@@ -106,5 +106,19 @@ namespace AvalonPipeMania.Code
 
 			}
 		}
+
+		public void RefreshPipes()
+		{
+			foreach (var k in this.PipesList)
+			{
+				k.Value.Container.Orphanize();
+			}
+
+
+			foreach (var k in this.PipesList.OrderBy(k => k.Y))
+			{
+				k.Value.Container.AttachTo(this.Pipes);
+			}
+		}
 	}
 }
