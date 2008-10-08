@@ -31,8 +31,19 @@ namespace AvalonPipeMania.Code
 		public readonly Canvas Container = new Canvas();
 
 
-		public Action OverlayBlackAnimationStart = delegate { };
-		public Action OverlayBlackAnimationStop = delegate { };
+		private event Action OverlayBlackAnimationStartEvent;
+		public void OverlayBlackAnimationStart()
+		{
+			if (OverlayBlackAnimationStartEvent != null)
+				OverlayBlackAnimationStartEvent();
+		}
+
+		private event Action OverlayBlackAnimationStopEvent;
+		public void OverlayBlackAnimationStop()
+		{
+			if (OverlayBlackAnimationStopEvent != null)
+				OverlayBlackAnimationStopEvent();
+		}
 
 		public void Animate(IEnumerable<Image> Water, Action Done)
 		{
