@@ -25,6 +25,8 @@ namespace AvalonPipeMania.Code
 
 		public readonly Rectangle Overlay;
 
+		public readonly Image Select;
+
 		public readonly Image YellowFilter;
 		
 		public readonly Image Shadow;
@@ -36,6 +38,10 @@ namespace AvalonPipeMania.Code
 
 		public int IndexX;
 		public int IndexY;
+
+
+		public readonly Image BackgroundPink;
+		public readonly Image BackgroundBrown;
 
 		public Tile()
 		{
@@ -50,9 +56,16 @@ namespace AvalonPipeMania.Code
 				Source = (KnownAssets.Path.Data + "/tile0_black_unfocus8.png").ToSource(),
 			};
 
-			new Image
+
+			this.BackgroundBrown = new Image
+			{
+				Source = (KnownAssets.Path.Data + "/tile0.png").ToSource(),
+			}.AttachTo(this.Container);
+
+			this.BackgroundPink = new Image
 			{
 				Source = (KnownAssets.Path.Data + "/tile0_pink.png").ToSource(),
+				Visibility = System.Windows.Visibility.Hidden
 			}.AttachTo(this.Container);
 
 
@@ -68,6 +81,13 @@ namespace AvalonPipeMania.Code
 				Source = (KnownAssets.Path.Data + "/drain.png").ToSource(),
 				Visibility = System.Windows.Visibility.Hidden
 			}.MoveTo(0, -12).AttachTo(this.Container);
+
+
+			this.Select = new Image
+			{
+				Source = (KnownAssets.Path.Data + "/select0.png").ToSource(),
+				Visibility = System.Windows.Visibility.Hidden,
+			}.AttachTo(this.Container);
 
 			this.YellowFilter = new Image
 			{

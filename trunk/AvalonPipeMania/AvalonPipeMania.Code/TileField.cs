@@ -79,13 +79,15 @@ namespace AvalonPipeMania.Code
 					tile.Overlay.MouseEnter +=
 						delegate
 						{
-							tile.YellowFilter.Visibility = System.Windows.Visibility.Visible;
+							//tile.YellowFilter.Visibility = System.Windows.Visibility.Visible;
+							tile.Select.Show();
 						};
 
 					tile.Overlay.MouseLeave +=
 						delegate
 						{
-							tile.YellowFilter.Visibility = System.Windows.Visibility.Hidden;
+							tile.Select.Hide();
+							//tile.YellowFilter.Visibility = System.Windows.Visibility.Hidden;
 						};
 				}
 
