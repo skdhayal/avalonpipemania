@@ -6,6 +6,7 @@ using ScriptCoreLib;
 using System.Windows.Controls;
 using ScriptCoreLib.Shared.Lambda;
 using ScriptCoreLib.Shared.Avalon.Extensions;
+using System.Windows.Threading;
 
 namespace AvalonPipeMania.Code
 {
@@ -28,6 +29,10 @@ namespace AvalonPipeMania.Code
 		public readonly Group Output = new Group();
 
 		public readonly Canvas Container = new Canvas();
+
+
+		public Action OverlayBlackAnimationStart = delegate { };
+		public Action OverlayBlackAnimationStop = delegate { };
 
 		public void Animate(IEnumerable<Image> Water, Action Done)
 		{

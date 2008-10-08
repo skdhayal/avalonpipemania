@@ -79,6 +79,9 @@ namespace AvalonPipeMania.Code
 					tile.Overlay.MouseEnter +=
 						delegate
 						{
+							if (Focus != null)
+								Focus(tile);
+
 							//tile.YellowFilter.Visibility = System.Windows.Visibility.Visible;
 							tile.Select.Show();
 						};
@@ -86,12 +89,19 @@ namespace AvalonPipeMania.Code
 					tile.Overlay.MouseLeave +=
 						delegate
 						{
+							if (Unfocus != null)
+								Unfocus(tile);
+
+
 							tile.Select.Hide();
 							//tile.YellowFilter.Visibility = System.Windows.Visibility.Hidden;
 						};
 				}
 
 		}
+
+		public event Action<Tile> Focus;
+		public event Action<Tile> Unfocus;
 
 		public Tile this[int x, int y]
 		{
