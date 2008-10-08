@@ -39,7 +39,7 @@ namespace AvalonPipeMania.Code
 							{
 								1500.AtDelay(this.PipePumpToRight.PumpHandleAnimation.Stop);
 
-								Animate(this.PipePumpToRight.Water, this.Output.Left);
+								Animate(this.PipePumpToRight.Water, this.Output.Right);
 							}
 						);
 					};
