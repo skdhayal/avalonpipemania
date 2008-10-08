@@ -78,6 +78,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AvalonPipeManiaCanvas.cs" />
+    <Compile Include="SimplePipe.PumpToRight.cs" />
+    <Compile Include="SimplePipe.RightToDrain.cs" />
+    <Compile Include="SimplePipe.LeftToBottom.cs" />
+    <Compile Include="SimplePipe.TopToLeft.cs" />
     <Compile Include="SimplePipe.Cross.cs" />
     <Compile Include="SimplePipe.LeftToDrain.cs" />
     <Compile Include="Field.cs" />

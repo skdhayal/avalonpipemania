@@ -34,15 +34,20 @@ namespace AvalonPipeMania.Code.Labs
 			f[1, 1] = new SimplePipe.Vertical();
 			f[1, 2] = new SimplePipe.TopToRight();
 			f[2, 2] = new SimplePipe.Cross();
-			f[3, 2] = new SimplePipe.LeftToDrain();
+			f[3, 2] = new SimplePipe.Horizontal();
+			f[4, 2] = new SimplePipe.LeftToDrain();
 
 			f[2, 1] = new SimplePipe.RightToBottom();
-			f[2, 3] = new SimplePipe.TopToRight();
+			f[2, 3] = new SimplePipe.TopToLeft();
 			f[3, 1] = new SimplePipe.Horizontal();
-			f[3, 3] = new SimplePipe.Horizontal();
+			f[4, 1] = new SimplePipe.TopToLeft();
+			f[4, 0] = new SimplePipe.LeftToBottom();
+			f[3, 0] = new SimplePipe.RightToDrain();
+			f[2, 0] = new SimplePipe.PumpToRight();
 
 			// show a hole in the floor
-			f.Tiles[3, 2].Drain.Visibility = System.Windows.Visibility.Visible;
+			f.Tiles[3, 0].Drain.Visibility = System.Windows.Visibility.Visible;
+			f.Tiles[4, 2].Drain.Visibility = System.Windows.Visibility.Visible;
 
 			// user must click on the pump to activate it
 			f.Tiles[2, 0].Overlay.MouseLeftButtonUp +=
@@ -51,6 +56,8 @@ namespace AvalonPipeMania.Code.Labs
 					f[2, 0].Input.Pump();
 				};
 
+			// when a user adds a pipe on top of another
+			// we need to call this to force a zorder sort
 			f.RefreshPipes();
 
 			var x = (DefaultWidth - f.Tiles.Width) / 2;
