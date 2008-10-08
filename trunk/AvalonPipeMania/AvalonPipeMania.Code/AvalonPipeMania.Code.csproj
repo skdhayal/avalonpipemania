@@ -78,12 +78,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AvalonPipeManiaCanvas.cs" />
+    <Compile Include="Field.cs" />
     <Compile Include="SimplePipe.RightToBottom.cs" />
     <Compile Include="SimplePipe.Vertical.cs" />
     <Compile Include="SimplePipe.PumpToLeft.cs" />
     <Compile Include="SimplePipe.TopToRight.cs" />
     <Compile Include="SimplePipe.Horizontal.cs" />
-    <Compile Include="Labs\FieldTest.cs" />
+    <Compile Include="Labs\TileFieldTest.cs" />
     <Compile Include="Labs\ColorTest.cs" />
     <Compile Include="Labs\SimplePipeTest.cs" />
     <Compile Include="Pipe.RightToDrain.cs" />
@@ -97,7 +98,7 @@
     <Compile Include="Pipe.TopToRight.cs" />
     <Compile Include="Pipe.LeftToRight.cs" />
     <Compile Include="Pipe.TopToBottom.cs" />
-    <Compile Include="Field.cs" />
+    <Compile Include="TileField.cs" />
     <Compile Include="MyExtensions.cs" />
     <Compile Include="Pipe.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
