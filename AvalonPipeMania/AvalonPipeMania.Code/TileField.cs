@@ -87,6 +87,13 @@ namespace AvalonPipeMania.Code
 							//tile.YellowFilter.Visibility = System.Windows.Visibility.Visible;
 							tile.Select.Show();
 						};
+					
+					this.Overlay.MouseLeftButtonUp +=
+						delegate
+						{
+							if (Click != null)
+								Click(tile);
+						};
 
 					tile.Overlay.MouseLeave +=
 						delegate
@@ -108,6 +115,7 @@ namespace AvalonPipeMania.Code
 
 		public event Action<Tile> Focus;
 		public event Action<Tile> Unfocus;
+		public event Action<Tile> Click;
 
 		public Tile this[int x, int y]
 		{

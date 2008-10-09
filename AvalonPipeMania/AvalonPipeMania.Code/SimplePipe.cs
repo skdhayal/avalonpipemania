@@ -59,5 +59,21 @@ namespace AvalonPipeMania.Code
 			)(Done);
 		}
 
+		public static Func<SimplePipe>[] BuildablePipes
+		{
+			get
+			{
+				return new Func<SimplePipe>[]
+				{
+					() => new SimplePipe.Horizontal(),
+					() => new SimplePipe.Vertical(),
+					() => new SimplePipe.Cross(),
+					() => new SimplePipe.LeftToBottom(),
+					() => new SimplePipe.RightToBottom(),
+					() => new SimplePipe.TopToLeft(),
+					() => new SimplePipe.TopToRight(),
+				};
+			}
+		}
 	}
 }
