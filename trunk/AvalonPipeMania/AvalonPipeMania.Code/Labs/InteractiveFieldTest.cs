@@ -11,20 +11,17 @@ using System.Windows.Media;
 namespace AvalonPipeMania.Code.Labs
 {
 	[Script]
-	public class FieldTest : Canvas
+	public class InteractiveFieldTest : Canvas
 	{
 		public const int DefaultWidth = 600;
 		public const int DefaultHeight = 600;
 
-		public FieldTest()
+		public InteractiveFieldTest()
 		{
 			this.Width = DefaultWidth;
 			this.Height = DefaultHeight;
 
-			var f = new Field(6, 4)
-				{
-					ShowSelection = true
-				};
+			var f = new Field(6, 4);
 
 			#region round the corners
 			f.Tiles[0, 0].Hide();
@@ -74,7 +71,11 @@ namespace AvalonPipeMania.Code.Labs
 
 			f.Container.MoveTo(x, y).AttachTo(this);
 
+			var CurrentTile = new SimplePipe.Cross();
 
+			CurrentTile.Container.Opacity = 0.7;
+			CurrentTile.Container.AttachTo(this);
+			CurrentTile.OverlayBlackAnimationStart();
 
 			#region overlay
 			var Overlay = new Canvas
@@ -95,6 +96,29 @@ namespace AvalonPipeMania.Code.Labs
 			#endregion
 
 
+
+			this.MouseMove +=
+				(Sender, Arguments) =>
+				{
+					var p = Arguments.GetPosition(this);
+
+					if (f.Tiles.FocusTile != null)
+					{
+						p.X = x + f.Tiles.FocusTile.IndexX * Tile.Size + Tile.ShadowBorder;
+						p.Y = y + (f.Tiles.FocusTile.IndexY + 1) * Tile.SurfaceHeight + Tile.ShadowBorder - Tile.Size;
+						
+						CurrentTile.Container.Opacity = 1;
+					}
+					else
+					{
+						p.X -= Tile.Size / 2;
+						p.Y -= Tile.SurfaceHeight / 2;
+
+						CurrentTile.Container.Opacity = 0.7;
+					}
+
+					CurrentTile.Container.MoveTo(p.X , p.Y );
+				};
 		}
 	}
 }

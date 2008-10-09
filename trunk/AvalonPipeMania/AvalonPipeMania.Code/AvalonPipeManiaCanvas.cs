@@ -87,7 +87,12 @@ namespace AvalonPipeMania.Code
 				new FieldTest
 				{
 					Visibility = Visibility.Hidden
-				}.AttachTo(this)
+				}.AttachTo(this),
+
+				new InteractiveFieldTest
+				{
+					Visibility = Visibility.Hidden
+				}.AttachTo(this),
 			};
 
 			var Navigationbar = new AeroNavigationBar();
