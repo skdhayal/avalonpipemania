@@ -7,6 +7,7 @@ using ScriptCoreLib.Shared.Avalon.Extensions;
 using System.Windows.Controls;
 using System.Windows.Shapes;
 using System.Windows.Media;
+using ScriptCoreLib.Shared.Lambda;
 
 namespace AvalonPipeMania.Code.Labs
 {
@@ -71,7 +72,9 @@ namespace AvalonPipeMania.Code.Labs
 
 			f.Container.MoveTo(x, y).AttachTo(this);
 
-			var CurrentTile = new SimplePipe.Cross();
+			var BuildablePipes = SimplePipe.BuildablePipes.AsCyclicEnumerable();
+
+			var CurrentTile = BuildablePipes.First()();
 
 			CurrentTile.Container.Opacity = 0.7;
 			CurrentTile.Container.AttachTo(this);
@@ -95,8 +98,14 @@ namespace AvalonPipeMania.Code.Labs
 			f.Tiles.Overlay.MoveTo(x, y).AttachTo(Overlay);
 			#endregion
 
+			f.Tiles.Click +=
+				Target =>
+				{
+					CurrentTile.OverlayBlackAnimationStop();
+					CurrentTile.Container.FadeOut();
+				};
 
-
+			#region MouseMove
 			this.MouseMove +=
 				(Sender, Arguments) =>
 				{
@@ -119,6 +128,8 @@ namespace AvalonPipeMania.Code.Labs
 
 					CurrentTile.Container.MoveTo(p.X , p.Y );
 				};
+			#endregion
+
 		}
 	}
 }
