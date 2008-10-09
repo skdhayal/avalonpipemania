@@ -35,28 +35,32 @@ namespace AvalonPipeMania.Code
 				Height = Tiles.Height
 			}.AttachTo(this.Container);
 
-			//this.Tiles.Focus +=
-			//    Selection =>
-			//    {
-			//        this[Selection.IndexX, Selection.IndexY].DoIfAny(
-			//            k =>
-			//            {
-			//                k.OverlayBlackAnimationStart();
-			//            }
-			//        );
-			//    };
+			this.Tiles.Focus +=
+				Selection =>
+				{
+					if (ShowSelection)
+						this[Selection.IndexX, Selection.IndexY].DoIfAny(
+							k =>
+							{
+								k.OverlayBlackAnimationStart();
+							}
+						);
+				};
 
-			//this.Tiles.Unfocus +=
-			//    Selection =>
-			//    {
-			//        this[Selection.IndexX, Selection.IndexY].DoIfAny(
-			//            k =>
-			//            {
-			//                k.OverlayBlackAnimationStop();
-			//            }
-			//        );
-			//    };
+			this.Tiles.Unfocus +=
+				Selection =>
+				{
+					if (ShowSelection)
+						this[Selection.IndexX, Selection.IndexY].DoIfAny(
+							k =>
+							{
+								k.OverlayBlackAnimationStop();
+							}
+						);
+				};
 		}
+
+		public bool ShowSelection;
 
 		[Script]
 		public class SimplePipeOnTheField
