@@ -58,30 +58,22 @@ namespace AvalonPipeMania.Code
 						if (y == -1)
 						{
 							this.Top = value;
-							return;
 						}
-
-						if (y == 1)
+						else if (y == 1)
 						{
 							this.Bottom = value;
-							return;
 						}
-
-
 					}
 					else if (y == 0)
 					{
 						if (x == -1)
 						{
 							this.Left = value;
-							return;
 						}
-
-						if (x == 1)
+						else if (x == 1)
 						{
 							this.Right = value;
 
-							return;
 						}
 					}
 
