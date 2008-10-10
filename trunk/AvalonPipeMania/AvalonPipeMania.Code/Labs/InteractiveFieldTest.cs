@@ -23,7 +23,10 @@ namespace AvalonPipeMania.Code.Labs
 			this.Width = DefaultWidth;
 			this.Height = DefaultHeight;
 
-			var f = new Field(6, 6);
+			var f = new Field(6, 6)
+			{
+				DefaultPipeColor = Colors.Green
+			};
 
 			#region round the corners
 			f.Tiles[0, 0].Hide();

@@ -10,6 +10,7 @@ using System.Windows;
 using ScriptCoreLib.Shared.Lambda;
 using System.Windows.Markup;
 using System.Windows.Threading;
+using System.Windows.Media;
 
 namespace AvalonPipeMania.Code
 {
@@ -60,6 +61,31 @@ namespace AvalonPipeMania.Code
 
 		DispatcherTimer OverlayBlackTimer;
 
+		public Color Color
+		{
+			set
+			{
+				if (value == Colors.Green)
+				{
+					this.Green.Show();
+					this.Yellow.Hide();
+					this.Brown.Hide();
+					return;
+				}
+
+				if (value == Colors.Yellow)
+				{
+					this.Green.Hide();
+					this.Yellow.Show();
+					this.Brown.Hide();
+					return;
+				}
+
+				this.Green.Hide();
+				this.Yellow.Hide();
+				this.Brown.Show();
+			}
+		}
 
 		public void OverlayBlackAnimationStart()
 		{

@@ -44,6 +44,10 @@ namespace AvalonPipeMania.Code
 						);
 					};
 
+				this.PipeParts = new Pipe[]
+				{
+					this.PipePumpToRight
+				};
 
 			}
 		}

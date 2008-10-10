@@ -30,20 +30,24 @@ namespace AvalonPipeMania.Code
 
 		public readonly Canvas Container = new Canvas();
 
-		public bool HasWater;
-
-		private event Action OverlayBlackAnimationStartEvent;
-		public void OverlayBlackAnimationStart()
+		public bool HasWater
 		{
-			if (OverlayBlackAnimationStartEvent != null)
-				OverlayBlackAnimationStartEvent();
+			get
+			{
+				return this.PipeParts.Any(k => k.Water.Any(w => w.Visibility == System.Windows.Visibility.Visible));
+			}
 		}
 
-		private event Action OverlayBlackAnimationStopEvent;
+		public Pipe[] PipeParts;
+
+		public void OverlayBlackAnimationStart()
+		{
+			this.PipeParts.ForEach(k => k.OverlayBlackAnimationStart());
+		}
+
 		public void OverlayBlackAnimationStop()
 		{
-			if (OverlayBlackAnimationStopEvent != null)
-				OverlayBlackAnimationStopEvent();
+			this.PipeParts.ForEach(k => k.OverlayBlackAnimationStop());
 		}
 
 		public void Animate(IEnumerable<Image> Water, Action Done)
@@ -53,7 +57,6 @@ namespace AvalonPipeMania.Code
 			Water.ForEach(
 				(Current, Next) =>
 				{
-					HasWater = true;
 					Current.Show();
 
 					FrameRate.AtDelay(Next);

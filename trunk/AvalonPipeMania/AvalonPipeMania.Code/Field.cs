@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using ScriptCoreLib;
 using ScriptCoreLib.Shared.Avalon.Extensions;
 using ScriptCoreLib.Shared.Lambda;
+using System.Windows.Media;
 
 namespace AvalonPipeMania.Code
 {
@@ -17,6 +18,8 @@ namespace AvalonPipeMania.Code
 		public readonly Canvas Pipes;
 
 		public readonly TileField Tiles;
+
+		public Color DefaultPipeColor = Colors.Yellow;
 
 		public Field(int SizeX, int SizeY)
 		{
@@ -163,6 +166,8 @@ namespace AvalonPipeMania.Code
 				#endregion
 
 				{
+					value.PipeParts.ForEach(k => k.Color = this.DefaultPipeColor);
+
 					var target =
 						new SimplePipeOnTheField
 						{
