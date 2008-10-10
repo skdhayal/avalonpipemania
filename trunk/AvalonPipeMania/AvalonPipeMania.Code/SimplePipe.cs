@@ -24,6 +24,69 @@ namespace AvalonPipeMania.Code
 			public Action Pump;
 			public Action Drain;
 			public Action Spill;
+
+			public Action this[int x, int y]
+			{
+				get
+				{
+					if (x == 0)
+					{
+						if (y == -1)
+							return this.Top;
+
+						if (y == 1)
+							return this.Bottom;
+
+
+					}
+					else if (y == 0)
+					{
+						if (x == -1)
+							return this.Left;
+
+						if (x == 1)
+							return this.Right;
+					}
+
+					return null;
+				}
+
+				set
+				{
+					if (x == 0)
+					{
+						if (y == -1)
+						{
+							this.Top = value;
+							return;
+						}
+
+						if (y == 1)
+						{
+							this.Bottom = value;
+							return;
+						}
+
+
+					}
+					else if (y == 0)
+					{
+						if (x == -1)
+						{
+							this.Left = value;
+							return;
+						}
+
+						if (x == 1)
+						{
+							this.Right = value;
+
+							return;
+						}
+					}
+
+				}
+			}
 		}
 
 		public readonly Group Input = new Group();

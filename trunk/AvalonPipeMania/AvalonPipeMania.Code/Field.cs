@@ -85,7 +85,7 @@ namespace AvalonPipeMania.Code
 			}
 			set
 			{
-				this[e.IndexX, e.IndexY] = value; 
+				this[e.IndexX, e.IndexY] = value;
 			}
 		}
 
@@ -199,19 +199,19 @@ namespace AvalonPipeMania.Code
 
 					if (!value.IsVirtualPipe)
 					{
-						#region SpillRight
-						Action<SimplePipeOnTheField> SpillRight =
-							SpillTarget =>
+						#region Spill
+						Action<int, int, SimplePipeOnTheField> Spill =
+							(ox, oy, SpillTarget) =>
 							{
-								if (SpillTarget.Value.Output.Right == null)
-									if (SpillTarget.Value.SupportedOutput.Right != null)
+								if (SpillTarget.Value.Output[ox, oy] == null)
+									if (SpillTarget.Value.SupportedOutput[ox, oy] != null)
 									{
 										// once the water gets here we need to spill it on the floor
 										// it can happen when the pipe is not there or even when the pipe does not accept input
 
 
 										// when the correct pipe is built this event is effectevly detatched
-										SpillTarget.Value.Output.Right =
+										SpillTarget.Value.Output[ox, oy] =
 											delegate
 											{
 												// SpillTarget has filled itself with water
@@ -220,7 +220,7 @@ namespace AvalonPipeMania.Code
 
 												var s = new SimplePipe.Missing();
 
-												this[SpillTarget.X + 1, SpillTarget.Y] = s;
+												this[SpillTarget.X + ox, SpillTarget.Y + oy] = s;
 
 												RefreshPipes();
 
@@ -231,7 +231,7 @@ namespace AvalonPipeMania.Code
 													};
 
 												// we need to trigger the event
-												s.Input.Left();
+												s.Input[-ox, -oy]();
 
 												// and when the water hits the floor
 												// we should trigger end game
@@ -247,14 +247,14 @@ namespace AvalonPipeMania.Code
 								Left.Value.Output.Right = value.Input.Left;
 								value.Output.Left = Left.Value.Input.Right;
 
-								SpillRight(Left);
+								Spill(1, 0, Left);
 							},
 							FoundRight = Right =>
 							{
 								Right.Value.Output.Left = value.Input.Right;
 								value.Output.Right = Right.Value.Input.Left;
 
-								SpillRight(target);
+								Spill(-1, 0, Right);
 							},
 							FoundTop = Top =>
 							{
@@ -268,7 +268,8 @@ namespace AvalonPipeMania.Code
 							}
 						}.Apply(PipesList, target);
 
-						SpillRight(target);
+						Spill(1, 0, target);
+						Spill(-1, 0, target);
 					}
 				}
 
