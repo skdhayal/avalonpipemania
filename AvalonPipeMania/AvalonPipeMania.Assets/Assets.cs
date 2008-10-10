@@ -39,6 +39,7 @@ namespace AvalonPipeMania.Assets
 					public const string LeftToBottom = "assets/AvalonPipeMania.Pipe/LeftToBottom";
 					public const string TopToLeft = "assets/AvalonPipeMania.Pipe/TopToLeft";
 					public const string RightToDrain = "assets/AvalonPipeMania.Pipe/RightToDrain";
+					public const string Missing = "assets/AvalonPipeMania.Pipe/Missing";
 
 					// yellow:
 					// hue +32

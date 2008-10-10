@@ -65,30 +65,30 @@ namespace AvalonPipeMania.Code.Labs
 			AddPipes(0,
 				pipe =>
 				{
-					pipe.Yellow.Visibility = System.Windows.Visibility.Hidden;
+					pipe.Color = Colors.Transparent;
+
 				}
 			);
 
 			AddPipes(PipeSizeWithMargin * 2,
 				pipe =>
 				{
-					pipe.Yellow.Visibility = System.Windows.Visibility.Visible;
+					pipe.Color = Colors.Yellow;
 				}
 			);
 
 			AddPipes(PipeSizeWithMargin * 4,
 				pipe =>
 				{
-					pipe.Yellow.Visibility = System.Windows.Visibility.Hidden;
-					pipe.Green.Visibility = System.Windows.Visibility.Visible;
+					pipe.Color = Colors.Green;
+
 				}
 			);
 
 			AddPipes(PipeSizeWithMargin * 6,
 				pipe =>
 				{
-					pipe.Yellow.Visibility = System.Windows.Visibility.Hidden;
-					pipe.Brown.Visibility = System.Windows.Visibility.Visible;
+					pipe.Color = Colors.Brown;
 				}
 			);
 		}

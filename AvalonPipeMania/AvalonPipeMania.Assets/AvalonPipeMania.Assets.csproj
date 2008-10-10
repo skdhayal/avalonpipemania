@@ -148,6 +148,7 @@
     <None Include="web\assets\AvalonPipeMania.Pipe\LeftToDrain\LeftToDrain.pdn" />
     <None Include="web\assets\AvalonPipeMania.Pipe\LeftToRightBent\LeftToRightBent.pdn" />
     <None Include="web\assets\AvalonPipeMania.Pipe\LeftToRight\LeftToRight.pdn" />
+    <None Include="web\assets\AvalonPipeMania.Pipe\Missing\Missing.pdn" />
     <None Include="web\assets\AvalonPipeMania.Pipe\PumpToLeft\PumpToLeft.pdn" />
     <None Include="web\assets\AvalonPipeMania.Pipe\PumpToRight\PumpToRight.pdn" />
     <None Include="web\assets\AvalonPipeMania.Pipe\RightToBottom\RightToBottom.pdn" />
@@ -333,6 +334,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="web\assets\AvalonPipeMania.Pipe\LeftToBottom\black.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="web\assets\AvalonPipeMania.Pipe\Missing\l1.png" />
+    <EmbeddedResource Include="web\assets\AvalonPipeMania.Pipe\Missing\l2.png" />
+    <EmbeddedResource Include="web\assets\AvalonPipeMania.Pipe\Missing\r1.png" />
+    <EmbeddedResource Include="web\assets\AvalonPipeMania.Pipe\Missing\r2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
