@@ -117,11 +117,16 @@ namespace AvalonPipeMania.Code
 			}
 		}
 
+		public IEnumerable<SimplePipeOnTheField> ByIndex(int x, int y)
+		{
+			return PipesList.Where(k => k.Y == y).Where(k => k.X == x);
+		}
+
 		public SimplePipe this[int x, int y]
 		{
 			get
 			{
-				var v = PipesList.Where(k => k.Y == y).FirstOrDefault(k => k.X == x);
+				var v = ByIndex(x, y).FirstOrDefault(k => !k.Value.IsVirtualPipe);
 
 				if (v == null)
 					return null;
@@ -130,41 +135,45 @@ namespace AvalonPipeMania.Code
 			}
 			set
 			{
-				#region remove old pipe
-				PipesList.Where(k => k.Y == y).Where(k => k.X == x).ToArray().ForEach(
-					target =>
-					{
-						Console.WriteLine("remove: " + new { target.Value.GetType().Name, target.X, target.Y });
-
-						target.Value.Container.Orphanize();
-						PipesList.Remove(target);
-
-						new FindSiblings
+				if (!value.IsVirtualPipe)
+				{
+					#region remove old pipe
+					PipesList.Where(k => k.Y == y).Where(k => k.X == x).ToArray().ForEach(
+						target =>
 						{
-							FoundLeft = Left =>
+							Console.WriteLine("remove: " + new { target.Value.GetType().Name, target.X, target.Y });
+
+							target.Value.Container.Orphanize();
+							PipesList.Remove(target);
+
+							new FindSiblings
 							{
-								Left.Value.Output.Right = null;
-								value.Output.Left = null;
-							},
-							FoundRight = Right =>
-							{
-								Right.Value.Output.Left = null;
-								value.Output.Right = null;
-							},
-							FoundTop = Top =>
-							{
-								Top.Value.Output.Bottom = null;
-								value.Output.Top = null;
-							},
-							FoundBottom = Bottom =>
-							{
-								Bottom.Value.Output.Top = null;
-								value.Output.Bottom = null;
-							}
-						}.Apply(PipesList, target);
-					}
-				);
-				#endregion
+								FoundLeft = Left =>
+								{
+									Left.Value.Output.Right = null;
+									value.Output.Left = null;
+								},
+								FoundRight = Right =>
+								{
+									Right.Value.Output.Left = null;
+									value.Output.Right = null;
+								},
+								FoundTop = Top =>
+								{
+									Top.Value.Output.Bottom = null;
+									value.Output.Top = null;
+								},
+								FoundBottom = Bottom =>
+								{
+									Bottom.Value.Output.Top = null;
+									value.Output.Bottom = null;
+								}
+							}.Apply(PipesList, target);
+						}
+					);
+					#endregion
+				}
+
 
 				{
 					value.PipeParts.ForEach(k => k.Color = this.DefaultPipeColor);
@@ -188,60 +197,79 @@ namespace AvalonPipeMania.Code
 						(1 + y) * Tile.SurfaceHeight + Tile.ShadowBorder - Tile.Size
 					);
 
-					Action<SimplePipeOnTheField> SpillRight =
-						SpillTarget =>
-						{
-							if (SpillTarget.Value.Output.Right == null)
-								if (SpillTarget.Value.SupportedOutput.Right != null)
-								{
-									// once the water gets here we need to spill it on the floor
-									// it can happen when the pipe is not there or even when the pipe does not accept input
-
-									
-									// when the correct pipe is built this event is effectevly detatched
-									SpillTarget.Value.Output.Right =
-										delegate
-										{
-											// SpillTarget has filled itself with water
-											// and needs to continue on the next pipe
-											// but as we are inside here there is no matching pipe there
-
-											var spill = new SimplePipe.Missing();
-
-											this[SpillTarget.X + 1, SpillTarget.Y] = spill;
-										};
-								}
-						};
-
-					new FindSiblings
+					if (!value.IsVirtualPipe)
 					{
-						FoundLeft = Left =>
-						{
-							Left.Value.Output.Right = value.Input.Left;
-							value.Output.Left = Left.Value.Input.Right;
-
-							SpillRight(Left);
-						},
-						FoundRight = Right =>
-						{
-							Right.Value.Output.Left = value.Input.Right;
-							value.Output.Right = Right.Value.Input.Left;
-						},
-						FoundTop = Top =>
-						{
-							Top.Value.Output.Bottom = value.Input.Top;
-							value.Output.Top = Top.Value.Input.Bottom;
-						},
-						FoundBottom = Bottom =>
-						{
-							Bottom.Value.Output.Top = value.Input.Bottom;
-							value.Output.Bottom = Bottom.Value.Input.Top;
-						}
-					}.Apply(PipesList, target);
+						#region SpillRight
+						Action<SimplePipeOnTheField> SpillRight =
+							SpillTarget =>
+							{
+								if (SpillTarget.Value.Output.Right == null)
+									if (SpillTarget.Value.SupportedOutput.Right != null)
+									{
+										// once the water gets here we need to spill it on the floor
+										// it can happen when the pipe is not there or even when the pipe does not accept input
 
 
+										// when the correct pipe is built this event is effectevly detatched
+										SpillTarget.Value.Output.Right =
+											delegate
+											{
+												// SpillTarget has filled itself with water
+												// and needs to continue on the next pipe
+												// but as we are inside here there is no matching pipe there
 
-					SpillRight(target);
+												var s = new SimplePipe.Missing();
+
+												this[SpillTarget.X + 1, SpillTarget.Y] = s;
+
+												RefreshPipes();
+
+												s.Output.Spill =
+													delegate
+													{
+														// game over!!!
+													};
+
+												// we need to trigger the event
+												s.Input.Left();
+
+												// and when the water hits the floor
+												// we should trigger end game
+											};
+									}
+							};
+						#endregion
+
+						new FindSiblings
+						{
+							FoundLeft = Left =>
+							{
+								Left.Value.Output.Right = value.Input.Left;
+								value.Output.Left = Left.Value.Input.Right;
+
+								SpillRight(Left);
+							},
+							FoundRight = Right =>
+							{
+								Right.Value.Output.Left = value.Input.Right;
+								value.Output.Right = Right.Value.Input.Left;
+
+								SpillRight(target);
+							},
+							FoundTop = Top =>
+							{
+								Top.Value.Output.Bottom = value.Input.Top;
+								value.Output.Top = Top.Value.Input.Bottom;
+							},
+							FoundBottom = Bottom =>
+							{
+								Bottom.Value.Output.Top = value.Input.Bottom;
+								value.Output.Bottom = Bottom.Value.Input.Top;
+							}
+						}.Apply(PipesList, target);
+
+						SpillRight(target);
+					}
 				}
 
 
@@ -258,7 +286,7 @@ namespace AvalonPipeMania.Code
 			}
 
 
-			foreach (var k in this.PipesList.OrderBy(k => k.Y))
+			foreach (var k in this.PipesList.OrderBy(k => k.Y).ThenBy(k => !k.Value.IsVirtualPipe))
 			{
 				k.Value.Container.AttachTo(this.Pipes);
 			}

@@ -34,6 +34,9 @@ namespace AvalonPipeMania.Code
 
 		static readonly Action SupportedOutputMarker = delegate { };
 
+
+		public bool IsVirtualPipe = false;
+
 		public bool HasWater
 		{
 			get
@@ -97,17 +100,6 @@ namespace AvalonPipeMania.Code
 				return BuildablePipeTypes.ToArray<Type, Func<SimplePipe>>(
 					k => () => (SimplePipe)Activator.CreateInstance(k)
 				);
-
-				//return new Func<SimplePipe>[]
-				//{
-				//    () => new SimplePipe.Horizontal(),
-				//    () => new SimplePipe.Vertical(),
-				//    () => new SimplePipe.Cross(),
-				//    () => new SimplePipe.LeftToBottom(),
-				//    () => new SimplePipe.RightToBottom(),
-				//    () => new SimplePipe.TopToLeft(),
-				//    () => new SimplePipe.TopToRight(),
-				//};
 			}
 		}
 	}

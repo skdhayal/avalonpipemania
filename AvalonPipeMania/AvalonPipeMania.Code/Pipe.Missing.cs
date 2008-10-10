@@ -27,6 +27,12 @@ namespace AvalonPipeMania.Code
 			{
 				var f = new Factory(KnownAssets.Path.Pipe.Missing, this.Container);
 
+				this.Water = f.ToWaterImages(
+					"1",
+					"2",
+					"3"
+				);
+
 				{
 					var WaterDropFrames = f.ToWaterImages(
 						"l1",
@@ -68,24 +74,6 @@ namespace AvalonPipeMania.Code
 				}
 
 
-				//this.Outline = f.ToImage("outline");
-
-				//this.Brown = f.ToImage("brown");
-				//this.Brown.Visibility = Visibility.Hidden;
-
-				//this.Green = f.ToImage("green");
-				//this.Green.Visibility = Visibility.Hidden;
-
-				//this.Yellow = f.ToImage("yellow");
-
-
-				this.Water = f.ToWaterImages(
-					//"0_8",
-					//"8_16",
-					//"16_24"
-				);
-
-				//this.Glow = f.ToImage("glow");
 			}
 		}
 
