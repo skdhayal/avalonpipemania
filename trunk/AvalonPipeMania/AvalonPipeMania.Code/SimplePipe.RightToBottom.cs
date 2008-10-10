@@ -27,12 +27,14 @@ namespace AvalonPipeMania.Code
 				// if the animation has already been started or even if its already
 				// complete this action should not be called again.
 
+				this.SupportedOutput.Bottom = SupportedOutputMarker;
 				this.Input.Right =
 					delegate
 					{
 						Animate(this.PipeRightToBottom.Water, this.Output.Bottom);
 					};
 
+				this.SupportedOutput.Right = SupportedOutputMarker;
 				this.Input.Bottom =
 					delegate
 					{
