@@ -21,6 +21,8 @@ namespace AvalonPipeMania.Code
 		{
 			public readonly DispatcherTimer WaterDropFromLeftAnimation;
 			public readonly DispatcherTimer WaterDropFromRightAnimation;
+			public readonly DispatcherTimer WaterDropFromTopAnimation;
+			public readonly DispatcherTimer WaterDropFromBottomAnimation;
 
 
 			public Missing()
@@ -33,45 +35,52 @@ namespace AvalonPipeMania.Code
 					"3"
 				);
 
-				{
-					var WaterDropFrames = f.ToWaterImages(
+				ParamsFunc<string, DispatcherTimer> ToAnimation =
+					Frames =>
+					{
+						var WaterDropFrames = f.ToWaterImages(
+							Frames
+						);
+
+						Action Hide = delegate { };
+
+						return (1000 / 23).AtIntervalWithCounter(
+							Counter =>
+							{
+								Hide();
+
+								WaterDropFrames.AtModulus(Counter).Show();
+
+								Hide = WaterDropFrames.AtModulus(Counter).Hide;
+							}
+						);
+					};
+
+				WaterDropFromLeftAnimation = 
+					ToAnimation(
 						"l1",
 						"l2"
 					);
 
-					Action Hide = delegate { };
 
-					WaterDropFromLeftAnimation = (1000 / 23).AtIntervalWithCounter(
-						Counter =>
-						{
-							Hide();
-
-							WaterDropFrames.AtModulus(Counter).Visibility = Visibility.Visible;
-
-							Hide = () => WaterDropFrames.AtModulus(Counter).Visibility = Visibility.Hidden;
-						}
-					);
-				}
-
-				{
-					var WaterDropFrames = f.ToWaterImages(
+				WaterDropFromRightAnimation =
+					ToAnimation(
 						"r1",
 						"r2"
 					);
 
-					Action Hide = delegate { };
 
-					WaterDropFromRightAnimation = (1000 / 23).AtIntervalWithCounter(
-						Counter =>
-						{
-							Hide();
-
-							WaterDropFrames.AtModulus(Counter).Visibility = Visibility.Visible;
-
-							Hide = () => WaterDropFrames.AtModulus(Counter).Visibility = Visibility.Hidden;
-						}
+				WaterDropFromTopAnimation =
+					ToAnimation(
+						"t1",
+						"t2"
 					);
-				}
+
+				WaterDropFromBottomAnimation =
+					ToAnimation(
+						"b1",
+						"b2"
+					);
 
 
 			}

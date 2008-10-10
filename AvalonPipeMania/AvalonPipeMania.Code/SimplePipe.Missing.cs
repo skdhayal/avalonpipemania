@@ -27,6 +27,8 @@ namespace AvalonPipeMania.Code
 
 				this.PipeMissing.WaterDropFromLeftAnimation.Stop();
 				this.PipeMissing.WaterDropFromRightAnimation.Stop();
+				this.PipeMissing.WaterDropFromTopAnimation.Stop();
+				this.PipeMissing.WaterDropFromRightAnimation.Stop();
 
 				this.PipeMissing.Container.AttachTo(this.Container);
 
@@ -48,6 +50,20 @@ namespace AvalonPipeMania.Code
 						Animate(this.PipeMissing.Water, this.Output.Spill);
 					};
 
+				this.Input.Top =
+					delegate
+					{
+						this.PipeMissing.WaterDropFromTopAnimation.Start();
+						Animate(this.PipeMissing.Water, this.Output.Spill);
+					};
+
+
+				this.Input.Bottom =
+					delegate
+					{
+						this.PipeMissing.WaterDropFromBottomAnimation.Start();
+						Animate(this.PipeMissing.Water, this.Output.Spill);
+					};
 
 				this.PipeParts = new Pipe[]
 				{
