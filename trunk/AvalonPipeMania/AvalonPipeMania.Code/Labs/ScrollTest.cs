@@ -50,11 +50,17 @@ namespace AvalonPipeMania.Code.Labs
 				{
 					var p = Arguments.GetPosition(Overlay);
 
-					const int MarginX = Tile.ShadowBorder + Tile.Size;
-					const int MarginY = Tile.ShadowBorder + Tile.SurfaceHeight;
-					
-					var x = (DefaultWidth - f.Tiles.Width) * ((p.X - MarginX).Max(0) / (DefaultWidth - MarginX * 2)).Min(1);
-					var y = (DefaultHeight - f.Tiles.Height) * ((p.Y - MarginY).Max(0) / (DefaultHeight - MarginY * 2)).Min(1);
+					const int PaddingX = Tile.Size / 2;
+					const int PaddingY = Tile.SurfaceHeight / 2;
+
+					const int MarginLeft = Tile.ShadowBorder + Tile.Size + PaddingX;
+					const int MarginWidth = MarginLeft + Tile.ShadowBorder + Tile.Size + PaddingX;
+
+					const int MarginTop = Tile.ShadowBorder + Tile.SurfaceHeight + PaddingY;
+					const int MarginHeight = MarginTop + Tile.ShadowBorder + Tile.Size + PaddingY;
+
+					var x = PaddingX + (DefaultWidth - (f.Tiles.Width + PaddingX * 2)) * ((p.X - MarginLeft).Max(0) / (DefaultWidth - MarginWidth)).Min(1);
+					var y = PaddingY + (DefaultHeight - (f.Tiles.Height + PaddingY * 2)) * ((p.Y - MarginTop).Max(0) / (DefaultHeight - MarginHeight)).Min(1);
 
 					f.Tiles.Overlay.MoveTo(x, y);
 					f.Container.MoveTo(x, y);
