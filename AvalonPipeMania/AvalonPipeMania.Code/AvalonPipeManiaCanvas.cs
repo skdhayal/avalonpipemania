@@ -57,43 +57,56 @@ namespace AvalonPipeMania.Code
 			);
 			#endregion
 
-			var Buttons = new Canvas
+		
+
+			// we selecting an implementation here:
+			// this should be dynamic in the UI for labs entrypoint
+			var Options = new Dictionary<Type, Func<Canvas>>
+			{
+				{ typeof(TileFieldTest), 
+					() => new TileFieldTest
+					{
+						PlaySound = e => PlaySound(e),
+						Visibility = Visibility.Hidden
+					}
+				},
+				{ typeof(ColorTest), 
+					() => new ColorTest
+					{
+						Visibility = Visibility.Hidden
+					}
+				},
+				{ typeof(SimplePipeTest),
+					() => new SimplePipeTest
+					{
+						Visibility = Visibility.Hidden
+					}
+				},
+				{ typeof(FieldTest),
+					() => new FieldTest
+					{
+						Visibility = Visibility.Hidden
+					}
+				},
+				{ typeof(InteractiveFieldTest),
+					() => new InteractiveFieldTest
+					{
+						Visibility = Visibility.Hidden
+					}
+				},
+			};
+
+			var Content = new Canvas
 			{
 				Width = DefaultWidth,
 				Height = DefaultHeight
 			}.AttachTo(this);
 
-			// we selecting an implementation here:
-			// this should be dynamic in the UI for labs entrypoint
-			var Options = new Canvas[]
+			var Buttons = new Canvas
 			{
-				new TileFieldTest
-				{
-					PlaySound = e => PlaySound(e),
-					Visibility = Visibility.Hidden
-				}.AttachTo(this),
-
-				new ColorTest
-				{
-					Visibility = Visibility.Hidden
-				}.AttachTo(this),
-
-
-				new SimplePipeTest
-				{
-					Visibility = Visibility.Hidden
-				}.AttachTo(this),
-
-				new FieldTest
-				{
-					Visibility = Visibility.Hidden
-				}.AttachTo(this),
-
-				new InteractiveFieldTest
-				{
-					Visibility = Visibility.Hidden
-				}.AttachTo(this),
-			};
+				Width = DefaultWidth,
+				Height = DefaultHeight
+			}.AttachTo(this);
 
 			var Navigationbar = new AeroNavigationBar();
 
@@ -107,7 +120,7 @@ namespace AvalonPipeMania.Code
 				{
 					var Button = new TextButtonControl
 					{
-						Text = "Open " + Option.GetType().Name,
+						Text = "Open " + Option.Key.Name,
 						Width = 200,
 						Height = ButtonHeight
 					};
@@ -132,19 +145,23 @@ namespace AvalonPipeMania.Code
 							Button.Foreground = Brushes.Blue;
 						};
 
+					var OptionCanvas = default(Canvas);
 
 					Button.Click +=
 						delegate
 						{
+							if (OptionCanvas == null)
+								OptionCanvas = Option.Value().AttachTo(Content);
+
 							Navigationbar.History.Add(
 								delegate
 								{
-									Option.Hide();
+									OptionCanvas.Hide();
 									Buttons.Show();
 								},
 								delegate
 								{
-									Option.Show();
+									OptionCanvas.Show();
 									Buttons.Hide();
 								}
 							);
