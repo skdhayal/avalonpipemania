@@ -87,13 +87,7 @@ namespace AvalonPipeMania.Code
 							//tile.YellowFilter.Visibility = System.Windows.Visibility.Visible;
 							tile.Select.Show();
 						};
-					
-					this.Overlay.MouseLeftButtonUp +=
-						delegate
-						{
-							if (Click != null)
-								Click(tile);
-						};
+				
 
 					tile.Overlay.MouseLeave +=
 						delegate
@@ -109,6 +103,14 @@ namespace AvalonPipeMania.Code
 						};
 				}
 
+
+
+			this.Overlay.MouseLeftButtonUp +=
+				delegate
+				{
+					if (Click != null)
+						Click(FocusTile);
+				};
 		}
 
 		public Tile FocusTile;
