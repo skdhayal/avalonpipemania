@@ -63,12 +63,19 @@ namespace AvalonPipeMania.Code.Labs
 			f.Tiles[2, 0].Overlay.MouseLeftButtonUp +=
 				delegate
 				{
+					if (f[2, 0].HasWater)
+						return;
+
 					f[2, 0].Input.Pump();
 				};
 
 			f.Tiles[2, 4].Overlay.MouseLeftButtonUp +=
 				delegate
 				{
+					if (f[2, 4].HasWater)
+						return;
+
+
 					f[2, 4].Input.Pump();
 				};
 
