@@ -23,7 +23,7 @@ namespace AvalonPipeMania.Code.Labs
 			this.Width = DefaultWidth;
 			this.Height = DefaultHeight;
 
-			var f = new Field(6, 6)
+			var f = new Field(8, 8)
 			{
 				DefaultPipeColor = Colors.Green
 			};
@@ -51,6 +51,7 @@ namespace AvalonPipeMania.Code.Labs
 			f[4, 0] = new SimplePipe.LeftToBottom();
 			f[3, 0] = new SimplePipe.RightToDrain();
 			f[1, 3] = new SimplePipe.PumpToRight();
+			f[2, 4] = new SimplePipe.PumpToRight();
 
 			f[4, 2].Output.Drain = f[1, 3].Input.Pump;
 
@@ -65,6 +66,11 @@ namespace AvalonPipeMania.Code.Labs
 					f[2, 0].Input.Pump();
 				};
 
+			f.Tiles[2, 4].Overlay.MouseLeftButtonUp +=
+				delegate
+				{
+					f[2, 4].Input.Pump();
+				};
 
 
 			// when a user adds a pipe on top of another
@@ -143,9 +149,12 @@ namespace AvalonPipeMania.Code.Labs
 								return true;
 							}
 
-							if (q.HasWater)
-								return true;
+						
 						}
+
+
+						if (f.ByIndex(u.IndexX, u.IndexY).Any(k => k.Value.HasWater))
+							return true;
 					}
 
 					return false;

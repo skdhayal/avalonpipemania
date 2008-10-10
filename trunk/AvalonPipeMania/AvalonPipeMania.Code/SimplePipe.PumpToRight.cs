@@ -28,6 +28,7 @@ namespace AvalonPipeMania.Code
 				// if the animation has already been started or even if its already
 				// complete this action should not be called again.
 
+				this.SupportedOutput.Right = SupportedOutputMarker;
 				this.Input.Pump =
 					delegate
 					{
