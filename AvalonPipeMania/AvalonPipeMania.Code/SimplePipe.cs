@@ -34,7 +34,12 @@ namespace AvalonPipeMania.Code
 		{
 			get
 			{
-				return this.PipeParts.Any(k => k.Water.Any(w => w.Visibility == System.Windows.Visibility.Visible));
+				return this.PipeParts.Any(
+					k =>
+					{
+						return k.Water.Any(w => w.Visibility == System.Windows.Visibility.Visible);
+					}
+				);
 			}
 		}
 
