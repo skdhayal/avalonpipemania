@@ -94,6 +94,12 @@ namespace AvalonPipeMania.Code
 						Visibility = Visibility.Hidden
 					}
 				},
+				{ typeof(ScrollTest),
+					() => new ScrollTest
+					{
+						Visibility = Visibility.Hidden
+					}
+				},
 			};
 
 			var Content = new Canvas
