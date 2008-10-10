@@ -358,6 +358,24 @@
   <ItemGroup>
     <EmbeddedResource Include="web\assets\AvalonPipeMania.Data\tile0_cyan.png" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="web\assets\AvalonPipeMania.Explosion\ani6_01.png" />
+    <EmbeddedResource Include="web\assets\AvalonPipeMania.Explosion\ani6_02.png" />
+    <EmbeddedResource Include="web\assets\AvalonPipeMania.Explosion\ani6_03.png" />
+    <EmbeddedResource Include="web\assets\AvalonPipeMania.Explosion\ani6_04.png" />
+    <EmbeddedResource Include="web\assets\AvalonPipeMania.Explosion\ani6_05.png" />
+    <EmbeddedResource Include="web\assets\AvalonPipeMania.Explosion\ani6_06.png" />
+    <EmbeddedResource Include="web\assets\AvalonPipeMania.Explosion\ani6_07.png" />
+    <EmbeddedResource Include="web\assets\AvalonPipeMania.Explosion\ani6_08.png" />
+    <EmbeddedResource Include="web\assets\AvalonPipeMania.Explosion\ani6_09.png" />
+    <EmbeddedResource Include="web\assets\AvalonPipeMania.Explosion\ani6_10.png" />
+    <EmbeddedResource Include="web\assets\AvalonPipeMania.Explosion\ani6_11.png" />
+    <EmbeddedResource Include="web\assets\AvalonPipeMania.Explosion\ani6_12.png" />
+    <EmbeddedResource Include="web\assets\AvalonPipeMania.Explosion\ani6_13.png" />
+    <EmbeddedResource Include="web\assets\AvalonPipeMania.Explosion\ani6_14.png" />
+    <EmbeddedResource Include="web\assets\AvalonPipeMania.Explosion\ani6_15.png" />
+    <EmbeddedResource Include="web\assets\AvalonPipeMania.Explosion\ani6_16.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

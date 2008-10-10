@@ -57,7 +57,7 @@ namespace AvalonPipeMania.Code
 			);
 			#endregion
 
-		
+
 
 			// we selecting an implementation here:
 			// this should be dynamic in the UI for labs entrypoint
@@ -108,6 +108,35 @@ namespace AvalonPipeMania.Code
 				Height = DefaultHeight
 			}.AttachTo(this);
 
+			var ExplosionCanvas = new Canvas
+			{
+				Width = 64,
+				Height = 64,
+			}.MoveTo(DefaultWidth - 64, 0).AttachTo(this);
+
+			var ExplosionFrames = KnownAssets.Default.FileNames.Where(k => k.StartsWith(KnownAssets.Path.Explosion)).OrderBy(k => k).ToArray(
+				k => new Image
+				{
+					Source = k.ToSource(),
+					Visibility = Visibility.Hidden
+				}.AttachTo(ExplosionCanvas)
+			);
+
+			{
+				ExplosionFrames.AtModulus(0).Show();
+				Action Hide = () => ExplosionFrames.AtModulus(0).Hide();
+
+				(1000 / 23).AtIntervalWithCounter(
+					Counter =>
+					{
+						Hide();
+
+						ExplosionFrames.AtModulus(Counter).Show();
+						Hide = () => ExplosionFrames.AtModulus(Counter).Hide();
+					}
+				);
+			}
+
 			var Buttons = new Canvas
 			{
 				Width = DefaultWidth,
@@ -126,7 +155,7 @@ namespace AvalonPipeMania.Code
 				{
 					var Button = new TextButtonControl
 					{
-						Text = (Index + 1) +  ". Open " + Option.Key.Name,
+						Text = (Index + 1) + ". Open " + Option.Key.Name,
 						Width = 200,
 						Height = ButtonHeight
 					};
@@ -147,7 +176,7 @@ namespace AvalonPipeMania.Code
 						delegate
 						{
 							Button.Background.Fill = Brushes.Black;
-							Button.Background.Opacity = 0.5; 
+							Button.Background.Opacity = 0.5;
 							Button.Foreground = Brushes.Blue;
 						};
 
