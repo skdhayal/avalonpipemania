@@ -23,6 +23,7 @@ namespace AvalonPipeMania.Assets
 				public const string Assets = "assets/AvalonPipeMania.Assets";
 				public const string Data = "assets/AvalonPipeMania.Data";
 				public const string Sounds = "assets/AvalonPipeMania.Sounds";
+				public const string Explosion = "assets/AvalonPipeMania.Explosion";
 
 				[Script, ScriptResources]
 				public static class Pipe
@@ -49,6 +50,7 @@ namespace AvalonPipeMania.Assets
 					// hue +92
 				}
 			}
+
 
 		}
 
