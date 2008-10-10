@@ -65,11 +65,13 @@ namespace AvalonPipeMania.Code
 					};
 				#endregion
 
-				this.OverlayBlackAnimationStartEvent += this.PipeTopToBottom.OverlayBlackAnimationStart;
-				this.OverlayBlackAnimationStopEvent += this.PipeTopToBottom.OverlayBlackAnimationStop;
 
-				this.OverlayBlackAnimationStartEvent += this.PipeLeftToRight.OverlayBlackAnimationStart;
-				this.OverlayBlackAnimationStopEvent += this.PipeLeftToRight.OverlayBlackAnimationStop;
+				this.PipeParts = new Pipe[]
+				{
+					this.PipeTopToBottom,
+					this.PipeLeftToRight
+				};
+		
 
 
 			}

@@ -39,6 +39,10 @@ namespace AvalonPipeMania.Code
 						Animate(this.PipeRightToDrain.Water, Output);
 					};
 
+				this.PipeParts = new Pipe[]
+				{
+					this.PipeRightToDrain
+				};
 
 			}
 		}
