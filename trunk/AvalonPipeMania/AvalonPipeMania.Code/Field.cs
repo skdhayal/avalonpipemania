@@ -260,16 +260,23 @@ namespace AvalonPipeMania.Code
 							{
 								Top.Value.Output.Bottom = value.Input.Top;
 								value.Output.Top = Top.Value.Input.Bottom;
+
+								Spill(0, 1, Top);
 							},
 							FoundBottom = Bottom =>
 							{
 								Bottom.Value.Output.Top = value.Input.Bottom;
 								value.Output.Bottom = Bottom.Value.Input.Top;
+
+								Spill(0, -1, Bottom);
 							}
 						}.Apply(PipesList, target);
 
 						Spill(1, 0, target);
 						Spill(-1, 0, target);
+						Spill(0, 1, target);
+						Spill(0, -1, target);
+
 					}
 				}
 
