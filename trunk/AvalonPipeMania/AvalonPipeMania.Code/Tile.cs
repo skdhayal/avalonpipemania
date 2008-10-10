@@ -43,6 +43,23 @@ namespace AvalonPipeMania.Code
 		public readonly Image BackgroundPink;
 		public readonly Image BackgroundBrown;
 
+		public Color Color
+		{
+			set
+			{
+				if (value == Colors.Pink)
+				{
+					BackgroundPink.Show();
+					BackgroundBrown.Hide();
+
+					return;
+				}
+
+				BackgroundPink.Hide();
+				BackgroundBrown.Show();
+			}
+		}
+
 		public Tile()
 		{
 			this.Container = new Canvas

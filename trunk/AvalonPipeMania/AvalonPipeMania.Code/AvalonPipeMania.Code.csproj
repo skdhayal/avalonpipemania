@@ -78,6 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AvalonPipeManiaCanvas.cs" />
+    <Compile Include="Labs\ScrollTest.cs" />
     <Compile Include="SimplePipe.Missing.cs" />
     <Compile Include="Pipe.Missing.cs" />
     <Compile Include="Labs\InteractiveFieldTest.cs" />

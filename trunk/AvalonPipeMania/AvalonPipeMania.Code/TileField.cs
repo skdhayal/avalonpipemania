@@ -5,6 +5,7 @@ using System.Text;
 using ScriptCoreLib;
 using ScriptCoreLib.Shared.Avalon.Extensions;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace AvalonPipeMania.Code
 {
@@ -30,7 +31,7 @@ namespace AvalonPipeMania.Code
 			this.SizeY = SizeY;
 
 			this.Width = Tile.Size * SizeX + Tile.ShadowBorder * 2;
-			this.Height = Tile.SurfaceHeight * SizeY + Tile.ShadowBorder * 2;
+			this.Height = Tile.SurfaceHeight * (SizeY - 1) + Tile.Size + Tile.ShadowBorder * 2;
 
 			this.Shadow = new Canvas
 			{
@@ -111,6 +112,14 @@ namespace AvalonPipeMania.Code
 					if (Click != null)
 						Click(FocusTile);
 				};
+		}
+
+		public Color Color
+		{
+			set
+			{
+				this.Tiles.ForEach(k => k.Color = value);
+			}
 		}
 
 		public Tile FocusTile;
