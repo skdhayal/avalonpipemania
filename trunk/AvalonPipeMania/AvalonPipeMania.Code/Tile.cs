@@ -42,19 +42,45 @@ namespace AvalonPipeMania.Code
 
 		public readonly Image BackgroundPink;
 		public readonly Image BackgroundBrown;
+		public readonly Image BackgroundGray;
+		public readonly Image BackgroundCyan;
 
 		public Color Color
 		{
 			set
 			{
+				if (value == Colors.Cyan)
+				{
+					BackgroundCyan.Show();
+					BackgroundGray.Hide();
+					BackgroundPink.Hide();
+					BackgroundBrown.Hide();
+
+					return;
+				}
+
+				if (value == Colors.Gray)
+				{
+					BackgroundCyan.Hide();
+					BackgroundGray.Show();
+					BackgroundPink.Hide();
+					BackgroundBrown.Hide();
+
+					return;
+				}
+
 				if (value == Colors.Pink)
 				{
+					BackgroundCyan.Hide();
+					BackgroundGray.Hide();
 					BackgroundPink.Show();
 					BackgroundBrown.Hide();
 
 					return;
 				}
 
+				BackgroundCyan.Hide();
+				BackgroundGray.Hide();
 				BackgroundPink.Hide();
 				BackgroundBrown.Show();
 			}
@@ -85,6 +111,17 @@ namespace AvalonPipeMania.Code
 				Visibility = System.Windows.Visibility.Hidden
 			}.AttachTo(this.Container);
 
+			this.BackgroundGray = new Image
+			{
+				Source = (KnownAssets.Path.Data + "/tile0_gray.png").ToSource(),
+				Visibility = System.Windows.Visibility.Hidden
+			}.AttachTo(this.Container);
+
+			this.BackgroundCyan = new Image
+			{
+				Source = (KnownAssets.Path.Data + "/tile0_cyan.png").ToSource(),
+				Visibility = System.Windows.Visibility.Hidden
+			}.AttachTo(this.Container);
 
 
 			var BlackFilter = new Image

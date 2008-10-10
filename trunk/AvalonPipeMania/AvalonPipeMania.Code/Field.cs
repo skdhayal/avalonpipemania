@@ -135,7 +135,56 @@ namespace AvalonPipeMania.Code
 			}
 			set
 			{
-				if (!value.IsVirtualPipe)
+				// assigning null currently does not register spill detection
+
+				var IsVirtualPipe = false;
+
+				if (value != null)
+					IsVirtualPipe = value.IsVirtualPipe;
+
+				#region Spill
+				Action<int, int, SimplePipeOnTheField> Spill =
+					(ox, oy, SpillTarget) =>
+					{
+						if (SpillTarget.Value.Output[ox, oy] == null)
+							if (SpillTarget.Value.SupportedOutput[ox, oy] != null)
+							{
+								// once the water gets here we need to spill it on the floor
+								// it can happen when the pipe is not there or even when the pipe does not accept input
+
+
+								// when the correct pipe is built this event is effectevly detatched
+								SpillTarget.Value.Output[ox, oy] =
+									delegate
+									{
+										// SpillTarget has filled itself with water
+										// and needs to continue on the next pipe
+										// but as we are inside here there is no matching pipe there
+
+										var s = new SimplePipe.Missing();
+
+										this[SpillTarget.X + ox, SpillTarget.Y + oy] = s;
+
+										RefreshPipes();
+
+										s.Output.Spill =
+											delegate
+											{
+												// game over!!!
+											};
+
+										// we need to trigger the event
+										s.Input[-ox, -oy]();
+
+										// and when the water hits the floor
+										// we should trigger end game
+									};
+							}
+					};
+				#endregion
+
+
+				if (!IsVirtualPipe)
 				{
 					#region remove old pipe
 					PipesList.Where(k => k.Y == y).Where(k => k.X == x).ToArray().ForEach(
@@ -151,22 +200,35 @@ namespace AvalonPipeMania.Code
 								FoundLeft = Left =>
 								{
 									Left.Value.Output.Right = null;
-									value.Output.Left = null;
+
+									if (value != null)
+										value.Output.Left = null;
+
+									Spill(1, 0, Left);
 								},
 								FoundRight = Right =>
 								{
 									Right.Value.Output.Left = null;
-									value.Output.Right = null;
+									if (value != null)
+										value.Output.Right = null;
+
+									Spill(-1, 0, Right);
 								},
 								FoundTop = Top =>
 								{
 									Top.Value.Output.Bottom = null;
-									value.Output.Top = null;
+									if (value != null)
+										value.Output.Top = null;
+
+									Spill(0, 1, Top);
 								},
 								FoundBottom = Bottom =>
 								{
 									Bottom.Value.Output.Top = null;
-									value.Output.Bottom = null;
+									if (value != null)
+										value.Output.Bottom = null;
+
+									Spill(0, -1, Bottom);
 								}
 							}.Apply(PipesList, target);
 						}
@@ -174,7 +236,7 @@ namespace AvalonPipeMania.Code
 					#endregion
 				}
 
-
+				if (value != null)
 				{
 					value.PipeParts.ForEach(k => k.Color = this.DefaultPipeColor);
 
@@ -197,49 +259,9 @@ namespace AvalonPipeMania.Code
 						(1 + y) * Tile.SurfaceHeight + Tile.ShadowBorder - Tile.Size
 					);
 
-					if (!value.IsVirtualPipe)
+					if (!IsVirtualPipe)
 					{
-						#region Spill
-						Action<int, int, SimplePipeOnTheField> Spill =
-							(ox, oy, SpillTarget) =>
-							{
-								if (SpillTarget.Value.Output[ox, oy] == null)
-									if (SpillTarget.Value.SupportedOutput[ox, oy] != null)
-									{
-										// once the water gets here we need to spill it on the floor
-										// it can happen when the pipe is not there or even when the pipe does not accept input
-
-
-										// when the correct pipe is built this event is effectevly detatched
-										SpillTarget.Value.Output[ox, oy] =
-											delegate
-											{
-												// SpillTarget has filled itself with water
-												// and needs to continue on the next pipe
-												// but as we are inside here there is no matching pipe there
-
-												var s = new SimplePipe.Missing();
-
-												this[SpillTarget.X + ox, SpillTarget.Y + oy] = s;
-
-												RefreshPipes();
-
-												s.Output.Spill =
-													delegate
-													{
-														// game over!!!
-													};
-
-												// we need to trigger the event
-												s.Input[-ox, -oy]();
-
-												// and when the water hits the floor
-												// we should trigger end game
-											};
-									}
-							};
-						#endregion
-
+					
 						new FindSiblings
 						{
 							FoundLeft = Left =>

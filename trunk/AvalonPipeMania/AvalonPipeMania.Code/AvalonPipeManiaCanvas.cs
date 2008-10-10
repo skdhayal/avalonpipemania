@@ -126,13 +126,13 @@ namespace AvalonPipeMania.Code
 				{
 					var Button = new TextButtonControl
 					{
-						Text = "Open " + Option.Key.Name,
+						Text = (Index + 1) +  ". Open " + Option.Key.Name,
 						Width = 200,
 						Height = ButtonHeight
 					};
 
 					Button.Background.Fill = Brushes.Black;
-					Button.Background.Opacity = 0.3;
+					Button.Background.Opacity = 0.5;
 					Button.Foreground = Brushes.Blue;
 
 					Button.MouseEnter +=
@@ -147,7 +147,7 @@ namespace AvalonPipeMania.Code
 						delegate
 						{
 							Button.Background.Fill = Brushes.Black;
-							Button.Background.Opacity = 0.3; 
+							Button.Background.Opacity = 0.5; 
 							Button.Foreground = Brushes.Blue;
 						};
 

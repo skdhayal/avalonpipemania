@@ -27,10 +27,39 @@ namespace AvalonPipeMania.Code.Labs
 
 			var f = new Field(16, 16);
 
-			f.Tiles.Color = Colors.Pink;
+			// f.Tiles.Color = Colors.Pink;
+			f.Tiles.Color = Colors.Cyan;
+
+			var Randomized = f.Tiles.Tiles.Randomize().ToArray();
+
+			Enumerable.Range(0, f.Tiles.SizeX * f.Tiles.SizeY / 20).ForEach(
+				Index =>
+				{
+					var Target = Randomized[Index];
+					if (Index % 2 == 0)
+					{
+						Target.Drain.Show();
+
+						if (Index % 4 == 0)
+							f[Target] = new SimplePipe.LeftToDrain();
+						else
+							f[Target] = new SimplePipe.RightToDrain();
+
+					}
+					else
+					{
+						if (Index % 4 == 1)
+							f[Target] = new SimplePipe.PumpToLeft();
+						else
+							f[Target] = new SimplePipe.PumpToRight();
+						10000.AtDelay(f[Target].Input.Pump);
+					}
+				}
+			);
 
 			f.Container.AttachTo(this);
 
+			#region overlay
 			var Overlay = new Canvas
 			{
 				Width = DefaultWidth,
@@ -45,7 +74,10 @@ namespace AvalonPipeMania.Code.Labs
 				Opacity = 0
 			}.AttachTo(Overlay);
 
+
+
 			f.Tiles.Overlay.AttachTo(Overlay);
+			#endregion
 
 			#region move the map with the mouse yet not too often anf smooth enough
 			Action<int, int> MoveTo = Tween.NumericEmitter.Of(
@@ -56,7 +88,7 @@ namespace AvalonPipeMania.Code.Labs
 				}
 			);
 
-			Action<int, int> CalculateMoveTo = 
+			Action<int, int> CalculateMoveTo =
 				//Tween.NumericOmitter.Of(
 				(int_x, int_y) =>
 				{
@@ -80,7 +112,7 @@ namespace AvalonPipeMania.Code.Labs
 
 					MoveTo(Convert.ToInt32(_x), Convert.ToInt32(_y));
 				}
-			//)
+				//)
 			;
 			#endregion
 
@@ -96,6 +128,11 @@ namespace AvalonPipeMania.Code.Labs
 			f.Tiles.Click +=
 				Selected =>
 				{
+					if (Selected == null)
+						return;
+
+					f[Selected] = null;
+
 					Selected.Hide();
 				};
 		}
