@@ -28,7 +28,7 @@ namespace AvalonPipeMania.Code
 				this.PipeMissing.WaterDropFromLeftAnimation.Stop();
 				this.PipeMissing.WaterDropFromRightAnimation.Stop();
 				this.PipeMissing.WaterDropFromTopAnimation.Stop();
-				this.PipeMissing.WaterDropFromRightAnimation.Stop();
+				this.PipeMissing.WaterDropFromBottomAnimation.Stop();
 
 				this.PipeMissing.Container.AttachTo(this.Container);
 
