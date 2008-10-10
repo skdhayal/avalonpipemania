@@ -44,6 +44,14 @@ namespace AvalonPipeMania.Code
 						);
 					};
 
+				this.Input.Right =
+					delegate
+					{
+						// what happens when water reaches the pump?
+
+						Animate(this.PipePumpToRight.Water, this.Output.Pump);
+					};
+
 				this.PipeParts = new Pipe[]
 				{
 					this.PipePumpToRight

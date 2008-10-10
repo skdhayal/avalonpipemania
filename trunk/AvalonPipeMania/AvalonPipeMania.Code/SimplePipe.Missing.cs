@@ -13,38 +13,37 @@ namespace AvalonPipeMania.Code
 	{
 
 		[Script]
-		public class TopToRight : SimplePipe
+		public class Missing : SimplePipe
 		{
-			readonly Pipe PipeTopToRight;
+			readonly Pipe.Missing PipeMissing;
 
+			// this pipe should be added to the field on demand
 
-			public TopToRight()
+			public Missing()
 			{
-				this.PipeTopToRight = new Pipe.TopToRight();
+				this.PipeMissing = new Pipe.Missing();
 
-				this.PipeTopToRight.Container.AttachTo(this.Container);
+				this.PipeMissing.Container.AttachTo(this.Container);
+
 
 				// if the animation has already been started or even if its already
 				// complete this action should not be called again.
 
-				this.SupportedOutput.Right = SupportedOutputMarker;
-				this.Input.Top =
+				this.Input.Left =
 					delegate
 					{
-						Animate(this.PipeTopToRight.Water, this.Output.Right);
+						Animate(this.PipeMissing.Water, this.Output.Spill);
 					};
 
-				this.SupportedOutput.Top = SupportedOutputMarker;
 				this.Input.Right =
 					delegate
 					{
-						Animate(this.PipeTopToRight.Water.Reverse(), this.Output.Top);
+						Animate(this.PipeMissing.Water, this.Output.Spill);
 					};
 
-			
+
 				this.PipeParts = new Pipe[]
 				{
-					this.PipeTopToRight
 				};
 			}
 		}

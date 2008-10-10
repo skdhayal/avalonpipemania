@@ -23,12 +23,16 @@ namespace AvalonPipeMania.Code
 
 			public Action Pump;
 			public Action Drain;
+			public Action Spill;
 		}
 
 		public readonly Group Input = new Group();
 		public readonly Group Output = new Group();
+		public readonly Group SupportedOutput = new Group();
 
 		public readonly Canvas Container = new Canvas();
+
+		static readonly Action SupportedOutputMarker = delegate { };
 
 		public bool HasWater
 		{
@@ -42,6 +46,7 @@ namespace AvalonPipeMania.Code
 				);
 			}
 		}
+
 
 		public Pipe[] PipeParts;
 

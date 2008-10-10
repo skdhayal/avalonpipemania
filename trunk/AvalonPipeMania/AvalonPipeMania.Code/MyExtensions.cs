@@ -11,6 +11,8 @@ namespace AvalonPipeMania.Code
 	[Script]
 	static class MyExtensions
 	{
+	
+
 		public static void DoIfAny<T>(this T e, Action<T> h)
 			where T : class
 		{

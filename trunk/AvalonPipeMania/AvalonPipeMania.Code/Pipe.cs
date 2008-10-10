@@ -65,6 +65,14 @@ namespace AvalonPipeMania.Code
 		{
 			set
 			{
+				if (value == Colors.Transparent)
+				{
+					this.Green.Hide();
+					this.Yellow.Hide();
+					this.Brown.Hide();
+					return;
+				}
+
 				if (value == Colors.Green)
 				{
 					this.Green.Show();
@@ -178,7 +186,8 @@ namespace AvalonPipeMania.Code
 					new RightToDrain(),
 					new TopToBottom(),
 					new TopToLeft(),
-					new TopToRight()
+					new TopToRight(),
+					new Missing()
 				};
 			}
 		}

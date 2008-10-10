@@ -7,6 +7,7 @@ using ScriptCoreLib;
 using ScriptCoreLib.Shared.Avalon.Extensions;
 using ScriptCoreLib.Shared.Lambda;
 using System.Windows.Media;
+using System.Diagnostics;
 
 namespace AvalonPipeMania.Code
 {
@@ -111,7 +112,7 @@ namespace AvalonPipeMania.Code
 				);
 
 				source.Where(k => k.X == target.X).FirstOrDefault(k => k.Y == target.Y + 1).DoIfAny(
-					FoundBottom 
+					FoundBottom
 				);
 			}
 		}
@@ -187,12 +188,39 @@ namespace AvalonPipeMania.Code
 						(1 + y) * Tile.SurfaceHeight + Tile.ShadowBorder - Tile.Size
 					);
 
+					Action<SimplePipeOnTheField> SpillRight =
+						SpillTarget =>
+						{
+							if (SpillTarget.Value.Output.Right == null)
+								if (SpillTarget.Value.SupportedOutput.Right != null)
+								{
+									// once the water gets here we need to spill it on the floor
+									// it can happen when the pipe is not there or even when the pipe does not accept input
+
+									
+									// when the correct pipe is built this event is effectevly detatched
+									SpillTarget.Value.Output.Right =
+										delegate
+										{
+											// SpillTarget has filled itself with water
+											// and needs to continue on the next pipe
+											// but as we are inside here there is no matching pipe there
+
+											var spill = new SimplePipe.Missing();
+
+											this[SpillTarget.X + 1, SpillTarget.Y] = spill;
+										};
+								}
+						};
+
 					new FindSiblings
 					{
 						FoundLeft = Left =>
 						{
 							Left.Value.Output.Right = value.Input.Left;
 							value.Output.Left = Left.Value.Input.Right;
+
+							SpillRight(Left);
 						},
 						FoundRight = Right =>
 						{
@@ -211,6 +239,9 @@ namespace AvalonPipeMania.Code
 						}
 					}.Apply(PipesList, target);
 
+
+
+					SpillRight(target);
 				}
 
 

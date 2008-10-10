@@ -28,6 +28,7 @@ namespace AvalonPipeMania.Code
 				// if the animation has already been started or even if its already
 				// complete this action should not be called again.
 
+				this.SupportedOutput.Left = SupportedOutputMarker;
 				this.Input.Pump =
 					delegate
 					{
@@ -42,6 +43,15 @@ namespace AvalonPipeMania.Code
 								Animate(this.PipePumpToLeft.Water, this.Output.Left);
 							}
 						);
+					};
+
+				this.SupportedOutput.Pump = SupportedOutputMarker;
+				this.Input.Left =
+					delegate
+					{
+						// what happens when water reaches the pump?
+
+						Animate(this.PipePumpToLeft.Water, this.Output.Pump);
 					};
 
 				this.PipeParts = new Pipe[]
