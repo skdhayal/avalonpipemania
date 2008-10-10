@@ -112,13 +112,14 @@ namespace AvalonPipeMania.Code
 						Height = ButtonHeight
 					};
 
-					Button.Background.Fill = Brushes.Blue;
-					Button.Background.Opacity = 0;
+					Button.Background.Fill = Brushes.Black;
+					Button.Background.Opacity = 0.3;
 					Button.Foreground = Brushes.Blue;
 
 					Button.MouseEnter +=
 						delegate
 						{
+							Button.Background.Fill = Brushes.Blue;
 							Button.Background.Opacity = 0.5;
 							Button.Foreground = Brushes.White;
 						};
@@ -126,7 +127,8 @@ namespace AvalonPipeMania.Code
 					Button.MouseLeave +=
 						delegate
 						{
-							Button.Background.Opacity = 0;
+							Button.Background.Fill = Brushes.Black;
+							Button.Background.Opacity = 0.3; 
 							Button.Foreground = Brushes.Blue;
 						};
 

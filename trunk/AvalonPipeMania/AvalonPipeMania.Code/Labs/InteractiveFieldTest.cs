@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Shapes;
 using ScriptCoreLib;
 using ScriptCoreLib.Shared.Avalon.Extensions;
-using System.Windows.Controls;
-using System.Windows.Shapes;
-using System.Windows.Media;
 using ScriptCoreLib.Shared.Lambda;
+using System.Windows;
 
 namespace AvalonPipeMania.Code.Labs
 {
@@ -22,7 +23,7 @@ namespace AvalonPipeMania.Code.Labs
 			this.Width = DefaultWidth;
 			this.Height = DefaultHeight;
 
-			var f = new Field(6, 4);
+			var f = new Field(6, 6);
 
 			#region round the corners
 			f.Tiles[0, 0].Hide();
@@ -72,13 +73,35 @@ namespace AvalonPipeMania.Code.Labs
 
 			f.Container.MoveTo(x, y).AttachTo(this);
 
-			var BuildablePipes = SimplePipe.BuildablePipes.AsCyclicEnumerable();
 
-			var CurrentTile = BuildablePipes.First()();
+			var CurrentTile = default(SimplePipe);
 
-			CurrentTile.Container.Opacity = 0.7;
-			CurrentTile.Container.AttachTo(this);
-			CurrentTile.OverlayBlackAnimationStart();
+			var CurrentTileCanvas = new Canvas
+			{
+				Width = DefaultWidth,
+				Height = DefaultHeight
+			}.AttachTo(this);
+
+			double CurrentTileX = 0;
+			double CurrentTileY = 0;
+
+			//var RandomTest = Enumerable.Distinct(
+			//                    from i in Enumerable.Range(1, 100)
+			//                    select SimplePipe.BuildablePipes.Random()().GetType()
+			//                 );
+
+			Action CurrentTileNext =
+				delegate
+				{
+					CurrentTile = SimplePipe.BuildablePipes.Random()();
+
+					CurrentTile.Container.Opacity = 0.7;
+					CurrentTile.Container.MoveTo(CurrentTileX, CurrentTileY);
+					CurrentTile.Container.AttachTo(CurrentTileCanvas);
+					CurrentTile.OverlayBlackAnimationStart();
+				};
+
+			CurrentTileNext();
 
 			#region overlay
 			var Overlay = new Canvas
@@ -98,11 +121,61 @@ namespace AvalonPipeMania.Code.Labs
 			f.Tiles.Overlay.MoveTo(x, y).AttachTo(Overlay);
 			#endregion
 
+
+			#region IsBlockingPipe
+			Func<bool> IsBlockingPipe =
+				delegate
+				{
+					var u = f.Tiles.FocusTile;
+
+					if (u != null)
+					{
+						var q = f[u];
+						if (q != null)
+						{
+							var qt = q.GetType();
+							if (!SimplePipe.BuildablePipeTypes.Any(t => t.Equals(qt)))
+							{
+								// we got a pipe on which we should not build upon
+								return true;
+							}
+
+							if (q.HasWater)
+								return true;
+						}
+					}
+
+					return false;
+				};
+			#endregion
+
+
+
 			f.Tiles.Click +=
 				Target =>
 				{
-					CurrentTile.OverlayBlackAnimationStop();
-					CurrentTile.Container.FadeOut();
+				
+
+					var u = f.Tiles.FocusTile;
+					
+					if (IsBlockingPipe())
+					{
+						// we got a pipe on which we should not build upon
+						u = null;
+					}
+
+					if (u != null)
+					{
+						CurrentTile.OverlayBlackAnimationStop();
+						CurrentTile.Container.Orphanize();
+						CurrentTile.Container.Opacity = 1;
+
+						f[u] = CurrentTile;
+						f.RefreshPipes();
+
+						CurrentTileNext();
+					}
+
 				};
 
 			#region MouseMove
@@ -111,11 +184,20 @@ namespace AvalonPipeMania.Code.Labs
 				{
 					var p = Arguments.GetPosition(this);
 
-					if (f.Tiles.FocusTile != null)
+					var u = f.Tiles.FocusTile;
+
+					if (IsBlockingPipe())
 					{
-						p.X = x + f.Tiles.FocusTile.IndexX * Tile.Size + Tile.ShadowBorder;
-						p.Y = y + (f.Tiles.FocusTile.IndexY + 1) * Tile.SurfaceHeight + Tile.ShadowBorder - Tile.Size;
-						
+						// we got a pipe on which we should not build upon
+						u = null;
+					}
+
+
+					if (u != null)
+					{
+						p.X = x + u.IndexX * Tile.Size + Tile.ShadowBorder;
+						p.Y = y + (u.IndexY + 1) * Tile.SurfaceHeight + Tile.ShadowBorder - Tile.Size;
+
 						CurrentTile.Container.Opacity = 1;
 					}
 					else
@@ -126,7 +208,9 @@ namespace AvalonPipeMania.Code.Labs
 						CurrentTile.Container.Opacity = 0.7;
 					}
 
-					CurrentTile.Container.MoveTo(p.X , p.Y );
+					CurrentTileX = p.X;
+					CurrentTileY = p.Y;
+					CurrentTile.Container.MoveTo(p.X, p.Y);
 				};
 			#endregion
 

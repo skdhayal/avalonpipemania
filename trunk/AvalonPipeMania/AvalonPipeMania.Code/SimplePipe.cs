@@ -30,6 +30,7 @@ namespace AvalonPipeMania.Code
 
 		public readonly Canvas Container = new Canvas();
 
+		public bool HasWater;
 
 		private event Action OverlayBlackAnimationStartEvent;
 		public void OverlayBlackAnimationStart()
@@ -52,6 +53,7 @@ namespace AvalonPipeMania.Code
 			Water.ForEach(
 				(Current, Next) =>
 				{
+					HasWater = true;
 					Current.Show();
 
 					FrameRate.AtDelay(Next);
@@ -59,20 +61,40 @@ namespace AvalonPipeMania.Code
 			)(Done);
 		}
 
+		public static Type[] BuildablePipeTypes
+		{
+			get
+			{
+				return new[]
+				{
+					typeof(SimplePipe.Horizontal),
+					typeof(SimplePipe.Vertical),
+					typeof(SimplePipe.Cross),
+					typeof(SimplePipe.LeftToBottom),
+					typeof(SimplePipe.RightToBottom),
+					typeof(SimplePipe.TopToLeft),
+					typeof(SimplePipe.TopToRight)
+				};
+			}
+		}
 		public static Func<SimplePipe>[] BuildablePipes
 		{
 			get
 			{
-				return new Func<SimplePipe>[]
-				{
-					() => new SimplePipe.Horizontal(),
-					() => new SimplePipe.Vertical(),
-					() => new SimplePipe.Cross(),
-					() => new SimplePipe.LeftToBottom(),
-					() => new SimplePipe.RightToBottom(),
-					() => new SimplePipe.TopToLeft(),
-					() => new SimplePipe.TopToRight(),
-				};
+				return BuildablePipeTypes.ToArray<Type, Func<SimplePipe>>(
+					k => () => (SimplePipe)Activator.CreateInstance(k)
+				);
+
+				//return new Func<SimplePipe>[]
+				//{
+				//    () => new SimplePipe.Horizontal(),
+				//    () => new SimplePipe.Vertical(),
+				//    () => new SimplePipe.Cross(),
+				//    () => new SimplePipe.LeftToBottom(),
+				//    () => new SimplePipe.RightToBottom(),
+				//    () => new SimplePipe.TopToLeft(),
+				//    () => new SimplePipe.TopToRight(),
+				//};
 			}
 		}
 	}
