@@ -8,6 +8,7 @@ using ScriptCoreLib.Shared.Lambda;
 using System.Windows.Controls;
 using System.Windows.Shapes;
 using System.Windows.Media;
+using System.Windows;
 
 namespace AvalonPipeMania.Code.Labs
 {
@@ -22,6 +23,7 @@ namespace AvalonPipeMania.Code.Labs
 			this.Width = DefaultWidth;
 			this.Height = DefaultHeight;
 
+			this.ClipTo(0, 0, DefaultWidth, DefaultHeight);
 
 			var f = new Field(16, 16);
 
