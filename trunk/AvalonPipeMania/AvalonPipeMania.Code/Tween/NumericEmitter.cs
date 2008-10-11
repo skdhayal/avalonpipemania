@@ -17,7 +17,7 @@ namespace AvalonPipeMania.Code.Tween
 
 		// 2. tweened movement based on erratic movement input
 
-
+		public event Action InputComplete;
 
 		public static NumericEmitter Of(Action<int, int> Output)
 		{
@@ -98,6 +98,12 @@ namespace AvalonPipeMania.Code.Tween
 									Convert.ToInt32(nx),
 									Convert.ToInt32(ny)
 								);
+
+								if (Stop == null)
+								{
+									if (n.InputComplete != null)
+										n.InputComplete();
+								}
 							}
 						).Stop;
 				};
@@ -107,6 +113,29 @@ namespace AvalonPipeMania.Code.Tween
 		}
 
 
+		public static implicit operator Action<int, int, Action>(NumericEmitter e)
+		{
+			Action<int, int> move = e;
+
+
+			return (x, y, done) =>
+			{
+				if (done != null)
+				{
+					Action once =
+						delegate
+						{
+							done();
+
+							e.InputComplete -= done;
+						};
+
+					e.InputComplete += once;
+				}
+
+				move(x, y);
+			};
+		}
 
 	}
 

@@ -12,7 +12,7 @@ using System.Windows.Media;
 namespace AvalonPipeMania.Code
 {
 	[Script]
-	public class SimplePipeFeeder : IEnumerator<SimplePipe>
+	public partial class SimplePipeFeeder : IEnumerator<SimplePipe>
 	{
 		public readonly Canvas Container;
 

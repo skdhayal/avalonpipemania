@@ -78,6 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AvalonPipeManiaCanvas.cs" />
+    <Compile Include="SimplePipeFeeder.AutoHide.cs" />
     <Compile Include="Explosion.cs" />
     <Compile Include="ExtendedField.cs" />
     <Compile Include="Labs\ColoredFieldTest.cs" />
