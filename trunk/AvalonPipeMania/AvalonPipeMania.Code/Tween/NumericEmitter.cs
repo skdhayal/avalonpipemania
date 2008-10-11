@@ -70,6 +70,10 @@ namespace AvalonPipeMania.Code.Tween
 							y
 						);
 
+
+						if (n.InputComplete != null)
+							n.InputComplete();
+
 						return;
 					}
 
@@ -79,11 +83,12 @@ namespace AvalonPipeMania.Code.Tween
 							{
 								var dx = tx - nx;
 								var dy = ty - ny;
-
+								var TriggerInputComplete = false;
 								if (GetDistance(dx, dy) < DefaultEndConditionDelta)
 								{
 									Stop();
 									Stop = null;
+									TriggerInputComplete = true;
 
 									nx = tx;
 									ny = ty;
@@ -99,10 +104,12 @@ namespace AvalonPipeMania.Code.Tween
 									Convert.ToInt32(ny)
 								);
 
-								if (Stop == null)
+								if (TriggerInputComplete)
 								{
+
 									if (n.InputComplete != null)
 										n.InputComplete();
+
 								}
 							}
 						).Stop;
@@ -122,12 +129,15 @@ namespace AvalonPipeMania.Code.Tween
 			{
 				if (done != null)
 				{
-					Action once =
+					var once = default(Action);
+
+
+					once = 
 						delegate
 						{
 							done();
 
-							e.InputComplete -= done;
+							e.InputComplete -= once;
 						};
 
 					e.InputComplete += once;
