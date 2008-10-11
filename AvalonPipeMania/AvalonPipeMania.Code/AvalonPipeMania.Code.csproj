@@ -112,6 +112,7 @@
     <Compile Include="Pipe.TopToRight.cs" />
     <Compile Include="Pipe.LeftToRight.cs" />
     <Compile Include="Pipe.TopToBottom.cs" />
+    <Compile Include="SimplePipeFeeder.cs" />
     <Compile Include="TileField.cs" />
     <Compile Include="MyExtensions.cs" />
     <Compile Include="Pipe.cs" />
