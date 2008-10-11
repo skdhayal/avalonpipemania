@@ -26,6 +26,14 @@ namespace AvalonPipeMania.Assets
 				public const string Explosion = "assets/AvalonPipeMania.Explosion";
 
 				[Script, ScriptResources]
+				public static class Fonts
+				{
+					public const string showcard = "assets/AvalonPipeMania.Fonts/showcard";
+
+
+				}
+
+				[Script, ScriptResources]
 				public static class Pipe
 				{
 					public const string LeftToRight = "assets/AvalonPipeMania.Pipe/LeftToRight";

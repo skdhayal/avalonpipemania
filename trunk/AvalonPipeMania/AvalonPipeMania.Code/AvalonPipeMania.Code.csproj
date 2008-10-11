@@ -78,6 +78,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AvalonPipeManiaCanvas.cs" />
+    <Compile Include="Fonts\BitmapLabel.cs" />
+    <Compile Include="Fonts\CharMap.cs" />
+    <Compile Include="Fonts\showcard\WhiteNumbers.cs" />
     <Compile Include="SimplePipeFeeder.AutoHide.cs" />
     <Compile Include="Explosion.cs" />
     <Compile Include="ExtendedField.cs" />
