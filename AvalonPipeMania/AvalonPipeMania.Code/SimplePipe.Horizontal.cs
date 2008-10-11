@@ -31,14 +31,14 @@ namespace AvalonPipeMania.Code
 				this.Input.Left =
 					delegate
 					{
-						Animate(this.PipeLeftToRight.Water, this.Output.Right);
+						AnimateLeftToRight(this.PipeLeftToRight.Water.First(), this.Output.Right);
 					};
 
 				this.SupportedOutput.Left = SupportedOutputMarker;
 				this.Input.Right =
 					delegate
 					{
-						Animate(this.PipeLeftToRight.Water.Reverse(), this.Output.Left);
+						AnimateRightToLeft(this.PipeLeftToRight.Water.Last(), this.Output.Left);
 					};
 
 				this.PipeParts = new Pipe[]
