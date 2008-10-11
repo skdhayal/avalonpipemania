@@ -62,7 +62,7 @@ namespace AvalonPipeMania.Code
 			water.ClipTo(0, 0, 0, 0);
 			water.Show();
 
-			Enumerable.Range(0, Pipe.Size / 2).ForEach(
+			Enumerable.Range(1, Pipe.Size / 2).ForEach(
 				(Current_, Next) =>
 				{
 					var Current = Current_ * 2;
@@ -85,7 +85,7 @@ namespace AvalonPipeMania.Code
 			water.ClipTo(0, 0, 0, 0);
 			water.Show();
 
-			Enumerable.Range(0, Pipe.Size / 2).ForEach(
+			Enumerable.Range(1, Pipe.Size / 2).ForEach(
 				(Current_, Next) =>
 				{
 					var Current = Current_ * 2;
@@ -103,10 +103,12 @@ namespace AvalonPipeMania.Code
 
 		public void AnimateBottomToTop(Image water, Action done)
 		{
+			HasWater = true;
+
 			water.ClipTo(0, 0, 0, 0);
 			water.Show();
 
-			Enumerable.Range(0, Pipe.Size / 2).ForEach(
+			Enumerable.Range(1, Pipe.Size / 2).ForEach(
 				(Current_, Next) =>
 				{
 					var Current = Current_ * 2;
@@ -126,10 +128,12 @@ namespace AvalonPipeMania.Code
 
 		public void AnimateRightToLeft(Image water, Action done)
 		{
+			HasWater = true;
+
 			water.ClipTo(0, 0, 0, 0);
 			water.Show();
 
-			Enumerable.Range(0, Pipe.Size / 2).ForEach(
+			Enumerable.Range(1, Pipe.Size / 2).ForEach(
 				(Current_, Next) =>
 				{
 					var Current = Current_ * 2;
