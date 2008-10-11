@@ -14,22 +14,26 @@ using AvalonPipeMania.Code.Tween;
 namespace AvalonPipeMania.Code.Labs
 {
 	[Script]
-	public class ExtendedFieldTest : Canvas
+	public class ColoredFieldTest : Canvas
 	{
 		public const int DefaultWidth = 600;
 		public const int DefaultHeight = 600;
 
-		public ExtendedFieldTest()
+		public ColoredFieldTest()
 		{
 			this.Width = DefaultWidth;
 			this.Height = DefaultHeight;
 
 
-			var f = new ExtendedField(6, 12, DefaultWidth, DefaultHeight);
+			var f = new ExtendedField(16, 6, DefaultWidth, DefaultHeight);
+
+			f.Field.DefaultPipeColor = Colors.Green;
+
+			f.Field.Tiles.Color = Colors.Pink;
 
 			f.Container.AttachTo(this);
 
-			var feeder = new SimplePipeFeeder(6, Colors.Yellow);
+			var feeder = new SimplePipeFeeder(6, Colors.Brown);
 
 			feeder.Container.MoveTo(Tile.ShadowBorder, Tile.ShadowBorder + Tile.Size).AttachTo(this);
 

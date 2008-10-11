@@ -100,8 +100,14 @@ namespace AvalonPipeMania.Code
 						Visibility = Visibility.Hidden
 					}
 				},
-					{ typeof(ExtendedFieldTest),
+				{ typeof(ExtendedFieldTest),
 					() => new ExtendedFieldTest
+					{
+						Visibility = Visibility.Hidden
+					}
+				},
+				{ typeof(ColoredFieldTest),
+					() => new ColoredFieldTest
 					{
 						Visibility = Visibility.Hidden
 					}
