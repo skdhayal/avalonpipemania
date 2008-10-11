@@ -34,14 +34,8 @@ namespace AvalonPipeMania.Code
 				this.Yellow = f.ToImage("yellow");
 
 				this.Water = f.ToWaterImages(
-					"0_8",
-					"8_16",
-					"16_24",
-					"24_32",
-					"32_40",
-					"40_48",
-					"48_56",
-					"56_64"
+					"water",
+					"water"
 				);
 
 				this.OverlayBlack = f.ToImage("black");
