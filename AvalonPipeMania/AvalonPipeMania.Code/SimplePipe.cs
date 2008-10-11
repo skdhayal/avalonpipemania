@@ -14,73 +14,6 @@ namespace AvalonPipeMania.Code
 	[Script]
 	public partial class SimplePipe
 	{
-		[Script]
-		public class Group
-		{
-			public Action Left;
-			public Action Top;
-			public Action Right;
-			public Action Bottom;
-
-			public Action Pump;
-			public Action Drain;
-			public Action Spill;
-
-			public Action this[int x, int y]
-			{
-				get
-				{
-					if (x == 0)
-					{
-						if (y == -1)
-							return this.Top;
-
-						if (y == 1)
-							return this.Bottom;
-
-
-					}
-					else if (y == 0)
-					{
-						if (x == -1)
-							return this.Left;
-
-						if (x == 1)
-							return this.Right;
-					}
-
-					return null;
-				}
-
-				set
-				{
-					if (x == 0)
-					{
-						if (y == -1)
-						{
-							this.Top = value;
-						}
-						else if (y == 1)
-						{
-							this.Bottom = value;
-						}
-					}
-					else if (y == 0)
-					{
-						if (x == -1)
-						{
-							this.Left = value;
-						}
-						else if (x == 1)
-						{
-							this.Right = value;
-
-						}
-					}
-
-				}
-			}
-		}
 
 		public readonly Group Input = new Group();
 		public readonly Group Output = new Group();
@@ -126,6 +59,11 @@ namespace AvalonPipeMania.Code
 			Water.ForEach(
 				(Current, Next) =>
 				{
+					// if there is water there already
+					// we will stop here
+					if (Current.Visibility == System.Windows.Visibility.Visible)
+						return;
+
 					Current.Show();
 
 					FrameRate.AtDelay(Next);
@@ -149,6 +87,7 @@ namespace AvalonPipeMania.Code
 				};
 			}
 		}
+
 		public static Func<SimplePipe>[] BuildablePipes
 		{
 			get
@@ -157,6 +96,93 @@ namespace AvalonPipeMania.Code
 					k => () => (SimplePipe)Activator.CreateInstance(k)
 				);
 			}
+		}
+
+
+		Action AddTimerAbort;
+
+		public void AddTimer(int timeout, Action done)
+		{
+			if (AddTimerAbort != null)
+				AddTimerAbort();
+
+			var white = new Fonts.showcard.WhiteNumbers();
+			var yellow = new Fonts.showcard.YellowNumbers();
+			var red = new Fonts.showcard.RedNumbers();
+
+			
+
+			Action<int> Update =
+				value =>
+				{
+					Action<Fonts.BitmapLabel> Show =
+						(label) =>
+						{
+							label.Container.Show();
+							label.Text = value + "";
+						};
+
+					if (value < 4)
+					{
+						white.Container.Hide();
+						yellow.Container.Hide();
+						Show(red);
+					}
+					else if ((value - 4) < (timeout - 4) / 4)
+					{
+						white.Container.Hide();
+						Show(yellow);
+						red.Container.Hide();
+					}
+					else
+					{
+						Show(white);
+						yellow.Container.Hide();
+						red.Container.Hide();
+					}
+				};
+
+
+			var counter = timeout;
+
+			Update(counter);
+
+			var t = 1000.AtIntervalWithTimer(
+				k =>
+				{
+					if (counter == 0)
+					{
+						AddTimerAbort();
+						return;
+					}
+
+					counter--;
+					Update(counter);
+
+					if (counter == 0)
+					{
+						done();
+					}
+				}
+			);
+
+
+			AddTimerAbort =
+				delegate
+				{
+					AddTimerAbort = null;
+
+					white.Container.Orphanize();
+					yellow.Container.Orphanize();
+					red.Container.Orphanize();
+					t.Stop();
+				};
+
+
+			white.Container.AttachTo(this.Container);
+			yellow.Container.AttachTo(this.Container);
+			red.Container.AttachTo(this.Container);
+
 		}
 	}
 }

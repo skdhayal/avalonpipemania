@@ -39,7 +39,7 @@ namespace AvalonPipeMania.Code.Labs
 
 			var feeder_autohide = new SimplePipeFeeder.AutoHide(feeder, f.Overlay, DefaultWidth, DefaultHeight);
 
-		
+
 
 			f.Overlay.AttachTo(this);
 
@@ -52,17 +52,44 @@ namespace AvalonPipeMania.Code.Labs
 					f.PipeToBeBuilt = feeder.Current;
 				};
 
-		
 
+
+			var Randomized = f.Field.Tiles.TileList.Randomize().GetEnumerator();
+
+			Enumerable.Range(0, 4).ForEach(
+				Index =>
+				{
+					var Target = Randomized.Take();
+
+					Target.Drain.Show();
+
+					if (Index % 2 == 0)
+						f.Field[Target] = new SimplePipe.LeftToDrain();
+					else
+						f.Field[Target] = new SimplePipe.RightToDrain();
+				}
+			);
+
+			Enumerable.Range(0, 4).ForEach(
+				Index =>
+				{
+					var Target = Randomized.Take();
+
+					var pump = default(SimplePipe);
+
+					if (Index % 2 == 0)
+						pump = new SimplePipe.PumpToLeft();
+					else
+						pump = new SimplePipe.PumpToRight();
+
+					pump.AddTimer(30, pump.Input.Pump);
+
+					f.Field[Target] = pump;
+				}
+			);
 		}
 
 
-		public enum FeederState
-		{
-			LeftAndIdle,
-			LeftAndMoving,
-			RightAndIdle,
-			RightAndMoving
-		}
+
 	}
 }

@@ -43,6 +43,12 @@ namespace AvalonPipeMania.Code.Labs
 
 					f.PipeToBeBuilt = feeder.Current;
 				};
+
+			var Randomized = f.Field.Tiles.TileList.Randomize().GetEnumerator();
+
+			Randomized.Take().Drain.Show();
+			Randomized.Take().Drain.Show();
+			Randomized.Take().Drain.Show();
 		}
 
 	
