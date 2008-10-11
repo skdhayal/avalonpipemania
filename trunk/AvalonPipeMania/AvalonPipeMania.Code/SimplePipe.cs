@@ -82,6 +82,7 @@ namespace AvalonPipeMania.Code
 					typeof(SimplePipe.Horizontal),
 					typeof(SimplePipe.HorizontalWide),
 					typeof(SimplePipe.Vertical),
+					typeof(SimplePipe.VerticalWide),
 					typeof(SimplePipe.Cross),
 					typeof(SimplePipe.LeftToBottom),
 					typeof(SimplePipe.RightToBottom),
@@ -102,7 +103,7 @@ namespace AvalonPipeMania.Code
 		}
 
 
-		Action AddTimerAbort;
+		public Action AddTimerAbort;
 
 		public void AddTimer(int timeout, Action done)
 		{

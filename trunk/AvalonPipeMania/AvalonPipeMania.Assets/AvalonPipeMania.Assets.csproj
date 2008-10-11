@@ -155,6 +155,7 @@
     <None Include="web\assets\AvalonPipeMania.Pipe\PumpToRight\PumpToRight.pdn" />
     <None Include="web\assets\AvalonPipeMania.Pipe\RightToBottom\RightToBottom.pdn" />
     <None Include="web\assets\AvalonPipeMania.Pipe\RightToDrain\RightToDrain.pdn" />
+    <None Include="web\assets\AvalonPipeMania.Pipe\TopToBottomWide\TopToBottomWide.pdn" />
     <None Include="web\assets\AvalonPipeMania.Pipe\TopToBottom\TopToBottom.pdn" />
     <None Include="web\assets\AvalonPipeMania.Pipe\TopToLeft\TopToLeft.pdn" />
     <None Include="web\assets\AvalonPipeMania.Pipe\TopToRight\TopToRight.pdn" />
@@ -400,6 +401,15 @@
     <EmbeddedResource Include="web\assets\AvalonPipeMania.Pipe\LeftToRightWide\green.png" />
     <EmbeddedResource Include="web\assets\AvalonPipeMania.Pipe\LeftToRightWide\outline.png" />
     <EmbeddedResource Include="web\assets\AvalonPipeMania.Pipe\LeftToRightWide\yellow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="web\assets\AvalonPipeMania.Pipe\TopToBottomWide\black.png" />
+    <EmbeddedResource Include="web\assets\AvalonPipeMania.Pipe\TopToBottomWide\brown.png" />
+    <EmbeddedResource Include="web\assets\AvalonPipeMania.Pipe\TopToBottomWide\glow.png" />
+    <EmbeddedResource Include="web\assets\AvalonPipeMania.Pipe\TopToBottomWide\green.png" />
+    <EmbeddedResource Include="web\assets\AvalonPipeMania.Pipe\TopToBottomWide\outline.png" />
+    <EmbeddedResource Include="web\assets\AvalonPipeMania.Pipe\TopToBottomWide\water.png" />
+    <EmbeddedResource Include="web\assets\AvalonPipeMania.Pipe\TopToBottomWide\yellow.png" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
