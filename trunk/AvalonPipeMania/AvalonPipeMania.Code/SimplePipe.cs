@@ -53,6 +53,96 @@ namespace AvalonPipeMania.Code
 
 		public int WaterAnimationSpeed = 1000 / 15;
 
+		#region Animate
+
+		public void AnimateLeftToRight(Image water, Action done)
+		{
+			HasWater = true;
+
+			water.ClipTo(0, 0, 0, 0);
+			water.Show();
+
+			Enumerable.Range(0, Pipe.Size).ForEach(
+				(Current, Next) =>
+				{
+					water.ClipTo(
+						0,
+						0,
+						Current,
+						Pipe.Size
+					);
+
+					this.WaterAnimationSpeed.AtDelay(Next);
+				}
+			)(done);
+		}
+
+		public void AnimateTopToBottom(Image water, Action done)
+		{
+			HasWater = true;
+
+			water.ClipTo(0, 0, 0, 0);
+			water.Show();
+
+			Enumerable.Range(0, Pipe.Size).ForEach(
+				(Current, Next) =>
+				{
+					water.ClipTo(
+						0,
+						0,
+						Pipe.Size,
+						Current
+					);
+
+					this.WaterAnimationSpeed.AtDelay(Next);
+				}
+			)(done);
+		}
+
+		public void AnimateBottomToTop(Image water, Action done)
+		{
+			water.ClipTo(0, 0, 0, 0);
+			water.Show();
+
+			Enumerable.Range(0, Pipe.Size).ForEach(
+				(Current, Next) =>
+				{
+					water.ClipTo(
+						0,
+						Pipe.Size - Current,
+						Pipe.Size,
+						Current
+					);
+
+					this.WaterAnimationSpeed.AtDelay(Next);
+				}
+			)(done);
+		}
+
+
+
+		public void AnimateRightToLeft(Image water, Action done)
+		{
+			water.ClipTo(0, 0, 0, 0);
+			water.Show();
+
+			Enumerable.Range(0, Pipe.Size).ForEach(
+				(Current, Next) =>
+				{
+					water.ClipTo(
+						Pipe.Size - Current, 
+						0,
+						
+						
+						Current,
+						Pipe.Size
+					);
+
+					this.WaterAnimationSpeed.AtDelay(Next);
+				}
+			)(done);
+		}
+
 		public void Animate(IEnumerable<Image> Water, Action Done)
 		{
 			HasWater = true;
@@ -72,6 +162,7 @@ namespace AvalonPipeMania.Code
 				}
 			)(Done);
 		}
+		#endregion
 
 		public static Type[] BuildablePipeTypes
 		{
@@ -114,7 +205,7 @@ namespace AvalonPipeMania.Code
 			var yellow = new Fonts.showcard.YellowNumbers();
 			var red = new Fonts.showcard.RedNumbers();
 
-			
+
 
 			Action<int> Update =
 				value =>

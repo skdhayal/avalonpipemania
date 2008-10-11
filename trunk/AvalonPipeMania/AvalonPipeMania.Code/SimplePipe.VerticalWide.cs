@@ -32,19 +32,10 @@ namespace AvalonPipeMania.Code
 				this.Input.Top =
 					delegate
 					{
-						var water = this.PipeTopToBottom.Water.First();
-
-						water.ClipTo(0, 0, 0, 0);
-						water.Show();
-
-						Enumerable.Range(0, Pipe.Size).ForEach(
-							(Current, Next) =>
-							{
-								water.ClipTo(0, 0, Pipe.Size, Current);
-
-								this.WaterAnimationSpeed.AtDelay(Next);
-							}
-						)(this.Output.Bottom);
+						this.AnimateBottomToTop(
+							this.PipeTopToBottom.Water.First(),
+							this.Output.Bottom
+						);
 					};
 
 				this.SupportedOutput.Top = SupportedOutputMarker;
@@ -53,17 +44,12 @@ namespace AvalonPipeMania.Code
 					{
 						var water = this.PipeTopToBottom.Water.Last();
 
-						water.ClipTo(0, 0, 0, 0);
-						water.Show();
+						this.AnimateBottomToTop(
+							this.PipeTopToBottom.Water.Last(),
+							this.Output.Top
+						);
 
-						Enumerable.Range(0, Pipe.Size).ForEach(
-							(Current, Next) =>
-							{
-								water.ClipTo(0, Pipe.Size - Current, Pipe.Size, Current);
-
-								this.WaterAnimationSpeed.AtDelay(Next);
-							}
-						)(this.Output.Top);
+				
 					};
 
 
