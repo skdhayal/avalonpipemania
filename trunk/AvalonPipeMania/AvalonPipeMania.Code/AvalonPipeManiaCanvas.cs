@@ -201,7 +201,7 @@ namespace AvalonPipeMania.Code
 
 
 
-			var counter = new Fonts.showcard.WhiteNumbers();
+			var counter = new Fonts.showcard.RedNumbers();
 
 			Enumerable.Range(0, 1000).ForEach(
 				(Current, Next) =>

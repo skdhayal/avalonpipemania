@@ -9,10 +9,10 @@ using AvalonPipeMania.Assets.Shared;
 namespace AvalonPipeMania.Code.Fonts.showcard
 {
 	[Script]
-	public class WhiteNumbers : Numbers
+	public class RedNumbers : Numbers
 	{
-		public WhiteNumbers()
-			: base((KnownAssets.Path.Fonts.showcard + "/Numbers_white.png").ToSource())
+		public RedNumbers()
+			: base((KnownAssets.Path.Fonts.showcard + "/Numbers_red.png").ToSource())
 		{
 
 		}
