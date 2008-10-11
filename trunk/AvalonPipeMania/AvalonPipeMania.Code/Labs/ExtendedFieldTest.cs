@@ -43,7 +43,10 @@ namespace AvalonPipeMania.Code.Labs
 				{
 					feeder.MoveNext();
 
+					f.PipeToBeBuilt = feeder.Current;
 				};
+
+			f.PipeToBeBuilt = feeder.Current;
 
 		}
 

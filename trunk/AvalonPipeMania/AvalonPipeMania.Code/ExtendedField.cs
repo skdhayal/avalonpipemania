@@ -34,6 +34,55 @@ namespace AvalonPipeMania.Code
 
 			this.Field.Container.AttachTo(this.Container);
 
+		
+
+
+			#region interactive layers
+			var CurrentTileCanvas = new Canvas
+			{
+				Width = this.Field.Tiles.Width,
+				Height = this.Field.Tiles.Height
+			}.AttachTo(this.Container);
+
+
+			//var ExplosionCanvas = new Canvas
+			//{
+			//    Width = Width,
+			//    Height = Height
+			//}.AttachTo(this.Container);
+
+			double CurrentTileX = 0;
+			double CurrentTileY = 0;
+
+			var CurrentTile = default(SimplePipe);
+			
+			// SimplePipe.BuildablePipes.Random()();
+
+			this.GetPipeToBeBuilt = () => CurrentTile;
+
+			this.SetPipeToBeBuilt =
+				value =>
+				{
+					if (CurrentTile != null)
+					{
+						CurrentTile.OverlayBlackAnimationStop();
+						CurrentTile.Container.Orphanize();
+					}
+
+					CurrentTile = value;
+
+					if (CurrentTile != null)
+					{
+						CurrentTile.Container.Opacity = 0.7;
+						CurrentTile.Container.MoveTo(CurrentTileX, CurrentTileY);
+						CurrentTile.Container.AttachTo(CurrentTileCanvas);
+						CurrentTile.OverlayBlackAnimationStart();
+					}
+				};
+
+			#endregion
+
+
 			#region overlay
 			this.Overlay = new Canvas
 			{
@@ -55,16 +104,22 @@ namespace AvalonPipeMania.Code
 			#endregion
 
 			#region move the map with the mouse yet not too often anf smooth enough
+
+			#region MoveTo
 			Action<int, int> MoveTo = Tween.NumericEmitter.Of(
 				(x, y) =>
 				{
 					this.Field.Tiles.Overlay.MoveTo(x, y);
 					this.Field.Container.MoveTo(x, y);
+
+
+					CurrentTileCanvas.MoveTo(x, y);
 				}
 			);
+			#endregion
 
+			#region CalculateMoveTo
 			Action<int, int> CalculateMoveTo =
-				//Tween.NumericOmitter.Of(
 				(int_x, int_y) =>
 				{
 					double x = int_x;
@@ -92,9 +147,11 @@ namespace AvalonPipeMania.Code
 
 					MoveTo(Convert.ToInt32(_x), Convert.ToInt32(_y));
 				}
-				//)
 			;
 			#endregion
+
+
+			CalculateMoveTo(0, 0);
 
 
 			Overlay.MouseMove +=
@@ -104,6 +161,97 @@ namespace AvalonPipeMania.Code
 
 					CalculateMoveTo(Convert.ToInt32(p.X), Convert.ToInt32(p.Y));
 				};
+			#endregion
+
+
+		
+
+			#region IsBlockingPipe
+			Func<bool> IsBlockingPipe =
+				delegate
+				{
+					var u = this.Field.Tiles.FocusTile;
+
+					if (u != null)
+					{
+						var q = this.Field[u];
+						if (q != null)
+						{
+							var qt = q.GetType();
+							if (!SimplePipe.BuildablePipeTypes.Any(t => t.Equals(qt)))
+							{
+								// we got a pipe on which we should not build upon
+								return true;
+							}
+
+
+						}
+
+
+						if (this.Field.ByIndex(u.IndexX, u.IndexY).Any(k => k.Value.HasWater))
+							return true;
+					}
+
+					return false;
+				};
+			#endregion
+
+
+			#region MouseMove
+			Overlay.MouseMove +=
+				(Sender, Arguments) =>
+				{
+					if (CurrentTile == null)
+						return;
+
+					var p = Arguments.GetPosition(this.Field.Tiles.Overlay);
+
+					var u = this.Field.Tiles.FocusTile;
+
+					if (IsBlockingPipe())
+					{
+						// we got a pipe on which we should not build upon
+						u = null;
+					}
+
+
+					if (u != null)
+					{
+						p.X = 0 + u.IndexX * Tile.Size + Tile.ShadowBorder;
+						p.Y = 0 + (u.IndexY + 1) * Tile.SurfaceHeight + Tile.ShadowBorder - Tile.Size;
+
+						CurrentTile.Container.Opacity = 1;
+					}
+					else
+					{
+						p.X -= Tile.Size / 2;
+						p.Y -= Tile.SurfaceHeight / 2;
+
+						CurrentTile.Container.Opacity = 0.7;
+					}
+
+					CurrentTileX = p.X;
+					CurrentTileY = p.Y;
+					CurrentTile.Container.MoveTo(p.X, p.Y);
+				};
+			#endregion
+
+
+		}
+
+		Action<SimplePipe> SetPipeToBeBuilt;
+		Func<SimplePipe> GetPipeToBeBuilt;
+
+		public SimplePipe PipeToBeBuilt
+		{
+			get
+			{
+				return GetPipeToBeBuilt();
+			}
+			set
+			{
+				SetPipeToBeBuilt(value);
+			}
 		}
 	}
 }

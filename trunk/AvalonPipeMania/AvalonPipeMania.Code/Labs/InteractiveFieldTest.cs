@@ -108,11 +108,7 @@ namespace AvalonPipeMania.Code.Labs
 			double CurrentTileX = 0;
 			double CurrentTileY = 0;
 
-			//var RandomTest = Enumerable.Distinct(
-			//                    from i in Enumerable.Range(1, 100)
-			//                    select SimplePipe.BuildablePipes.Random()().GetType()
-			//                 );
-
+		
 			Action CurrentTileNext =
 				delegate
 				{
