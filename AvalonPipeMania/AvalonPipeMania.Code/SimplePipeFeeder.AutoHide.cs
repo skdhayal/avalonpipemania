@@ -59,12 +59,19 @@ namespace AvalonPipeMania.Code
 											}
 										);
 
-										feeder_MoveTo(DefaultWidth + Pipe.Size, feeder_y, null);
-
-										feeder_MoveTo(DefaultWidth - Pipe.Size - feeder_x, feeder_y,
+										Console.WriteLine("to right");
+										feeder_MoveTo(DefaultWidth + Pipe.Size, feeder_y,
 											delegate
 											{
-												state = FeederState.RightAndIdle;
+
+												feeder_MoveTo(DefaultWidth - Pipe.Size - feeder_x, feeder_y,
+													delegate
+													{
+														Console.WriteLine("to right done");
+
+														state = FeederState.RightAndIdle;
+													}
+												);
 											}
 										);
 									}
@@ -93,12 +100,18 @@ namespace AvalonPipeMania.Code
 											}
 										);
 
-										feeder_MoveTo(-Pipe.Size * 2, feeder_y, null);
-
-										feeder_MoveTo(feeder_x, feeder_y,
+										Console.WriteLine("to left");
+										feeder_MoveTo(-Pipe.Size * 2, feeder_y,
 											delegate
 											{
-												state = FeederState.LeftAndIdle;
+
+												feeder_MoveTo(feeder_x, feeder_y,
+													delegate
+													{
+														Console.WriteLine("to left done");
+														state = FeederState.LeftAndIdle;
+													}
+												);
 											}
 										);
 
