@@ -120,7 +120,7 @@ namespace AvalonPipeMania.Code
 				Height = DefaultHeight
 			}.AttachTo(this);
 
-			
+
 
 			var Buttons = new Canvas
 			{
@@ -199,8 +199,23 @@ namespace AvalonPipeMania.Code
 			#endregion
 
 
+
+
+			var counter = new Fonts.showcard.WhiteNumbers();
+
+			Enumerable.Range(0, 1000).ForEach(
+				(Current, Next) =>
+				{
+					counter.Text = Current + "";
+
+					(1000 / 24).AtDelay(Next);
+				}
+			);
+
+			counter.Container.AttachTo(this).MoveTo(300, 8);
+
 		}
 
-		
+
 	}
 }
