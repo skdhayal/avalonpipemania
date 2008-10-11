@@ -29,25 +29,20 @@ namespace AvalonPipeMania.Code.Labs
 
 			f.Container.AttachTo(this);
 
-			
-
-			
 			var feeder = new SimplePipeFeeder(6);
 
 			feeder.Container.MoveTo(Tile.ShadowBorder, Tile.ShadowBorder + Tile.Size).AttachTo(this);
 
 			f.Overlay.AttachTo(this);
 
-			f.Field.Tiles.Click +=
+			f.PipeToBeBuilt = feeder.Current;
+			f.PipeToBeBuiltUsed +=
 				delegate
 				{
 					feeder.MoveNext();
 
 					f.PipeToBeBuilt = feeder.Current;
 				};
-
-			f.PipeToBeBuilt = feeder.Current;
-
 		}
 
 	

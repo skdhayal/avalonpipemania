@@ -45,11 +45,11 @@ namespace AvalonPipeMania.Code
 			}.AttachTo(this.Container);
 
 
-			//var ExplosionCanvas = new Canvas
-			//{
-			//    Width = Width,
-			//    Height = Height
-			//}.AttachTo(this.Container);
+			var ExplosionCanvas = new Canvas
+			{
+				Width = Width,
+				Height = Height
+			}.AttachTo(this.Container);
 
 			double CurrentTileX = 0;
 			double CurrentTileY = 0;
@@ -67,6 +67,7 @@ namespace AvalonPipeMania.Code
 					{
 						CurrentTile.OverlayBlackAnimationStop();
 						CurrentTile.Container.Orphanize();
+						CurrentTile.Container.Opacity = 1;
 					}
 
 					CurrentTile = value;
@@ -114,6 +115,7 @@ namespace AvalonPipeMania.Code
 
 
 					CurrentTileCanvas.MoveTo(x, y);
+					ExplosionCanvas.MoveTo(x, y);
 				}
 			);
 			#endregion
@@ -236,8 +238,52 @@ namespace AvalonPipeMania.Code
 				};
 			#endregion
 
+			this.Field.Tiles.Click +=
+				Target =>
+				{
+					if (CurrentTile == null)
+						return;
 
+					var u = this.Field.Tiles.FocusTile;
+
+					if (IsBlockingPipe())
+					{
+						// we got a pipe on which we should not build upon
+						u = null;
+					}
+
+					if (u != null)
+					{
+						var PipeToBeBuilt = this.PipeToBeBuilt;
+						this.PipeToBeBuilt = null;
+
+						
+						if (this.Field[u] != null)
+						{
+
+							var px = u.IndexX * Tile.Size + Tile.ShadowBorder;
+							var py = (u.IndexY + 1) * Tile.SurfaceHeight + Tile.ShadowBorder - Tile.Size;
+
+
+
+							new Explosion().PlayAndOrphanize().Container.MoveTo(px, py).AttachTo(ExplosionCanvas);
+						}
+
+
+						this.Field[u] = PipeToBeBuilt;
+						this.Field.RefreshPipes();
+
+						if (PipeToBeBuiltUsed != null)
+							PipeToBeBuiltUsed();
+					}
+
+				};
 		}
+
+
+		#region PipeToBeBuilt
+
+		public event Action PipeToBeBuiltUsed;
 
 		Action<SimplePipe> SetPipeToBeBuilt;
 		Func<SimplePipe> GetPipeToBeBuilt;
@@ -252,6 +298,7 @@ namespace AvalonPipeMania.Code
 			{
 				SetPipeToBeBuilt(value);
 			}
-		}
+		} 
+		#endregion
 	}
 }
