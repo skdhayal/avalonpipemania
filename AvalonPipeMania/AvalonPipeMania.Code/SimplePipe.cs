@@ -50,11 +50,13 @@ namespace AvalonPipeMania.Code
 				this.PipeParts.ForEach(k => k.Color = value);
 			}
 		}
+
+		public int WaterAnimationSpeed = 1000 / 15;
+
 		public void Animate(IEnumerable<Image> Water, Action Done)
 		{
 			HasWater = true;
 
-			const int FrameRate = 1000 / 15;
 
 			Water.ForEach(
 				(Current, Next) =>
@@ -66,7 +68,7 @@ namespace AvalonPipeMania.Code
 
 					Current.Show();
 
-					FrameRate.AtDelay(Next);
+					WaterAnimationSpeed.AtDelay(Next);
 				}
 			)(Done);
 		}
@@ -78,6 +80,7 @@ namespace AvalonPipeMania.Code
 				return new[]
 				{
 					typeof(SimplePipe.Horizontal),
+					typeof(SimplePipe.HorizontalWide),
 					typeof(SimplePipe.Vertical),
 					typeof(SimplePipe.Cross),
 					typeof(SimplePipe.LeftToBottom),

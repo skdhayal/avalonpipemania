@@ -78,6 +78,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AvalonPipeManiaCanvas.cs" />
+    <Compile Include="SimplePipe.HorizontalWide.cs" />
+    <Compile Include="Pipe.LeftToRightWide.cs" />
     <Compile Include="SimplePipe.Group.cs" />
     <Compile Include="Fonts\BitmapLabel.cs" />
     <Compile Include="Fonts\CharMap.cs" />
