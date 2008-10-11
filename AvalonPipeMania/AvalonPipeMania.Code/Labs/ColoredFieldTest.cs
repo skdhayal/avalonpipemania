@@ -33,9 +33,13 @@ namespace AvalonPipeMania.Code.Labs
 
 			f.Container.AttachTo(this);
 
-			var feeder = new SimplePipeFeeder(6, Colors.Brown);
+			var feeder = new SimplePipeFeeder(6, Colors.Yellow);
 
-			feeder.Container.MoveTo(Tile.ShadowBorder, Tile.ShadowBorder + Tile.Size).AttachTo(this);
+			feeder.Container.AttachTo(this);
+
+			var feeder_autohide = new SimplePipeFeeder.AutoHide(feeder, f.Overlay, DefaultWidth, DefaultHeight);
+
+		
 
 			f.Overlay.AttachTo(this);
 
@@ -47,9 +51,18 @@ namespace AvalonPipeMania.Code.Labs
 
 					f.PipeToBeBuilt = feeder.Current;
 				};
+
+		
+
 		}
 
-	
-	
+
+		public enum FeederState
+		{
+			LeftAndIdle,
+			LeftAndMoving,
+			RightAndIdle,
+			RightAndMoving
+		}
 	}
 }
