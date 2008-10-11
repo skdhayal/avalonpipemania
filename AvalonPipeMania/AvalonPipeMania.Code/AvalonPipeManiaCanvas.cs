@@ -108,34 +108,7 @@ namespace AvalonPipeMania.Code
 				Height = DefaultHeight
 			}.AttachTo(this);
 
-			var ExplosionCanvas = new Canvas
-			{
-				Width = 64,
-				Height = 64,
-			}.MoveTo(DefaultWidth - 64, 0).AttachTo(this);
-
-			var ExplosionFrames = KnownAssets.Default.FileNames.Where(k => k.StartsWith(KnownAssets.Path.Explosion)).OrderBy(k => k).ToArray(
-				k => new Image
-				{
-					Source = k.ToSource(),
-					Visibility = Visibility.Hidden
-				}.AttachTo(ExplosionCanvas)
-			);
-
-			{
-				ExplosionFrames.AtModulus(0).Show();
-				Action Hide = () => ExplosionFrames.AtModulus(0).Hide();
-
-				(1000 / 23).AtIntervalWithCounter(
-					Counter =>
-					{
-						Hide();
-
-						ExplosionFrames.AtModulus(Counter).Show();
-						Hide = () => ExplosionFrames.AtModulus(Counter).Hide();
-					}
-				);
-			}
+			
 
 			var Buttons = new Canvas
 			{
@@ -153,6 +126,9 @@ namespace AvalonPipeMania.Code
 			Options.ForEach(
 				(Option, Index) =>
 				{
+					var x = 72;
+					var y = 16 + Index * ButtonHeight;
+
 					var Button = new TextButtonControl
 					{
 						Text = (Index + 1) + ". Open " + Option.Key.Name,
@@ -167,6 +143,9 @@ namespace AvalonPipeMania.Code
 					Button.MouseEnter +=
 						delegate
 						{
+							new Explosion().PlayAndOrphanize().Container.MoveTo(DefaultWidth - Explosion.Size, 0).AttachTo(this);
+
+
 							Button.Background.Fill = Brushes.Blue;
 							Button.Background.Opacity = 0.5;
 							Button.Foreground = Brushes.White;
@@ -202,12 +181,14 @@ namespace AvalonPipeMania.Code
 							);
 						};
 
-					Button.Container.MoveTo(72, 16 + Index * ButtonHeight).AttachTo(Buttons);
+					Button.Container.MoveTo(x, y).AttachTo(Buttons);
 				}
 			);
 			#endregion
 
 
 		}
+
+		
 	}
 }
