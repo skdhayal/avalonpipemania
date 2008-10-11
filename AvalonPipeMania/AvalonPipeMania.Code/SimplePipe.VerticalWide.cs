@@ -19,6 +19,8 @@ namespace AvalonPipeMania.Code
 
 			public VerticalWide()
 			{
+				this.WaterAnimationSpeed *= 3;
+
 				this.PipeTopToBottom = new Pipe.TopToBottomWide();
 
 				this.PipeTopToBottom.Container.AttachTo(this.Container);
@@ -32,7 +34,7 @@ namespace AvalonPipeMania.Code
 				this.Input.Top =
 					delegate
 					{
-						this.AnimateBottomToTop(
+						this.AnimateTopToBottom(
 							this.PipeTopToBottom.Water.First(),
 							this.Output.Bottom
 						);

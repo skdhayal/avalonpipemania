@@ -51,7 +51,7 @@ namespace AvalonPipeMania.Code
 			}
 		}
 
-		public int WaterAnimationSpeed = 1000 / 15;
+		public int WaterAnimationSpeed = 1000 / 50; // 64
 
 		#region Animate
 
@@ -62,9 +62,10 @@ namespace AvalonPipeMania.Code
 			water.ClipTo(0, 0, 0, 0);
 			water.Show();
 
-			Enumerable.Range(0, Pipe.Size).ForEach(
-				(Current, Next) =>
+			Enumerable.Range(0, Pipe.Size / 2).ForEach(
+				(Current_, Next) =>
 				{
+					var Current = Current_ * 2;
 					water.ClipTo(
 						0,
 						0,
@@ -84,9 +85,10 @@ namespace AvalonPipeMania.Code
 			water.ClipTo(0, 0, 0, 0);
 			water.Show();
 
-			Enumerable.Range(0, Pipe.Size).ForEach(
-				(Current, Next) =>
+			Enumerable.Range(0, Pipe.Size / 2).ForEach(
+				(Current_, Next) =>
 				{
+					var Current = Current_ * 2;
 					water.ClipTo(
 						0,
 						0,
@@ -104,9 +106,10 @@ namespace AvalonPipeMania.Code
 			water.ClipTo(0, 0, 0, 0);
 			water.Show();
 
-			Enumerable.Range(0, Pipe.Size).ForEach(
-				(Current, Next) =>
+			Enumerable.Range(0, Pipe.Size / 2).ForEach(
+				(Current_, Next) =>
 				{
+					var Current = Current_ * 2;
 					water.ClipTo(
 						0,
 						Pipe.Size - Current,
@@ -126,9 +129,11 @@ namespace AvalonPipeMania.Code
 			water.ClipTo(0, 0, 0, 0);
 			water.Show();
 
-			Enumerable.Range(0, Pipe.Size).ForEach(
-				(Current, Next) =>
+			Enumerable.Range(0, Pipe.Size / 2).ForEach(
+				(Current_, Next) =>
 				{
+					var Current = Current_ * 2;
+
 					water.ClipTo(
 						Pipe.Size - Current, 
 						0,
@@ -158,7 +163,7 @@ namespace AvalonPipeMania.Code
 
 					Current.Show();
 
-					WaterAnimationSpeed.AtDelay(Next);
+					(WaterAnimationSpeed * 4).AtDelay(Next);
 				}
 			)(Done);
 		}
