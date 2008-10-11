@@ -9,7 +9,7 @@ using AvalonPipeMania.Assets.Shared;
 namespace AvalonPipeMania.Code.Fonts.showcard
 {
 	[Script]
-	public class YellowNumbers : Numbers
+	public class YellowNumbers : NumbersBase
 	{
 		public YellowNumbers()
 			: base((KnownAssets.Path.Fonts.showcard + "/Numbers_yellow.png").ToSource())

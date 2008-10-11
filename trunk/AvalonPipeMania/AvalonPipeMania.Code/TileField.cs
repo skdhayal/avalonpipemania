@@ -20,7 +20,7 @@ namespace AvalonPipeMania.Code
 		public readonly int Width;
 		public readonly int Height;
 
-		public readonly List<Tile> Tiles = new List<Tile>();
+		public readonly List<Tile> TileList = new List<Tile>();
 
 		public readonly int SizeX;
 		public readonly int SizeY;
@@ -69,7 +69,7 @@ namespace AvalonPipeMania.Code
 						IndexY = iy
 					};
 
-					Tiles.Add(tile);
+					TileList.Add(tile);
 
 					tile.Shadow.MoveTo(64 * ix, 52 * iy).AttachTo(this.Shadow);
 					tile.Container.MoveTo(64 * ix + Tile.ShadowBorder, 52 * iy + Tile.ShadowBorder).AttachTo(this.Content);
@@ -118,7 +118,7 @@ namespace AvalonPipeMania.Code
 		{
 			set
 			{
-				this.Tiles.ForEach(k => k.Color = value);
+				this.TileList.ForEach(k => k.Color = value);
 			}
 		}
 
@@ -132,7 +132,7 @@ namespace AvalonPipeMania.Code
 		{
 			get
 			{
-				return this.Tiles.Single(
+				return this.TileList.Single(
 					k =>
 					{
 						if (k.IndexX != x)
