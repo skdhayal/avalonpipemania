@@ -19,7 +19,7 @@ namespace AvalonPipeMania.Code
 
 			public VerticalWide()
 			{
-				this.WaterAnimationSpeed *= 3;
+				this.WaterAnimationSpeed *= 10;
 
 				this.PipeTopToBottom = new Pipe.TopToBottomWide();
 
