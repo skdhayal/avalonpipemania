@@ -100,6 +100,12 @@ namespace AvalonPipeMania.Code
 						Visibility = Visibility.Hidden
 					}
 				},
+					{ typeof(ExtendedFieldTest),
+					() => new ExtendedFieldTest
+					{
+						Visibility = Visibility.Hidden
+					}
+				},
 			};
 
 			var Content = new Canvas
