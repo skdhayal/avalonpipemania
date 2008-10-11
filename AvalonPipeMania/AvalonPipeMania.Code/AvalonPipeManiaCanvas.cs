@@ -155,7 +155,6 @@ namespace AvalonPipeMania.Code
 					Button.MouseEnter +=
 						delegate
 						{
-							new Explosion().PlayAndOrphanize().Container.MoveTo(DefaultWidth - Explosion.Size, 0).AttachTo(this);
 
 
 							Button.Background.Fill = Brushes.Blue;
@@ -201,18 +200,7 @@ namespace AvalonPipeMania.Code
 
 
 
-			var counter = new Fonts.showcard.RedNumbers();
-
-			Enumerable.Range(0, 1000).ForEach(
-				(Current, Next) =>
-				{
-					counter.Text = Current + "";
-
-					(1000 / 24).AtDelay(Next);
-				}
-			);
-
-			counter.Container.AttachTo(this).MoveTo(300, 8);
+			
 
 		}
 

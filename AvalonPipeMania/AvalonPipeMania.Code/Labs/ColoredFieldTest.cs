@@ -70,6 +70,8 @@ namespace AvalonPipeMania.Code.Labs
 				}
 			);
 
+			var PumpTimeout = new Random();
+
 			Enumerable.Range(0, 4).ForEach(
 				Index =>
 				{
@@ -82,7 +84,7 @@ namespace AvalonPipeMania.Code.Labs
 					else
 						pump = new SimplePipe.PumpToRight();
 
-					pump.AddTimer(30, pump.Input.Pump);
+					pump.AddTimer(PumpTimeout.Next(20, 150), pump.Input.Pump);
 
 					f.Field[Target] = pump;
 				}
