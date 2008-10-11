@@ -37,6 +37,8 @@ namespace AvalonPipeMania.Assets
 				public static class Pipe
 				{
 					public const string LeftToRight = "assets/AvalonPipeMania.Pipe/LeftToRight";
+					public const string LeftToRightBent = "assets/AvalonPipeMania.Pipe/LeftToRightBent";
+					public const string LeftToRightWide = "assets/AvalonPipeMania.Pipe/LeftToRightWide";
 					public const string LeftToDrain = "assets/AvalonPipeMania.Pipe/LeftToDrain";
 					public const string TopToBottom = "assets/AvalonPipeMania.Pipe/TopToBottom";
 					public const string RightToBottom = "assets/AvalonPipeMania.Pipe/RightToBottom";
@@ -44,7 +46,6 @@ namespace AvalonPipeMania.Assets
 					public const string PumpToLeft = "assets/AvalonPipeMania.Pipe/PumpToLeft";
 					public const string PumpHandle = "assets/AvalonPipeMania.Pipe/PumpHandle";
 					public const string PumpToRight = "assets/AvalonPipeMania.Pipe/PumpToRight";
-					public const string LeftToRightBent = "assets/AvalonPipeMania.Pipe/LeftToRightBent";
 					public const string LeftToBottom = "assets/AvalonPipeMania.Pipe/LeftToBottom";
 					public const string TopToLeft = "assets/AvalonPipeMania.Pipe/TopToLeft";
 					public const string RightToDrain = "assets/AvalonPipeMania.Pipe/RightToDrain";

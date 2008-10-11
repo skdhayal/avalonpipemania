@@ -39,7 +39,7 @@ namespace AvalonPipeMania.Code
 
 
 		public Image Glow;
-		
+
 		public Image[] Water;
 
 
@@ -61,6 +61,7 @@ namespace AvalonPipeMania.Code
 
 		DispatcherTimer OverlayBlackTimer;
 
+		#region Color
 		public Color Color
 		{
 			set
@@ -94,7 +95,9 @@ namespace AvalonPipeMania.Code
 				this.Brown.Show();
 			}
 		}
+		#endregion
 
+		#region OverlayBlackAnimation
 		public void OverlayBlackAnimationStart()
 		{
 			if (OverlayBlack == null)
@@ -109,7 +112,7 @@ namespace AvalonPipeMania.Code
 			OverlayBlackTimer = (1000 / 24).AtIntervalWithCounter(
 				Counter =>
 				{
-					OverlayBlack.Opacity = (Math.Cos(Counter * 0.5) + 1) * 0.20 + 0.15; 
+					OverlayBlack.Opacity = (Math.Cos(Counter * 0.5) + 1) * 0.20 + 0.15;
 				}
 			);
 		}
@@ -127,6 +130,7 @@ namespace AvalonPipeMania.Code
 
 			OverlayBlack.Hide();
 		}
+		#endregion
 
 		[Script]
 		public class Factory
@@ -180,6 +184,7 @@ namespace AvalonPipeMania.Code
 					new LeftToDrain(),
 					new LeftToRight(),
 					new LeftToRightBent(),
+					new LeftToRightWide(),
 					new PumpToLeft(),
 					new PumpToRight(),
 					new RightToBottom(),
