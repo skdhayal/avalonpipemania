@@ -80,6 +80,7 @@
     <Compile Include="AvalonPipeManiaCanvas.cs" />
     <Compile Include="Explosion.cs" />
     <Compile Include="ExtendedField.cs" />
+    <Compile Include="Labs\ColoredFieldTest.cs" />
     <Compile Include="Labs\ExtendedFieldTest.cs" />
     <Compile Include="Labs\ScrollTest.cs" />
     <Compile Include="SimplePipe.Missing.cs" />

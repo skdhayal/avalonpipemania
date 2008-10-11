@@ -7,6 +7,7 @@ using AvalonPipeMania.Code.Tween;
 using ScriptCoreLib.Shared.Avalon.Extensions;
 using ScriptCoreLib.Shared.Lambda;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace AvalonPipeMania.Code
 {
@@ -19,7 +20,8 @@ namespace AvalonPipeMania.Code
 
 		public readonly Action MoveNext;
 
-		public SimplePipeFeeder(int VisiblePipes)
+		
+		public SimplePipeFeeder(int VisiblePipes, Color DefaultPipeColor)
 		{
 			var AlternativeOffset = 8;
 
@@ -64,12 +66,15 @@ namespace AvalonPipeMania.Code
 
 
 			this.Current = RandomizedBuildablePipes.Take()();
+			this.Current.Color = DefaultPipeColor;
 
 			RandomizedBuildablePipes.Take(VisiblePipes).ForEach(
 				Constructor =>
 				{
 					var a = new SimplePipeWithEmitter(Constructor());
 
+					a.Pipe.Color = DefaultPipeColor;
+ 
 					a.Pipe.Container.AttachTo(Container);
 					UseablePipes.Enqueue(a);
 				}
@@ -88,6 +93,7 @@ namespace AvalonPipeMania.Code
 					this.Current.Container.Orphanize();
 
 					var a = new SimplePipeWithEmitter(RandomizedBuildablePipes.Take()());
+					a.Pipe.Color = DefaultPipeColor;
 					a.Pipe.Container.AttachTo(this.Container);
 					UseablePipes.Enqueue(a);
 

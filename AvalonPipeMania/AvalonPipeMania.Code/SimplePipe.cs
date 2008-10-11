@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using ScriptCoreLib.Shared.Lambda;
 using ScriptCoreLib.Shared.Avalon.Extensions;
 using System.Windows.Threading;
+using System.Windows.Media;
 
 namespace AvalonPipeMania.Code
 {
@@ -93,17 +94,7 @@ namespace AvalonPipeMania.Code
 		public bool IsVirtualPipe = false;
 
 		public bool HasWater;
-		//{
-		//    get
-		//    {
-		//        return this.PipeParts.Any(
-		//            k =>
-		//            {
-		//                return k.Water.Any(w => w.Visibility == System.Windows.Visibility.Visible);
-		//            }
-		//        );
-		//    }
-		//}
+
 
 
 		public Pipe[] PipeParts;
@@ -118,6 +109,14 @@ namespace AvalonPipeMania.Code
 			this.PipeParts.ForEach(k => k.OverlayBlackAnimationStop());
 		}
 
+
+		public Color Color
+		{
+			set
+			{
+				this.PipeParts.ForEach(k => k.Color = value);
+			}
+		}
 		public void Animate(IEnumerable<Image> Water, Action Done)
 		{
 			HasWater = true;
