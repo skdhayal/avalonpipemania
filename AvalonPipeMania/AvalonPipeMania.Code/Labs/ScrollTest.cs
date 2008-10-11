@@ -30,6 +30,7 @@ namespace AvalonPipeMania.Code.Labs
 			// f.Tiles.Color = Colors.Pink;
 			f.Tiles.Color = Colors.Cyan;
 
+			#region random pumps and drain holes
 			var Randomized = f.Tiles.Tiles.Randomize().ToArray();
 
 			Enumerable.Range(0, f.Tiles.SizeX * f.Tiles.SizeY / 20).ForEach(
@@ -56,6 +57,7 @@ namespace AvalonPipeMania.Code.Labs
 					}
 				}
 			);
+			#endregion
 
 			f.Container.AttachTo(this);
 

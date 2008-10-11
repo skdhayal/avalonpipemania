@@ -79,6 +79,8 @@
   <ItemGroup>
     <Compile Include="AvalonPipeManiaCanvas.cs" />
     <Compile Include="Explosion.cs" />
+    <Compile Include="ExtendedField.cs" />
+    <Compile Include="Labs\ExtendedFieldTest.cs" />
     <Compile Include="Labs\ScrollTest.cs" />
     <Compile Include="SimplePipe.Missing.cs" />
     <Compile Include="Pipe.Missing.cs" />
@@ -126,6 +128,9 @@
       <Project>{0034D475-940D-46FC-9C9B-022EF1EA484D}</Project>
       <Name>AvalonPipeMania.Assets</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Extensions\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

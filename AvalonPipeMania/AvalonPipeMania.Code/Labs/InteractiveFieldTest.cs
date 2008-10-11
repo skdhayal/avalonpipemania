@@ -163,7 +163,7 @@ namespace AvalonPipeMania.Code.Labs
 								return true;
 							}
 
-						
+
 						}
 
 
@@ -180,10 +180,10 @@ namespace AvalonPipeMania.Code.Labs
 			f.Tiles.Click +=
 				Target =>
 				{
-				
+
 
 					var u = f.Tiles.FocusTile;
-					
+
 					if (IsBlockingPipe())
 					{
 						// we got a pipe on which we should not build upon
@@ -196,15 +196,23 @@ namespace AvalonPipeMania.Code.Labs
 						CurrentTile.Container.Orphanize();
 						CurrentTile.Container.Opacity = 1;
 
+
+						if (f[u] != null)
+						{
+
+							var px = x + u.IndexX * Tile.Size + Tile.ShadowBorder;
+							var py = y + (u.IndexY + 1) * Tile.SurfaceHeight + Tile.ShadowBorder - Tile.Size;
+
+
+
+							new Explosion().PlayAndOrphanize().Container.MoveTo(px, py).AttachTo(ExplosionCanvas);
+						}
+
+
 						f[u] = CurrentTile;
 						f.RefreshPipes();
 
 						CurrentTileNext();
-
-						var px = x + u.IndexX * Tile.Size + Tile.ShadowBorder;
-						var py = y + (u.IndexY + 1) * Tile.SurfaceHeight + Tile.ShadowBorder - Tile.Size;
-
-						new Explosion().PlayAndOrphanize().Container.MoveTo(px, py).AttachTo(ExplosionCanvas);
 
 					}
 
@@ -245,6 +253,8 @@ namespace AvalonPipeMania.Code.Labs
 					CurrentTile.Container.MoveTo(p.X, p.Y);
 				};
 			#endregion
+
+
 
 		}
 	}

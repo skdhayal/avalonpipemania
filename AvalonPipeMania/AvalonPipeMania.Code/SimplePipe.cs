@@ -92,18 +92,18 @@ namespace AvalonPipeMania.Code
 
 		public bool IsVirtualPipe = false;
 
-		public bool HasWater
-		{
-			get
-			{
-				return this.PipeParts.Any(
-					k =>
-					{
-						return k.Water.Any(w => w.Visibility == System.Windows.Visibility.Visible);
-					}
-				);
-			}
-		}
+		public bool HasWater;
+		//{
+		//    get
+		//    {
+		//        return this.PipeParts.Any(
+		//            k =>
+		//            {
+		//                return k.Water.Any(w => w.Visibility == System.Windows.Visibility.Visible);
+		//            }
+		//        );
+		//    }
+		//}
 
 
 		public Pipe[] PipeParts;
@@ -120,6 +120,8 @@ namespace AvalonPipeMania.Code
 
 		public void Animate(IEnumerable<Image> Water, Action Done)
 		{
+			HasWater = true;
+
 			const int FrameRate = 1000 / 15;
 
 			Water.ForEach(
