@@ -34,7 +34,7 @@ namespace AvalonPipeMania.Code
 
 			this.Field.Container.AttachTo(this.Container);
 
-		
+
 
 
 			#region interactive layers
@@ -55,7 +55,7 @@ namespace AvalonPipeMania.Code
 			double CurrentTileY = 0;
 
 			var CurrentTile = default(SimplePipe);
-			
+
 			// SimplePipe.BuildablePipes.Random()();
 
 			this.GetPipeToBeBuilt = () => CurrentTile;
@@ -133,7 +133,7 @@ namespace AvalonPipeMania.Code
 					const int MarginLeft = Tile.ShadowBorder + Tile.Size + PaddingX;
 					const int MarginWidth = MarginLeft + Tile.ShadowBorder + Tile.Size + PaddingX;
 					var _x = PaddingX + (Width - (this.Field.Tiles.Width + PaddingX * 2)) * ((x - MarginLeft).Max(0) / (Width - MarginWidth)).Min(1);
-					
+
 
 					const int PaddingY = Tile.SurfaceHeight;
 					const int MarginTop = Tile.ShadowBorder + Tile.SurfaceHeight + PaddingY;
@@ -166,7 +166,7 @@ namespace AvalonPipeMania.Code
 			#endregion
 
 
-		
+
 
 			#region IsBlockingPipe
 			Func<bool> IsBlockingPipe =
@@ -246,6 +246,24 @@ namespace AvalonPipeMania.Code
 
 					var u = this.Field.Tiles.FocusTile;
 
+					if (u != null)
+					{
+						var q = this.Field[u];
+
+						if (q != null)
+							if (q.Input.Pump != null)
+							{
+								// we are clicking on a pump
+								if (q.AddTimerAbort != null)
+									q.AddTimerAbort();
+
+
+								q.Input.Pump();
+								return;
+
+							}
+					}
+
 					if (IsBlockingPipe())
 					{
 						// we got a pipe on which we should not build upon
@@ -257,7 +275,7 @@ namespace AvalonPipeMania.Code
 						var PipeToBeBuilt = this.PipeToBeBuilt;
 						this.PipeToBeBuilt = null;
 
-						
+
 						if (this.Field[u] != null)
 						{
 
@@ -298,7 +316,7 @@ namespace AvalonPipeMania.Code
 			{
 				SetPipeToBeBuilt(value);
 			}
-		} 
+		}
 		#endregion
 	}
 }

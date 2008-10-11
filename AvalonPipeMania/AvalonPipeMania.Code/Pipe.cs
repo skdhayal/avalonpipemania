@@ -190,6 +190,7 @@ namespace AvalonPipeMania.Code
 					new RightToBottom(),
 					new RightToDrain(),
 					new TopToBottom(),
+					new TopToBottomWide(),
 					new TopToLeft(),
 					new TopToRight(),
 					new Missing()
