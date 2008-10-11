@@ -387,14 +387,6 @@
     <EmbeddedResource Include="web\assets\AvalonPipeMania.Fonts\showcard\Numbers_red.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="web\assets\AvalonPipeMania.Pipe\LeftToRightWide\0_8.png" />
-    <EmbeddedResource Include="web\assets\AvalonPipeMania.Pipe\LeftToRightWide\16_24.png" />
-    <EmbeddedResource Include="web\assets\AvalonPipeMania.Pipe\LeftToRightWide\24_32.png" />
-    <EmbeddedResource Include="web\assets\AvalonPipeMania.Pipe\LeftToRightWide\32_40.png" />
-    <EmbeddedResource Include="web\assets\AvalonPipeMania.Pipe\LeftToRightWide\40_48.png" />
-    <EmbeddedResource Include="web\assets\AvalonPipeMania.Pipe\LeftToRightWide\48_56.png" />
-    <EmbeddedResource Include="web\assets\AvalonPipeMania.Pipe\LeftToRightWide\56_64.png" />
-    <EmbeddedResource Include="web\assets\AvalonPipeMania.Pipe\LeftToRightWide\8_16.png" />
     <EmbeddedResource Include="web\assets\AvalonPipeMania.Pipe\LeftToRightWide\black.png" />
     <EmbeddedResource Include="web\assets\AvalonPipeMania.Pipe\LeftToRightWide\brown.png" />
     <EmbeddedResource Include="web\assets\AvalonPipeMania.Pipe\LeftToRightWide\glow.png" />
@@ -410,6 +402,9 @@
     <EmbeddedResource Include="web\assets\AvalonPipeMania.Pipe\TopToBottomWide\outline.png" />
     <EmbeddedResource Include="web\assets\AvalonPipeMania.Pipe\TopToBottomWide\water.png" />
     <EmbeddedResource Include="web\assets\AvalonPipeMania.Pipe\TopToBottomWide\yellow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="web\assets\AvalonPipeMania.Pipe\LeftToRightWide\water.png" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
