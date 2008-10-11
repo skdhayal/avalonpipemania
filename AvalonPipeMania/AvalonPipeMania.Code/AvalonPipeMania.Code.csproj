@@ -80,6 +80,9 @@
     <Compile Include="AvalonPipeManiaCanvas.cs" />
     <Compile Include="Fonts\BitmapLabel.cs" />
     <Compile Include="Fonts\CharMap.cs" />
+    <Compile Include="Fonts\showcard\RedNumbers.cs" />
+    <Compile Include="Fonts\showcard\YellowNumbers.cs" />
+    <Compile Include="Fonts\showcard\Numbers.cs" />
     <Compile Include="Fonts\showcard\WhiteNumbers.cs" />
     <Compile Include="SimplePipeFeeder.AutoHide.cs" />
     <Compile Include="Explosion.cs" />

@@ -144,6 +144,7 @@
     <EmbeddedResource Include="web\assets\AvalonPipeMania.Pipe\PumpToLeft\green.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="web\assets\AvalonPipeMania.Fonts\showcard\Numbers.pdn" />
     <None Include="web\assets\AvalonPipeMania.Pipe\LeftToBottom\LeftToBottom.pdn" />
     <None Include="web\assets\AvalonPipeMania.Pipe\LeftToDrain\LeftToDrain.pdn" />
     <None Include="web\assets\AvalonPipeMania.Pipe\LeftToRightBent\LeftToRightBent.pdn" />
@@ -379,6 +380,9 @@
   <ItemGroup>
     <EmbeddedResource Include="web\assets\AvalonPipeMania.Fonts\showcard\Numbers_white.png" />
     <EmbeddedResource Include="web\assets\AvalonPipeMania.Fonts\showcard\Numbers_yellow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="web\assets\AvalonPipeMania.Fonts\showcard\Numbers_red.png" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
