@@ -19,6 +19,8 @@ namespace AvalonPipeMania.Code
 
 			public HorizontalWide()
 			{
+				this.WaterAnimationSpeed *= 3;
+
 				this.PipeLeftToRight = new Pipe.LeftToRightWide();
 
 				this.PipeLeftToRight.Container.AttachTo(this.Container);
