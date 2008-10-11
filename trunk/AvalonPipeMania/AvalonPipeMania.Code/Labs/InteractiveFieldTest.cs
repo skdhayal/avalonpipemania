@@ -98,6 +98,13 @@ namespace AvalonPipeMania.Code.Labs
 				Height = DefaultHeight
 			}.AttachTo(this);
 
+
+			var ExplosionCanvas = new Canvas
+			{
+				Width = DefaultWidth,
+				Height = DefaultHeight
+			}.AttachTo(this);
+
 			double CurrentTileX = 0;
 			double CurrentTileY = 0;
 
@@ -193,6 +200,12 @@ namespace AvalonPipeMania.Code.Labs
 						f.RefreshPipes();
 
 						CurrentTileNext();
+
+						var px = x + u.IndexX * Tile.Size + Tile.ShadowBorder;
+						var py = y + (u.IndexY + 1) * Tile.SurfaceHeight + Tile.ShadowBorder - Tile.Size;
+
+						new Explosion().PlayAndOrphanize().Container.MoveTo(px, py).AttachTo(ExplosionCanvas);
+
 					}
 
 				};
