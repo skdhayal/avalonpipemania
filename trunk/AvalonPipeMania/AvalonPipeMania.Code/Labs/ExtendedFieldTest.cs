@@ -9,6 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Shapes;
 using System.Windows.Media;
 using System.Windows;
+using AvalonPipeMania.Code.Tween;
 
 namespace AvalonPipeMania.Code.Labs
 {
@@ -28,54 +29,25 @@ namespace AvalonPipeMania.Code.Labs
 
 			f.Container.AttachTo(this);
 
+			
+
+			
+			var feeder = new SimplePipeFeeder(6);
+
+			feeder.Container.MoveTo(Tile.ShadowBorder, Tile.ShadowBorder + Tile.Size).AttachTo(this);
+
 			f.Overlay.AttachTo(this);
-
-			#region incoming stream of randomized pipes
-			Func<IEnumerable<Func<SimplePipe>>> GetRandomizedBuildablePipes =
-				delegate
-				{
-					Console.WriteLine("GetRandomizedBuildablePipes");
-					return SimplePipe.BuildablePipes.Randomize();
-				};
-
-			IEnumerator<Func<SimplePipe>> RandomizedBuildablePipes =
-				GetRandomizedBuildablePipes.AsCyclicEnumerable().GetEnumerator();
-			#endregion
-
-			var UseablePipes = new Queue<SimplePipe>();
- 
-			RandomizedBuildablePipes.Take(5).ForEach(
-				Constructor =>
-				{
-					var a = Constructor();
-
-					a.Container.AttachTo(this).MoveTo(8, 100 + Pipe.Size * UseablePipes.Count);
-					UseablePipes.Enqueue(a);
-				}
-			);
 
 			f.Field.Tiles.Click +=
 				delegate
 				{
-					var FieldReady = UseablePipes.Dequeue();
-					FieldReady.Container.Orphanize();
-
-					var a = RandomizedBuildablePipes.Take()();
-					a.Container.AttachTo(this);
-					UseablePipes.Enqueue(a);
-
-					#region update
-					UseablePipes.ForEach(
-						(Current, Index) =>
-						{
-							Current.Container.MoveTo(8, 100 + Pipe.Size * Index);
-						}
-					);
-					#endregion
-
+					feeder.MoveNext();
 
 				};
 
 		}
+
+	
+	
 	}
 }
