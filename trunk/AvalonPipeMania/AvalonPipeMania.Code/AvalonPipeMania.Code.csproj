@@ -77,8 +77,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\KnownAnimations.cs" />
     <Compile Include="AvalonPipeManiaCanvas.cs" />
+    <Compile Include="Extensions\AnimationCollection.cs" />
     <Compile Include="Extensions\ASCIIImage.cs" />
+    <Compile Include="Extensions\MyExtensions.cs" />
+    <Compile Include="Labs\AnimationsTest.cs" />
     <Compile Include="Labs\SpaceInvaderTest.cs" />
     <Compile Include="SimplePipe.Animate.cs" />
     <Compile Include="SimplePipe.VerticalWide.cs" />

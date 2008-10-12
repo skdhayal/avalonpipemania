@@ -55,12 +55,13 @@ MMMMMMMMMM        MMM.       MMMMMMMMMMM
 
 			var f = new ExtendedField(map.Width, map.Height, DefaultWidth, DefaultHeight);
 
-			for (int x = 0; x < map.Width; x++)
-				for (int y = 0; y < map.Height; y++)
+			f.Field.Tiles.TileList.ForEach(
+				value =>
 				{
-					if (map[x, y] == "M")
-						f.Field.Tiles[x, y].Hide();
+					if (map[value.IndexX, value.IndexY] == "M")
+						f.Field.Tiles[value.IndexX, value.IndexY].Hide();
 				}
+			);
 
 			f.Field.DefaultPipeColor = Colors.Yellow;
 

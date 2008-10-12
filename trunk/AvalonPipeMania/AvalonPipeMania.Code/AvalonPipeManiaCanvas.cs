@@ -2,19 +2,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Shapes;
 using AvalonPipeMania.Assets.Shared;
+using AvalonPipeMania.Code.Labs;
 using ScriptCoreLib;
 using ScriptCoreLib.Shared.Avalon.Cursors;
 using ScriptCoreLib.Shared.Avalon.Extensions;
-using ScriptCoreLib.Shared.Lambda;
-using ScriptCoreLib.Shared.Avalon.TiledImageButton;
-using System.Windows.Shapes;
-using System.Windows.Media;
-using System.Windows.Input;
-using System.Windows;
-using AvalonPipeMania.Code.Labs;
 using ScriptCoreLib.Shared.Avalon.TextButton;
+using ScriptCoreLib.Shared.Avalon.TiledImageButton;
+using ScriptCoreLib.Shared.Lambda;
+using AvalonPipeMania.Code.Extensions;
+using System.Windows.Threading;
 
 namespace AvalonPipeMania.Code
 {
@@ -118,7 +120,12 @@ namespace AvalonPipeMania.Code
 						Visibility = Visibility.Hidden
 					}
 				},
-
+				{ typeof(AnimationsTest),
+					() => new AnimationsTest
+					{
+						Visibility = Visibility.Hidden
+					}
+				},
 			};
 
 			var Content = new Canvas
@@ -205,12 +212,10 @@ namespace AvalonPipeMania.Code
 			#endregion
 
 
+		
 
-
-			
 
 		}
-
 
 	}
 }
