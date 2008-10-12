@@ -12,8 +12,10 @@ using System.Windows.Media;
 namespace AvalonPipeMania.Code
 {
 	[Script]
-	public partial class SimplePipe : ISupportsContainer
+	public partial class SimplePipe : ISupportsContainer, IDisposable
 	{
+
+		public int DemolitionCost = -50;
 
 		public readonly Group Input = new Group();
 		public readonly Group Output = new Group();
@@ -184,5 +186,23 @@ namespace AvalonPipeMania.Code
 			red.Container.AttachTo(this.Container);
 
 		}
+
+		#region IDisposable Members
+
+		protected bool IsDisposed;
+
+		public event Action Disposing;
+
+		public void Dispose()
+		{
+			IsDisposed = true;
+			this.Container.Orphanize();
+			this.InfoOverlay.Orphanize();
+
+			if (Disposing != null)
+				Disposing();
+		}
+
+		#endregion
 	}
 }

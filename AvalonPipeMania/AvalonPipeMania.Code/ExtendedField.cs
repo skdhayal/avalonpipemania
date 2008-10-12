@@ -285,7 +285,7 @@ namespace AvalonPipeMania.Code
 						this.PipeToBeBuilt = null;
 
 
-						if (this.Field[u] != null)
+						if (this.Field.ByIndex(Target.IndexX, Target.IndexY).Any())
 						{
 
 							var px = u.IndexX * Tile.Size + Tile.ShadowBorder;

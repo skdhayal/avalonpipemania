@@ -79,6 +79,7 @@
   <ItemGroup>
     <Compile Include="Assets\KnownAnimations.cs" />
     <Compile Include="AvalonPipeManiaCanvas.cs" />
+    <Compile Include="SimplePipe.BonusPickup.cs" />
     <Compile Include="Extensions\AnimationCollection.cs" />
     <Compile Include="Extensions\ASCIIImage.cs" />
     <Compile Include="Extensions\MyExtensions.cs" />
