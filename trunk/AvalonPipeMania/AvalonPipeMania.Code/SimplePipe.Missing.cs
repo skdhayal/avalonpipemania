@@ -21,6 +21,8 @@ namespace AvalonPipeMania.Code
 
 			public Missing()
 			{
+				this.AnimationCompleteMultiplier = -1000;
+
 				this.IsVirtualPipe = true;
 
 				this.PipeMissing = new Pipe.Missing();

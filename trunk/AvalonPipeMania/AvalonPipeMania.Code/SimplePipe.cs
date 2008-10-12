@@ -12,17 +12,18 @@ using System.Windows.Media;
 namespace AvalonPipeMania.Code
 {
 	[Script]
-	public partial class SimplePipe
+	public partial class SimplePipe : ISupportsContainer
 	{
 
 		public readonly Group Input = new Group();
 		public readonly Group Output = new Group();
 		public readonly Group SupportedOutput = new Group();
 
-		public readonly Canvas Container = new Canvas();
+		public Canvas Container { get; set; }
+
+		public Canvas InfoOverlay;
 
 		static readonly Action SupportedOutputMarker = delegate { };
-
 
 		public bool IsVirtualPipe = false;
 
@@ -31,6 +32,22 @@ namespace AvalonPipeMania.Code
 
 
 		public Pipe[] PipeParts;
+
+
+		public SimplePipe()
+		{
+			this.Container = new Canvas
+			{
+				Width = Pipe.Size,
+				Height = Pipe.Size
+			};
+
+			this.InfoOverlay = new Canvas
+			{
+				Width = Pipe.Size,
+				Height = Pipe.Size
+			};
+		}
 
 		public void OverlayBlackAnimationStart()
 		{
@@ -51,127 +68,6 @@ namespace AvalonPipeMania.Code
 			}
 		}
 
-		public int WaterAnimationSpeed = 1000 / 50; // 64
-
-		#region Animate
-
-		public void AnimateLeftToRight(Image water, Action done)
-		{
-			HasWater = true;
-
-			water.ClipTo(0, 0, 0, 0);
-			water.Show();
-
-			Enumerable.Range(1, Pipe.Size / 2).ForEach(
-				(Current_, Next) =>
-				{
-					var Current = Current_ * 2;
-					water.ClipTo(
-						0,
-						0,
-						Current,
-						Pipe.Size
-					);
-
-					this.WaterAnimationSpeed.AtDelay(Next);
-				}
-			)(done);
-		}
-
-		public void AnimateTopToBottom(Image water, Action done)
-		{
-			HasWater = true;
-
-			water.ClipTo(0, 0, 0, 0);
-			water.Show();
-
-			Enumerable.Range(1, Pipe.Size / 2).ForEach(
-				(Current_, Next) =>
-				{
-					var Current = Current_ * 2;
-					water.ClipTo(
-						0,
-						0,
-						Pipe.Size,
-						Current
-					);
-
-					this.WaterAnimationSpeed.AtDelay(Next);
-				}
-			)(done);
-		}
-
-		public void AnimateBottomToTop(Image water, Action done)
-		{
-			HasWater = true;
-
-			water.ClipTo(0, 0, 0, 0);
-			water.Show();
-
-			Enumerable.Range(1, Pipe.Size / 2).ForEach(
-				(Current_, Next) =>
-				{
-					var Current = Current_ * 2;
-					water.ClipTo(
-						0,
-						Pipe.Size - Current,
-						Pipe.Size,
-						Current
-					);
-
-					this.WaterAnimationSpeed.AtDelay(Next);
-				}
-			)(done);
-		}
-
-
-
-		public void AnimateRightToLeft(Image water, Action done)
-		{
-			HasWater = true;
-
-			water.ClipTo(0, 0, 0, 0);
-			water.Show();
-
-			Enumerable.Range(1, Pipe.Size / 2).ForEach(
-				(Current_, Next) =>
-				{
-					var Current = Current_ * 2;
-
-					water.ClipTo(
-						Pipe.Size - Current, 
-						0,
-						
-						
-						Current,
-						Pipe.Size
-					);
-
-					this.WaterAnimationSpeed.AtDelay(Next);
-				}
-			)(done);
-		}
-
-		public void Animate(IEnumerable<Image> Water, Action Done)
-		{
-			HasWater = true;
-
-
-			Water.ForEach(
-				(Current, Next) =>
-				{
-					// if there is water there already
-					// we will stop here
-					if (Current.Visibility == System.Windows.Visibility.Visible)
-						return;
-
-					Current.Show();
-
-					(WaterAnimationSpeed * 4).AtDelay(Next);
-				}
-			)(Done);
-		}
-		#endregion
 
 		public static Type[] BuildablePipeTypes
 		{

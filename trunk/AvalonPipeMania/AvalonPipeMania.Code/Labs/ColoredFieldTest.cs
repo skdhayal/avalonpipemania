@@ -53,7 +53,7 @@ namespace AvalonPipeMania.Code.Labs
 				};
 
 
-
+			#region setting up some stuff on the field
 			var Randomized = f.Field.Tiles.TileList.Randomize().GetEnumerator();
 
 			Enumerable.Range(0, 4).ForEach(
@@ -89,6 +89,9 @@ namespace AvalonPipeMania.Code.Labs
 					f.Field[Target] = pump;
 				}
 			);
+			#endregion
+
+
 		}
 
 

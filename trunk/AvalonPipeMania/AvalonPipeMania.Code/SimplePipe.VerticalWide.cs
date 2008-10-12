@@ -36,7 +36,7 @@ namespace AvalonPipeMania.Code
 					{
 						this.AnimateTopToBottom(
 							this.PipeTopToBottom.Water.First(),
-							this.Output.Bottom
+							this.Output.RaiseBottom
 						);
 					};
 
@@ -48,7 +48,7 @@ namespace AvalonPipeMania.Code
 
 						this.AnimateBottomToTop(
 							this.PipeTopToBottom.Water.Last(),
-							this.Output.Top
+							this.Output.RaiseTop
 						);
 
 				

@@ -15,6 +15,34 @@ namespace AvalonPipeMania.Code
 		[Script]
 		public class Group
 		{
+			public void RaiseLeft()
+			{
+				if (Left != null)
+					Left();
+			}
+
+
+			public void RaiseTop()
+			{
+				if (Top != null)
+					Top();
+			}
+
+
+
+			public void RaiseRight()
+			{
+				if (Right != null)
+					Right();
+			}
+
+
+			public void RaiseBottom()
+			{
+				if (Bottom != null)
+					Bottom();
+			}
+
 			public Action Left;
 			public Action Top;
 			public Action Right;
@@ -24,6 +52,7 @@ namespace AvalonPipeMania.Code
 			public Action Drain;
 			public Action Spill;
 
+			#region indexed
 			public Action this[int x, int y]
 			{
 				get
@@ -78,6 +107,8 @@ namespace AvalonPipeMania.Code
 
 				}
 			}
+			#endregion
+
 		}
 	}
 }

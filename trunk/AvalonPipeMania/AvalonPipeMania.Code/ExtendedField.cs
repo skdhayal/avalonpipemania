@@ -51,6 +51,14 @@ namespace AvalonPipeMania.Code
 				Height = Height
 			}.AttachTo(this.Container);
 
+			var InfoOverlay = new Canvas
+			{
+				Width = Width,
+				Height = Height
+			}.AttachTo(this.Container);
+
+			this.Field.InfoOverlay.AttachTo(InfoOverlay);
+
 			double CurrentTileX = 0;
 			double CurrentTileY = 0;
 
@@ -116,6 +124,7 @@ namespace AvalonPipeMania.Code
 
 					CurrentTileCanvas.MoveTo(x, y);
 					ExplosionCanvas.MoveTo(x, y);
+					InfoOverlay.MoveTo(x, y);
 				}
 			);
 			#endregion

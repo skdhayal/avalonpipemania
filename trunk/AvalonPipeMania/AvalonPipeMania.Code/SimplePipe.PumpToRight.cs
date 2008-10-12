@@ -20,6 +20,8 @@ namespace AvalonPipeMania.Code
 
 			public PumpToRight()
 			{
+				this.AnimationCompleteMultiplier = 50;
+
 				this.PipePumpToRight = new Pipe.PumpToRight();
 				this.PipePumpToRight.PumpHandleAnimation.Stop();
 
@@ -32,6 +34,8 @@ namespace AvalonPipeMania.Code
 				this.Input.Pump =
 					delegate
 					{
+						this.Input.Pump = delegate { };
+
 						this.PipePumpToRight.PumpHandleAnimation.Start();
 
 						// turn the handle before the water comes
@@ -40,7 +44,7 @@ namespace AvalonPipeMania.Code
 							{
 								1500.AtDelay(this.PipePumpToRight.PumpHandleAnimation.Stop);
 
-								Animate(this.PipePumpToRight.Water, this.Output.Right);
+								Animate(this.PipePumpToRight.Water, this.Output.RaiseRight);
 							}
 						);
 					};
@@ -49,6 +53,9 @@ namespace AvalonPipeMania.Code
 					delegate
 					{
 						// what happens when water reaches the pump?
+
+						if (AddTimerAbort != null)
+							AddTimerAbort();
 
 						Animate(this.PipePumpToRight.Water, this.Output.Pump);
 					};

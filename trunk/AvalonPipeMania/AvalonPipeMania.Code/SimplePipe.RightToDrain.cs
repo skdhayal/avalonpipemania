@@ -20,6 +20,9 @@ namespace AvalonPipeMania.Code
 
 			public RightToDrain()
 			{
+				this.AnimationCompleteMultiplier = 1000;
+
+
 				this.PipeRightToDrain = new Pipe.RightToDrain();
 				this.PipeRightToDrain.WaterDropAnimation.Stop();
 
