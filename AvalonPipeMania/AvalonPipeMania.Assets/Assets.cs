@@ -44,6 +44,8 @@ namespace AvalonPipeMania.Assets
 					public const string five_seconds_hug = "assets/AvalonPipeMania.Animation/five_seconds_hug";
 					public const string duck_ride = "assets/AvalonPipeMania.Animation/duck_ride";
 					public const string daily_deviation = "assets/AvalonPipeMania.Animation/daily_deviation";
+					public const string bubbles_time = "assets/AvalonPipeMania.Animation/bubbles_time";
+					public const string clone = "assets/AvalonPipeMania.Animation/clone";
 					
 
 				}

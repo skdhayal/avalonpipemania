@@ -21,7 +21,9 @@ namespace AvalonPipeMania.Code.Assets
 			    { 50, 50, 30, KnownAssets.Path.Animation.pancakeglomp},
 			    { 70, 48, 25, KnownAssets.Path.Animation.five_seconds_hug},
 			    { 20, 40, 40, KnownAssets.Path.Animation.duck_ride},
-			    { 60, 50, 50, KnownAssets.Path.Animation.daily_deviation}
+			    { 60, 50, 50, KnownAssets.Path.Animation.daily_deviation},
+			    { 60, 44, 40, KnownAssets.Path.Animation.bubbles_time},
+			    { 60, 40, 20, KnownAssets.Path.Animation.clone}
 			};
 	}
 }
