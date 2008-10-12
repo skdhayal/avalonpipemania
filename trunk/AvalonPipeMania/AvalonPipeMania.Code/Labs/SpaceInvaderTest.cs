@@ -128,6 +128,15 @@ MMMMMMMMMM        MMM.       MMMMMMMMMMM
 					f.Field[Target] = pump;
 				}
 			);
+
+			Enumerable.Range(0, 6).ForEach(
+				Index =>
+				{
+					var Target = Randomized.Take();
+
+					f.Field[Target] = new SimplePipe.BonusPickup();
+				}
+			);
 			#endregion
 
 

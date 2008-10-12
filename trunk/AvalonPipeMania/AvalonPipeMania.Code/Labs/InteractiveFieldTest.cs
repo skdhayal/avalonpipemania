@@ -52,6 +52,7 @@ namespace AvalonPipeMania.Code.Labs
 			f[3, 0] = new SimplePipe.RightToDrain();
 			f[1, 3] = new SimplePipe.PumpToRight();
 			f[2, 4] = new SimplePipe.PumpToRight();
+			f[3, 5] = new SimplePipe.BonusPickup();
 
 			f[4, 2].Output.Drain = f[1, 3].Input.Pump;
 
@@ -193,7 +194,7 @@ namespace AvalonPipeMania.Code.Labs
 						CurrentTile.Container.Opacity = 1;
 
 
-						if (f[u] != null)
+						if (f.ByIndex(Target.IndexX, Target.IndexY).Any())
 						{
 
 							var px = x + u.IndexX * Tile.Size + Tile.ShadowBorder;

@@ -191,7 +191,7 @@ namespace AvalonPipeMania.Code
 					};
 				#endregion
 
-				var RemovedPipes = 0;
+				var DemolitionCost = 0;
 
 				if (!IsVirtualPipe)
 				{
@@ -199,12 +199,12 @@ namespace AvalonPipeMania.Code
 					PipesList.Where(k => k.Y == y).Where(k => k.X == x).ToArray().ForEach(
 						target =>
 						{
-							RemovedPipes++;
+							DemolitionCost += target.Value.DemolitionCost;
 
 							Console.WriteLine("remove: " + new { target.Value.GetType().Name, target.X, target.Y });
 
-							target.Value.Container.Orphanize();
-							target.Value.InfoOverlay.Orphanize();
+
+							target.Value.Dispose();
 
 							PipesList.Remove(target);
 
@@ -313,7 +313,7 @@ namespace AvalonPipeMania.Code
 						Spill(0, 1, target);
 						Spill(0, -1, target);
 
-						value.ShowBonusPoints(-50 * RemovedPipes);
+						value.ShowBonusPoints(DemolitionCost);
 					}
 				}
 
