@@ -112,6 +112,13 @@ namespace AvalonPipeMania.Code
 						Visibility = Visibility.Hidden
 					}
 				},
+				{ typeof(SpaceInvaderTest),
+					() => new SpaceInvaderTest
+					{
+						Visibility = Visibility.Hidden
+					}
+				},
+
 			};
 
 			var Content = new Canvas
