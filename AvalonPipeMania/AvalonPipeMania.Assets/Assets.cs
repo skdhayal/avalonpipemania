@@ -34,6 +34,21 @@ namespace AvalonPipeMania.Assets
 				}
 
 				[Script, ScriptResources]
+				public static class Animation
+				{
+					public const string pengsuitani = "assets/AvalonPipeMania.Animation/pengsuitani";
+					public const string weekend_feeling = "assets/AvalonPipeMania.Animation/weekend_feeling";
+					public const string irritating_fly = "assets/AvalonPipeMania.Animation/irritating_fly";
+					public const string troll = "assets/AvalonPipeMania.Animation/troll";
+					public const string pancakeglomp = "assets/AvalonPipeMania.Animation/pancakeglomp";
+					public const string five_seconds_hug = "assets/AvalonPipeMania.Animation/five_seconds_hug";
+					public const string duck_ride = "assets/AvalonPipeMania.Animation/duck_ride";
+					public const string daily_deviation = "assets/AvalonPipeMania.Animation/daily_deviation";
+					
+
+				}
+
+				[Script, ScriptResources]
 				public static class Pipe
 				{
 					public const string LeftToRight = "assets/AvalonPipeMania.Pipe/LeftToRight";
