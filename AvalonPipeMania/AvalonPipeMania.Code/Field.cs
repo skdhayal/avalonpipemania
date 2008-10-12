@@ -18,6 +18,8 @@ namespace AvalonPipeMania.Code
 
 		public readonly Canvas Pipes;
 
+		public readonly Canvas InfoOverlay;
+
 		public readonly TileField Tiles;
 
 		public Color DefaultPipeColor = Colors.Yellow;
@@ -38,6 +40,12 @@ namespace AvalonPipeMania.Code
 				Width = Tiles.Width,
 				Height = Tiles.Height
 			}.AttachTo(this.Container);
+
+			this.InfoOverlay = new Canvas
+			{
+				Width = Tiles.Width,
+				Height = Tiles.Height
+			};
 
 			this.Tiles.Focus +=
 				Selection =>
@@ -183,6 +191,7 @@ namespace AvalonPipeMania.Code
 					};
 				#endregion
 
+				var RemovedPipes = 0;
 
 				if (!IsVirtualPipe)
 				{
@@ -190,9 +199,13 @@ namespace AvalonPipeMania.Code
 					PipesList.Where(k => k.Y == y).Where(k => k.X == x).ToArray().ForEach(
 						target =>
 						{
+							RemovedPipes++;
+
 							Console.WriteLine("remove: " + new { target.Value.GetType().Name, target.X, target.Y });
 
 							target.Value.Container.Orphanize();
+							target.Value.InfoOverlay.Orphanize();
+
 							PipesList.Remove(target);
 
 							new FindSiblings
@@ -254,10 +267,11 @@ namespace AvalonPipeMania.Code
 
 					Console.WriteLine("add: " + new { target.Value.GetType().Name, target.X, target.Y });
 
-					value.Container.AttachTo(this.Pipes).MoveTo(
-						x * Tile.Size + Tile.ShadowBorder,
-						(1 + y) * Tile.SurfaceHeight + Tile.ShadowBorder - Tile.Size
-					);
+					var px = x * Tile.Size + Tile.ShadowBorder;
+					var py = (1 + y) * Tile.SurfaceHeight + Tile.ShadowBorder - Tile.Size;
+
+					value.Container.AttachTo(this.Pipes).MoveTo(px, py);
+					value.InfoOverlay.AttachTo(this.InfoOverlay).MoveTo(px, py);
 
 					if (!IsVirtualPipe)
 					{
@@ -299,6 +313,7 @@ namespace AvalonPipeMania.Code
 						Spill(0, 1, target);
 						Spill(0, -1, target);
 
+						value.ShowBonusPoints(-50 * RemovedPipes);
 					}
 				}
 

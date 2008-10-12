@@ -78,6 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AvalonPipeManiaCanvas.cs" />
+    <Compile Include="SimplePipe.Animate.cs" />
     <Compile Include="SimplePipe.VerticalWide.cs" />
     <Compile Include="Pipe.TopToBottomWide.cs" />
     <Compile Include="SimplePipe.HorizontalWide.cs" />

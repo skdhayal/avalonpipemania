@@ -11,9 +11,9 @@ using ScriptCoreLib.Shared.Lambda;
 namespace AvalonPipeMania.Code.Fonts
 {
 	[Script]
-	public class BitmapLabel
+	public class BitmapLabel : ISupportsContainer
 	{
-		public readonly Canvas Container = new Canvas();
+		public Canvas Container { get; set; }
 
 		public readonly ImageSource Source;
 		public readonly CharMap CharMap;
@@ -23,6 +23,8 @@ namespace AvalonPipeMania.Code.Fonts
 
 		public BitmapLabel(ImageSource source, CharMap c, string value)
 		{
+			this.Container = new Canvas();
+
 			this.Source = source;
 			this.CharMap = c;
 			this.Text = value;

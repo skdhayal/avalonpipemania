@@ -35,14 +35,14 @@ namespace AvalonPipeMania.Code
 				this.Input.Top =
 					delegate
 					{
-						AnimateTopToBottom(this.PipeTopToBottom.Water.First(), this.Output.Bottom);
+						AnimateTopToBottom(this.PipeTopToBottom.Water.First(), this.Output.RaiseBottom);
 					};
 
 				this.SupportedOutput.Top = SupportedOutputMarker;
 				this.Input.Bottom =
 					delegate
 					{
-						AnimateBottomToTop(this.PipeTopToBottom.Water.Last(), this.Output.Top);
+						AnimateBottomToTop(this.PipeTopToBottom.Water.Last(), this.Output.RaiseTop);
 					};
 				#endregion
 
@@ -58,14 +58,14 @@ namespace AvalonPipeMania.Code
 				this.Input.Left =
 					delegate
 					{
-						AnimateLeftToRight(this.PipeLeftToRight.Water.First(), this.Output.Right);
+						AnimateLeftToRight(this.PipeLeftToRight.Water.First(), this.Output.RaiseRight);
 					};
 
 				this.SupportedOutput.Left = SupportedOutputMarker;
 				this.Input.Right =
 					delegate
 					{
-						AnimateRightToLeft(this.PipeLeftToRight.Water.Last(), this.Output.Left);
+						AnimateRightToLeft(this.PipeLeftToRight.Water.Last(), this.Output.RaiseLeft);
 					};
 				#endregion
 

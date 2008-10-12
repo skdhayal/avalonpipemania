@@ -32,14 +32,14 @@ namespace AvalonPipeMania.Code
 				this.Input.Top =
 					delegate
 					{
-						AnimateTopToBottom(this.PipeTopToBottom.Water.First(), this.Output.Bottom);
+						AnimateTopToBottom(this.PipeTopToBottom.Water.First(), this.Output.RaiseBottom);
 					};
 
 				this.SupportedOutput.Top = SupportedOutputMarker;
 				this.Input.Bottom =
 					delegate
 					{
-						AnimateBottomToTop(this.PipeTopToBottom.Water.Last(), this.Output.Top);
+						AnimateBottomToTop(this.PipeTopToBottom.Water.Last(), this.Output.RaiseTop);
 					};
 
 
