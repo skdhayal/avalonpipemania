@@ -190,17 +190,17 @@ namespace AvalonPipeMania.Code
 						delegate
 						{
 							if (OptionCanvas == null)
-								OptionCanvas = Option.Value().AttachTo(Content);
+								OptionCanvas = Option.Value();
 
 							Navigationbar.History.Add(
 								delegate
 								{
-									OptionCanvas.Hide();
+									OptionCanvas.Orphanize().Hide();
 									Buttons.Show();
 								},
 								delegate
 								{
-									OptionCanvas.Show();
+									OptionCanvas.AttachTo(Content).Show();
 									Buttons.Hide();
 								}
 							);
