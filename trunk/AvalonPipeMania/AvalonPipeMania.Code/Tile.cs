@@ -161,8 +161,12 @@ namespace AvalonPipeMania.Code
 			}.MoveTo(ShadowBorder, ShadowBorder);
 		}
 
+		public bool IsVisible = true;
+
 		public void Show()
 		{
+			IsVisible = true;
+
 			this.Shadow.Show();
 			this.Container.Show();
 			this.Overlay.Show();
@@ -171,6 +175,8 @@ namespace AvalonPipeMania.Code
 
 		public void Hide()
 		{
+			IsVisible = false;
+
 			this.Shadow.Hide();
 			this.Container.Hide();
 			this.Overlay.Hide();

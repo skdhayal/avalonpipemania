@@ -10,31 +10,66 @@ using System.Windows.Shapes;
 using System.Windows.Media;
 using System.Windows;
 using AvalonPipeMania.Code.Tween;
+using AvalonPipeMania.Code.Extensions;
 
 namespace AvalonPipeMania.Code.Labs
 {
 	[Script]
-	public class ColoredFieldTest : Canvas
+	public class SpaceInvaderTest : Canvas
 	{
 		public const int DefaultWidth = 600;
 		public const int DefaultHeight = 600;
 
-		public ColoredFieldTest()
+		public SpaceInvaderTest()
 		{
 			this.Width = DefaultWidth;
 			this.Height = DefaultHeight;
 
+			// SpaceInvaderTest
+			// http://www.glassgiant.com/ascii/
+			// http://text-image.com/convert/
+			// these maps could be inside a zip file
 
-			var f = new ExtendedField(16, 6, DefaultWidth, DefaultHeight);
+			var map = new ASCIIImage(@"
+MMMMMMM...MMMMMMMMMMMMMMMMMMM...MMMMMMMM
+MMMMMMM...MMMMMMMMMMMMMMMMMMM...MMMMMMMM
+MMMMMMMMMM    MMMMMMMMMMM    MMMMMMMMMMM
+MMMMMMMMMM    MMMMMMMMMMM    MMMMMMMMMMM
+MMMMMMM                         MMMMMMMM
+MMMMMMM                         MMMMMMMM
+MMM       MMMM           MMMM       MMMM
+MMM       MMMM           MMMM       MMMM
+MMM       MMMM           MMMM       MMMM
+...                                     
+...                                     
+...                                     
+...                                     
+...MMMM   MMMMMMMMMMMMMMMMMMM   MMMM    
+...MMMM   MMMMMMMMMMMMMMMMMMM   MMMM    
+MMMMMMMMMM        MMM.       MMMMMMMMMMM
+MMMMMMMMMM        MMM.       MMMMMMMMMMM
+MMMMMMMMMM        MMM.       MMMMMMMMMMM
+			".Trim());
 
-			f.Field.DefaultPipeColor = Colors.Green;
 
-			f.Field.Tiles.Color = Colors.Pink;
+
+			var f = new ExtendedField(map.Width, map.Height, DefaultWidth, DefaultHeight);
+
+			for (int x = 0; x < map.Width; x++)
+				for (int y = 0; y < map.Height; y++)
+				{
+					if (map[x, y] == "M")
+						f.Field.Tiles[x, y].Hide();
+				}
+
+			f.Field.DefaultPipeColor = Colors.Yellow;
+
+			f.Field.Tiles.Color = Colors.Cyan;
 
 			f.Container.AttachTo(this);
 
 			#region feeder
-			var feeder = new SimplePipeFeeder(6, Colors.Yellow);
+			var feeder = new SimplePipeFeeder(6, Colors.Brown);
 
 			feeder.Container.AttachTo(this);
 
@@ -57,7 +92,7 @@ namespace AvalonPipeMania.Code.Labs
 
 
 			#region setting up some stuff on the field
-			var Randomized = f.Field.Tiles.TileList.Randomize().GetEnumerator();
+			var Randomized = f.Field.Tiles.TileList.Where(k => k.IsVisible).Randomize().GetEnumerator();
 
 			Enumerable.Range(0, 4).ForEach(
 				Index =>
@@ -96,7 +131,6 @@ namespace AvalonPipeMania.Code.Labs
 
 
 		}
-
 
 
 	}
