@@ -49,7 +49,8 @@ namespace AvalonPipeMania.Code.Labs
 				{
 					Console.WriteLine("ani: " + value.Prefix);
 
-					value.ToAnimation().AttachContainerTo(this).MoveContainerTo(300 - value.Width / 2, 64 * (index + 1) - value.Height / 2);
+					value.ToAnimation().AttachContainerTo(this).MoveContainerTo(
+						300 - value.Width / 2 + 64 * (index % 2), 32 * (index + 1) - value.Height / 2);
 				}
 			);
 		}
