@@ -17,6 +17,9 @@ using ScriptCoreLib.Shared.Avalon.TiledImageButton;
 using ScriptCoreLib.Shared.Lambda;
 using AvalonPipeMania.Code.Extensions;
 using System.Windows.Threading;
+using System.Windows.Documents;
+using System.Windows.Markup;
+using System.Windows.Navigation;
 
 namespace AvalonPipeMania.Code
 {
@@ -210,9 +213,6 @@ namespace AvalonPipeMania.Code
 				}
 			);
 			#endregion
-
-
-		
 
 
 		}
