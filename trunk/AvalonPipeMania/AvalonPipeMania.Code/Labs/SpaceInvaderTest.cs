@@ -9,7 +9,6 @@ using System.Windows.Controls;
 using System.Windows.Shapes;
 using System.Windows.Media;
 using System.Windows;
-using AvalonPipeMania.Code.Tween;
 using AvalonPipeMania.Code.Extensions;
 
 namespace AvalonPipeMania.Code.Labs

@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Shapes;
 using ScriptCoreLib.Shared.Avalon.Extensions;
 using ScriptCoreLib.Shared.Lambda;
+using ScriptCoreLib.Shared.Avalon.Tween;
 
 namespace AvalonPipeMania.Code
 {
@@ -115,7 +116,7 @@ namespace AvalonPipeMania.Code
 			#region move the map with the mouse yet not too often anf smooth enough
 
 			#region MoveTo
-			Action<int, int> MoveTo = Tween.NumericEmitter.Of(
+			Action<int, int> MoveTo = NumericEmitter.Of(
 				(x, y) =>
 				{
 					this.Field.Tiles.Overlay.MoveTo(x, y);

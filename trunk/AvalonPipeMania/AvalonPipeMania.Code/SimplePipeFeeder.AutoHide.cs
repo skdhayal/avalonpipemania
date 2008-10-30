@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using ScriptCoreLib;
-using AvalonPipeMania.Code.Tween;
 using ScriptCoreLib.Shared.Avalon.Extensions;
 using ScriptCoreLib.Shared.Lambda;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows;
+using ScriptCoreLib.Shared.Avalon.Tween;
 
 namespace AvalonPipeMania.Code
 {
