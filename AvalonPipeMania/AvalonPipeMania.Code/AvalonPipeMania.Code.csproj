@@ -141,9 +141,6 @@
     <Compile Include="IAssemblyReferenceToken.cs" />
     <Compile Include="KnownPipes\SimplePipe.cs" />
     <Compile Include="Tile.cs" />
-    <Compile Include="Tween\NumericEmitter.cs" />
-    <Compile Include="Tween\NumericOmitter.cs" />
-    <Compile Include="Tween\NumericTransmitter.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AvalonPipeMania.Assets\AvalonPipeMania.Assets.csproj">
