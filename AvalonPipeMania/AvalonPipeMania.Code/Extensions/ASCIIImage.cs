@@ -14,17 +14,17 @@ namespace AvalonPipeMania.Code.Extensions
 		public readonly int Height;
 		public readonly int Width;
 
-		public ASCIIImage(string value)
-			: this(value, 2, 1)
-		{
-		}
+        //public ASCIIImage(string value)
+        //    : this(value, 2, 1)
+        //{
+        //}
 
-		public ASCIIImage(string value, int skipx, int skipy)
-			: this(value, skipx, skipy, 1, 1)
-		{
-		}
+        //public ASCIIImage(string value, int skipx, int skipy)
+        //    : this(value, skipx, skipy, 1, 1)
+        //{
+        //}
 
-		public ASCIIImage(string value, int skipx, int skipy, int MultiplyX, int MultiplyY)
+		public ASCIIImage(string value, int skipx = 2, int skipy = 1, int MultiplyX = 1, int MultiplyY = 1)
 		{
 			var lines = value.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
 
