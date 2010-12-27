@@ -37,10 +37,12 @@ using ScriptCoreLib;
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
 
-[assembly:
-	Script,
+[assembly: Obfuscation(Feature = "script")]
 
-	ScriptTypeFilter(ScriptType.ActionScript, "AvalonPipeMania.Code"),
-	ScriptTypeFilter(ScriptType.JavaScript, "AvalonPipeMania.Code")
+//[assembly:
+//    Script,
 
-]
+//    ScriptTypeFilter(ScriptType.ActionScript, "AvalonPipeMania.Code"),
+//    ScriptTypeFilter(ScriptType.JavaScript, "AvalonPipeMania.Code")
+
+//]
