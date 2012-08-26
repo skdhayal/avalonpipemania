@@ -13,8 +13,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AvalonPipeMania.Quattro", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AvalonPipeMania.Quattro.iPad", "AvalonPipeMania.Quattro.iPad\AvalonPipeMania.Quattro.iPad.csproj", "{EAA8F73E-A5F1-4B26-904F-B9DAEE46E79A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AvalonPipeManiaActivity", "AvalonPipeManiaActivity\AvalonPipeManiaActivity.csproj", "{69FADF37-0F7B-4057-A578-E3C9AA54834C}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Assets|Any CPU = Assets|Any CPU
@@ -100,21 +98,6 @@ Global
 		{EAA8F73E-A5F1-4B26-904F-B9DAEE46E79A}.Release|Mixed Platforms.Build.0 = Release|x86
 		{EAA8F73E-A5F1-4B26-904F-B9DAEE46E79A}.Release|x86.ActiveCfg = Release|x86
 		{EAA8F73E-A5F1-4B26-904F-B9DAEE46E79A}.Release|x86.Build.0 = Release|x86
-		{69FADF37-0F7B-4057-A578-E3C9AA54834C}.Assets|Any CPU.ActiveCfg = Release|Any CPU
-		{69FADF37-0F7B-4057-A578-E3C9AA54834C}.Assets|Any CPU.Build.0 = Release|Any CPU
-		{69FADF37-0F7B-4057-A578-E3C9AA54834C}.Assets|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{69FADF37-0F7B-4057-A578-E3C9AA54834C}.Assets|Mixed Platforms.Build.0 = Release|Any CPU
-		{69FADF37-0F7B-4057-A578-E3C9AA54834C}.Assets|x86.ActiveCfg = Release|Any CPU
-		{69FADF37-0F7B-4057-A578-E3C9AA54834C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{69FADF37-0F7B-4057-A578-E3C9AA54834C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{69FADF37-0F7B-4057-A578-E3C9AA54834C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{69FADF37-0F7B-4057-A578-E3C9AA54834C}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{69FADF37-0F7B-4057-A578-E3C9AA54834C}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{69FADF37-0F7B-4057-A578-E3C9AA54834C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{69FADF37-0F7B-4057-A578-E3C9AA54834C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{69FADF37-0F7B-4057-A578-E3C9AA54834C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{69FADF37-0F7B-4057-A578-E3C9AA54834C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{69FADF37-0F7B-4057-A578-E3C9AA54834C}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -123,6 +106,5 @@ Global
 		{AC09CB7A-99FE-4AEC-956F-6B0A812B9BEF} = {10659E47-D04C-4D3C-ADE6-420CE40E3526}
 		{61D18EDB-0AEB-4FA3-91F8-0FB7DA6F01FD} = {10659E47-D04C-4D3C-ADE6-420CE40E3526}
 		{EAA8F73E-A5F1-4B26-904F-B9DAEE46E79A} = {10659E47-D04C-4D3C-ADE6-420CE40E3526}
-		{69FADF37-0F7B-4057-A578-E3C9AA54834C} = {10659E47-D04C-4D3C-ADE6-420CE40E3526}
 	EndGlobalSection
 EndGlobal
