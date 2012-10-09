@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Web
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Entrypoints", "Entrypoints", "{10659E47-D04C-4D3C-ADE6-420CE40E3526}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AvalonPipeMania.Assets", "AvalonPipeMania.Assets\AvalonPipeMania.Assets.csproj", "{0034D475-940D-46FC-9C9B-022EF1EA484D}"

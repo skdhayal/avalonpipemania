@@ -35,7 +35,7 @@ namespace AvalonPipeMania.Quattro.iPad
             page.Content.onclick +=
                 delegate
                 {
-                    page.Content.requestFullscreen();
+                    //page.Content.requestFullscreen();
 
                 };
 
