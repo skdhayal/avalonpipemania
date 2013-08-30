@@ -120,8 +120,8 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="UIAutomationTypes" />
-    <Reference Include="AvalonPipeMania.Quattro.iPad.UltraSource">
-      <HintPath>bin\staging.UltraSource\AvalonPipeMania.Quattro.iPad.UltraSource.dll</HintPath>
+    <Reference Include="AvalonPipeMania.Quattro.iPad.AssetsLibrary">
+      <HintPath>bin\staging.AssetsLibrary\AvalonPipeMania.Quattro.iPad.AssetsLibrary.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -157,6 +157,10 @@
 if $(ConfigurationName)==Release (
 start /WAIT c:\util\jsc\bin\jsc.meta.exe RewriteToJavaScriptDocument /assembly:"$(TargetFileName)" /AttachDebugger:false /DisableWebServiceAndroid:false
 )</PostBuildEvent>
-    <PreBuildEvent>start /MIN C:\util\jsc\bin\jsc.meta.exe ReferenceJavaScriptDocument /ProjectFileName:"$(ProjectPath)" /Configuration:"$(ConfigurationName)" /AttachDebugger:false /SelectAll:true</PreBuildEvent>
+    <PreBuildEvent>
+
+start /MIN /WAIT C:\util\jsc\bin\jsc.meta.exe ReferenceAssetsLibrary /ProjectFileName:"$(ProjectPath)" /EnableUltraSource:true
+
+</PreBuildEvent>
   </PropertyGroup>
 </Project>

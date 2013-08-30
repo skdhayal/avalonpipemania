@@ -11,7 +11,6 @@ using ScriptCoreLib.Shared.Lambda;
 
 namespace AvalonPipeMania.Code
 {
-	[Script]
 	public class Explosion
 	{
 		public const int Size = 64;

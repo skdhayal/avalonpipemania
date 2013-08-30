@@ -9,7 +9,6 @@ using System.Windows.Media;
 
 namespace AvalonPipeMania.Code
 {
-	[Script]
 	public class TileField
 	{
 		public readonly Canvas Shadow;

@@ -12,7 +12,6 @@ using System.Windows.Media;
 
 namespace AvalonPipeMania.Code
 {
-	[Script]
 	public class Tile
 	{
 		private static Random rnd = new Random();
