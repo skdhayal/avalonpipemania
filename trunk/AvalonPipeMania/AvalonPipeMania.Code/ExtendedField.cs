@@ -12,7 +12,6 @@ using ScriptCoreLib.Shared.Avalon.Tween;
 
 namespace AvalonPipeMania.Code
 {
-	[Script]
 	public class ExtendedField
 	{
 		public readonly Canvas Container;

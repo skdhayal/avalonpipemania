@@ -11,7 +11,6 @@ using ScriptCoreLib.Shared.Avalon.Tween;
 
 namespace AvalonPipeMania.Code
 {
-	[Script]
 	public partial class SimplePipeFeeder : IEnumerator<SimplePipe>
 	{
 		public readonly Canvas Container;

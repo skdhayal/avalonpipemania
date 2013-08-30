@@ -11,7 +11,6 @@ using System.Diagnostics;
 
 namespace AvalonPipeMania.Code
 {
-	[Script]
 	public class Field
 	{
 		public readonly Canvas Container;

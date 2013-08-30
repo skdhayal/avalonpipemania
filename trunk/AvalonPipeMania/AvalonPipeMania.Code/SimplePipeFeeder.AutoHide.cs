@@ -14,7 +14,6 @@ namespace AvalonPipeMania.Code
 {
 	partial class SimplePipeFeeder 
 	{
-		[Script]
 		public class AutoHide
 		{
 			public AutoHide(SimplePipeFeeder Feeder, UIElement Overlay, int DefaultWidth, int DefaultHeight)

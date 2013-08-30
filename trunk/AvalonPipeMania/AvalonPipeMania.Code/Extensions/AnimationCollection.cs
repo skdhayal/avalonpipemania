@@ -10,8 +10,30 @@ using System.Windows;
 
 namespace AvalonPipeMania.Code.Extensions
 {
+    [Script]
+    public class AnimationCollectionAnimationInfo
+    {
+        public int Framerate;
+        public int Width;
+        public int Height;
+        public string Prefix;
+
+        public string[] Frames;
+
+        public AnimationCollection.Animation ToAnimation()
+        {
+            return new AnimationCollection.Animation(this);
+        }
+
+        public static implicit operator AnimationCollection.Animation(AnimationCollectionAnimationInfo e)
+        {
+            return e.ToAnimation();
+        }
+    }
+
+
 	[Script]
-	public class AnimationCollection : IEnumerable<AnimationCollection.AnimationInfo>
+	public class AnimationCollection : IEnumerable<AnimationCollectionAnimationInfo>
 	{
 		readonly Func<string, string[]> PrefixToFrames;
 
@@ -20,38 +42,18 @@ namespace AvalonPipeMania.Code.Extensions
 			this.PrefixToFrames = PrefixToFrames;
 		}
 
-		[Script]
-		public class AnimationInfo
-		{
-			public int Framerate;
-			public int Width;
-			public int Height;
-			public string Prefix;
-
-			public string[] Frames;
-
-			public Animation ToAnimation()
-			{
-				return new Animation(this);
-			}
-
-			public static implicit operator Animation(AnimationInfo e)
-			{
-				return e.ToAnimation();
-			}
-		}
 
 		[Script]
 		public class Animation : ISupportsContainer, IDisposable
 		{
-			public readonly AnimationInfo Info;
+			public readonly AnimationCollectionAnimationInfo Info;
 
 			public Image[] Frames;
 
 			public Canvas Container { get; set; }
 
 
-			public Animation(AnimationInfo Info)
+			public Animation(AnimationCollectionAnimationInfo Info)
 			{
 				this.Info = Info;
 
@@ -103,7 +105,7 @@ namespace AvalonPipeMania.Code.Extensions
 		}
 
 
-		public AnimationInfo this[string prefix]
+		public AnimationCollectionAnimationInfo this[string prefix]
 		{
 			get
 			{
@@ -114,7 +116,7 @@ namespace AvalonPipeMania.Code.Extensions
 		public void Add(int fps, int w, int h, string prefix)
 		{
 			Add(
-				new AnimationInfo
+				new AnimationCollectionAnimationInfo
 				{
 					Framerate = fps,
 					Width = w,
@@ -124,9 +126,9 @@ namespace AvalonPipeMania.Code.Extensions
 			);
 		}
 
-		public readonly List<AnimationInfo> List = new List<AnimationInfo>();
+		public readonly List<AnimationCollectionAnimationInfo> List = new List<AnimationCollectionAnimationInfo>();
 
-		public void Add(AnimationInfo a)
+		public void Add(AnimationCollectionAnimationInfo a)
 		{
 			a.Frames = PrefixToFrames(a.Prefix);
 
@@ -135,7 +137,7 @@ namespace AvalonPipeMania.Code.Extensions
 
 		#region IEnumerable<AnimationInfo> Members
 
-		public IEnumerator<AnimationCollection.AnimationInfo> GetEnumerator()
+		public IEnumerator<AnimationCollectionAnimationInfo> GetEnumerator()
 		{
 			return List.GetEnumerator();
 		}

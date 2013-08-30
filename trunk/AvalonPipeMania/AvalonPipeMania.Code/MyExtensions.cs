@@ -8,7 +8,6 @@ using ScriptCoreLib.Shared.Avalon.Extensions;
 
 namespace AvalonPipeMania.Code
 {
-	[Script]
 	static class MyExtensions
 	{
 	

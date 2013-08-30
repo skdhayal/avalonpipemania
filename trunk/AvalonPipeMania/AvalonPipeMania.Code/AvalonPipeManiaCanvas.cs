@@ -20,31 +20,31 @@ using System.Windows.Threading;
 using System.Windows.Documents;
 using System.Windows.Markup;
 using System.Windows.Navigation;
+using ScriptCoreLib.Extensions;
 
 namespace AvalonPipeMania.Code
 {
-	[Script]
-	public partial class AvalonPipeManiaCanvas : Canvas
-	{
-		public const int DefaultWidth = 600;
-		public const int DefaultHeight = 600;
+    public partial class AvalonPipeManiaCanvas : Canvas
+    {
+        public const int DefaultWidth = 600;
+        public const int DefaultHeight = 600;
 
-		public Action<string> PlaySound = delegate { };
+        public Action<string> PlaySound = delegate { };
 
-		// See more:
-		// http://members.chello.at/theodor.lauppert/games/pipe.htm
+        // See more:
+        // http://members.chello.at/theodor.lauppert/games/pipe.htm
 
-		// tile themes to add:
-		// moon lander/ space
-		// grass/farmer/trees
+        // tile themes to add:
+        // moon lander/ space
+        // grass/farmer/trees
 
-		public AvalonPipeManiaCanvas()
-		{
-			this.Width = DefaultWidth;
-			this.Height = DefaultHeight;
+        public AvalonPipeManiaCanvas()
+        {
+            this.Width = DefaultWidth;
+            this.Height = DefaultHeight;
 
-			#region background
-			new[]
+            #region background
+            new[]
 			{
 				//Colors.White,
 				//Colors.Blue,
@@ -52,21 +52,21 @@ namespace AvalonPipeMania.Code
 				Colors.White,
 				Colors.Black
 			}.ToGradient(DefaultHeight / 4).ForEach(
-				(c, i) =>
-				new Rectangle
-				{
-					Fill = new SolidColorBrush(c),
-					Width = DefaultWidth,
-					Height = 5,
-				}.MoveTo(0, i * 4).AttachTo(this)
-			);
-			#endregion
+                (c, i) =>
+                new Rectangle
+                {
+                    Fill = new SolidColorBrush(c),
+                    Width = DefaultWidth,
+                    Height = 5,
+                }.MoveTo(0, i * 4).AttachTo(this)
+            );
+            #endregion
 
 
 
-			// we selecting an implementation here:
-			// this should be dynamic in the UI for labs entrypoint
-			var Options = new Dictionary<Type, Func<Canvas>>
+            // we selecting an implementation here:
+            // this should be dynamic in the UI for labs entrypoint
+            var Options = new Dictionary<Type, Func<Canvas>>
 			{
 				{ typeof(TileFieldTest), 
 					() => new TileFieldTest
@@ -131,91 +131,95 @@ namespace AvalonPipeMania.Code
 				},
 			};
 
-			var Content = new Canvas
-			{
-				Width = DefaultWidth,
-				Height = DefaultHeight
-			}.AttachTo(this);
+            var Content = new Canvas
+            {
+                Width = DefaultWidth,
+                Height = DefaultHeight
+            }.AttachTo(this);
 
 
 
-			var Buttons = new Canvas
-			{
-				Width = DefaultWidth,
-				Height = DefaultHeight
-			}.AttachTo(this);
+            var Buttons = new Canvas
+            {
+                Width = DefaultWidth,
+                Height = DefaultHeight
+            }.AttachTo(this);
 
-			var Navigationbar = new AeroNavigationBar();
+            var Navigationbar = new AeroNavigationBar();
 
-			Navigationbar.Container.MoveTo(4, 4).AttachTo(this);
+            Navigationbar.Container.MoveTo(4, 4).AttachTo(this);
 
-			#region generate the menu
-			const int ButtonHeight = 30;
+            #region generate the menu
+            const int ButtonHeight = 30;
 
-			Options.ForEach(
-				(Option, Index) =>
-				{
-					var x = 72;
-					var y = 16 + Index * ButtonHeight;
+            // x:\jsc.svn\examples\actionscript\Test\TestDictionaryOfTypeAndFunc\TestDictionaryOfTypeAndFunc\ApplicationCanvas.cs
+            Options
+                //.ForEach(
+                .Select(Option => new { Option.Key, Option.Value })
+                .WithEachIndex(
+                (Option, Index) =>
+                {
+                    var x = 72;
+                    var y = 16 + Index * ButtonHeight;
 
-					var Button = new TextButtonControl
-					{
-						Text = (Index + 1) + ". Open " + Option.Key.Name,
-						Width = 200,
-						Height = ButtonHeight
-					};
+                    var Button = new TextButtonControl
+                    {
+                        Text = (Index + 1) + ". Open " + Option.Key.Name,
+                        Width = 200,
+                        Height = ButtonHeight
+                    };
 
-					Button.Background.Fill = Brushes.Black;
-					Button.Background.Opacity = 0.5;
-					Button.Foreground = Brushes.Blue;
+                    Button.Background.Fill = Brushes.Black;
+                    Button.Background.Opacity = 0.5;
+                    Button.Foreground = Brushes.Blue;
 
-					Button.MouseEnter +=
-						delegate
-						{
-
-
-							Button.Background.Fill = Brushes.Blue;
-							Button.Background.Opacity = 0.5;
-							Button.Foreground = Brushes.White;
-						};
-
-					Button.MouseLeave +=
-						delegate
-						{
-							Button.Background.Fill = Brushes.Black;
-							Button.Background.Opacity = 0.5;
-							Button.Foreground = Brushes.Blue;
-						};
-
-					var OptionCanvas = default(Canvas);
-
-					Button.Click +=
-						delegate
-						{
-							if (OptionCanvas == null)
-								OptionCanvas = Option.Value();
-
-							Navigationbar.History.Add(
-								delegate
-								{
-									OptionCanvas.Orphanize().Hide();
-									Buttons.Show();
-								},
-								delegate
-								{
-									OptionCanvas.AttachTo(Content).Show();
-									Buttons.Hide();
-								}
-							);
-						};
-
-					Button.Container.MoveTo(x, y).AttachTo(Buttons);
-				}
-			);
-			#endregion
+                    Button.MouseEnter +=
+                        delegate
+                        {
 
 
-		}
+                            Button.Background.Fill = Brushes.Blue;
+                            Button.Background.Opacity = 0.5;
+                            Button.Foreground = Brushes.White;
+                        };
 
-	}
+                    Button.MouseLeave +=
+                        delegate
+                        {
+                            Button.Background.Fill = Brushes.Black;
+                            Button.Background.Opacity = 0.5;
+                            Button.Foreground = Brushes.Blue;
+                        };
+
+                    var OptionCanvas = default(Canvas);
+
+                    Button.Click +=
+                        delegate
+                        {
+                            if (OptionCanvas == null)
+                                OptionCanvas = Option.Value();
+
+                            Navigationbar.History.Add(
+                                delegate
+                                {
+                                    OptionCanvas.Orphanize().Hide();
+                                    Buttons.Show();
+                                },
+                                delegate
+                                {
+                                    OptionCanvas.AttachTo(Content).Show();
+                                    Buttons.Hide();
+                                }
+                            );
+                        };
+
+                    Button.Container.MoveTo(x, y).AttachTo(Buttons);
+                }
+            );
+            #endregion
+
+
+        }
+
+    }
 }
